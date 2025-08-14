@@ -170,36 +170,42 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           </p>
         </div>
 
-        {/* Action buttons - Redesigned with ideal colors, X button first */}
-        <div className="absolute bottom-8 sm:bottom-12 left-6 right-6 flex justify-center space-x-6 sm:space-x-8">
-          {/* Close Button - First position */}
+        {/* Redesigned Action buttons */}
+        <div className="absolute bottom-8 sm:bottom-12 left-6 right-6 flex justify-center space-x-8">
+          {/* Close Button - Minimalist design */}
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300 hover:rotate-90"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-xl border-2 border-white/40 hover:border-white/60 text-white hover:scale-105 shadow-xl transition-all duration-300"
           >
-            <X className="h-7 w-7 sm:h-8 sm:w-8" />
+            <X className="h-6 w-6 sm:h-7 sm:w-7 stroke-2" />
           </Button>
 
-          {/* Like Button - Personality color */}
+          {/* Like Button - Always red for heart */}
           <Button
             variant="ghost"
             size="icon"
             onClick={onLike}
-            className={`w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-${modeConfig[story.mode].color} to-${modeConfig[story.mode].color}/80 hover:from-${modeConfig[story.mode].color}/90 hover:to-${modeConfig[story.mode].color}/70 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300`}
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 backdrop-blur-xl border-2 border-red-400/50 hover:border-red-300 text-white hover:scale-105 shadow-xl transition-all duration-300"
           >
-            <Heart className="h-7 w-7 sm:h-8 sm:w-8 fill-current" />
+            <Heart className="h-6 w-6 sm:h-7 sm:w-7 fill-current" />
           </Button>
 
-          {/* Chat Button - Premium purple gradient */}
+          {/* Chat Button - Uses personality color */}
           <Button
             variant="ghost"
             size="icon"
             onClick={onChat}
-            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300"
+            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl border-2 text-white hover:scale-105 shadow-xl transition-all duration-300 ${
+              story.mode === 'blue'
+                ? 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50 hover:border-blue-300'
+                : story.mode === 'amber'
+                ? 'bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50 hover:border-amber-300'
+                : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50 hover:border-red-300'
+            }`}
           >
-            <MessageCircle className="h-7 w-7 sm:h-8 sm:w-8" />
+            <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
           </Button>
         </div>
       </div>
