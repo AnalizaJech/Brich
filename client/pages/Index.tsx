@@ -351,39 +351,48 @@ export default function Index() {
       </div>
 
       {/* Enhanced Bottom Navigation (Mobile Only) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-brich-dark/95 backdrop-blur-xl border-t border-white/10 lg:hidden">
-        <div className="max-w-md mx-auto px-2 py-3">
-          <div className="grid grid-cols-4 gap-1">
-            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white hover:bg-white/10 h-auto py-3 rounded-xl transition-all duration-200">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden">
+        <div className="max-w-md mx-auto px-4 py-2">
+          <div className="grid grid-cols-4 gap-2">
+            <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
               <div className="relative">
-                <Heart className="h-5 w-5" />
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-brich-blue-500 rounded-full"></div>
+                <div className="p-2 bg-gradient-to-br from-brich-blue-500/20 to-brich-blue-600/20 rounded-xl border border-brich-blue-500/30">
+                  <Heart className="h-6 w-6 text-brich-blue-400" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-blue-500 rounded-full"></div>
               </div>
-              <span className="text-xs font-medium">Inicio</span>
+              <span className="text-xs font-bold">Inicio</span>
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
               onClick={() => window.location.href = '/matches'}
             >
-              <Users className="h-5 w-5" />
-              <span className="text-xs">Matches</span>
+              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <Users className="h-6 w-6" />
+              </div>
+              <span className="text-xs font-medium">Matches</span>
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
               onClick={() => window.location.href = '/chats'}
             >
-              <MessageCircle className="h-5 w-5" />
-              <span className="text-xs">Chats</span>
+              <div className="relative p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <MessageCircle className="h-6 w-6" />
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+              </div>
+              <span className="text-xs font-medium">Chats</span>
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
               onClick={() => window.location.href = '/profile'}
             >
-              <Settings className="h-5 w-5" />
-              <span className="text-xs">Perfil</span>
+              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <Settings className="h-6 w-6" />
+              </div>
+              <span className="text-xs font-medium">Perfil</span>
             </Button>
           </div>
         </div>
