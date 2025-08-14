@@ -42,27 +42,20 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
   };
 
   return (
-    <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      {/* Story Container */}
-      <div className="relative w-full max-w-sm h-[80vh] rounded-2xl overflow-hidden">
-        {/* Background with user's mode gradient */}
-        <div className={`absolute inset-0 ${modeConfig[story.mode].gradient}`} />
-        
-        {/* Large Profile Photo */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl">
-            <ProfilePhoto
-              name={story.name}
-              gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
-              personalityType={story.mode}
-              size="xl"
-              className="w-full h-full scale-150"
-            />
-          </div>
-        </div>
+    <div className="fixed inset-0 bg-black z-50">
+      {/* Story Container - Fullscreen */}
+      <div className="relative w-full h-full">
+        {/* Fullscreen Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(https://picsum.photos/seed/${story.name}-${story.mode}-story/800/1200)`,
+          }}
+        />
 
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+        {/* Gradient overlays for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
 
         {/* Close button */}
         <Button
