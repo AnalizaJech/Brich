@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import InteractiveMap from "@/components/InteractiveMap";
+import GoogleMapComponent from "@/components/GoogleMapComponent";
+import StoriesSection from "@/components/StoriesSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -103,7 +104,7 @@ export default function Index() {
       age: 23,
       distance: "6.2 km",
       mode: "blue",
-      story: "Relación seria y comprometida 💕",
+      story: "Relación seria y comprometida ���",
       online: false,
       verified: true
     },
