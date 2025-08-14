@@ -381,7 +381,53 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Bottom Navigation removed for mobile/tablet - only showing in desktop sidebar */}
+      {/* Enhanced Bottom Navigation (Mobile/Tablet Only) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden z-40">
+        <div className="max-w-md mx-auto px-4 py-3 pb-safe">
+          <div className="grid grid-cols-4 gap-2">
+            <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
+              <div className="relative">
+                <div className="p-2 bg-gradient-to-br from-brich-blue-500/20 to-brich-blue-600/20 rounded-xl border border-brich-blue-500/30">
+                  <Home className="h-6 w-6 text-brich-blue-400" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-blue-500 rounded-full"></div>
+              </div>
+              <span className="text-xs font-bold">Inicio</span>
+            </Button>
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
+              onClick={() => window.location.href = '/matches'}
+            >
+              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <Users className="h-6 w-6" />
+              </div>
+              <span className="text-xs font-medium">Matches</span>
+            </Button>
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
+              onClick={() => window.location.href = '/chats'}
+            >
+              <div className="relative p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <MessageCircle className="h-6 w-6" />
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+              </div>
+              <span className="text-xs font-medium">Chats</span>
+            </Button>
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
+              onClick={() => window.location.href = '/profile'}
+            >
+              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                <Settings className="h-6 w-6" />
+              </div>
+              <span className="text-xs font-medium">Perfil</span>
+            </Button>
+          </div>
+        </div>
+      </div>
 
       {/* Low Credits Modal */}
       {credits < 5 && (
