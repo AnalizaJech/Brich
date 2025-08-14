@@ -298,16 +298,19 @@ export default function Index() {
       {/* Quick Actions - Moved to header or removed for cleaner UI */}
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-lg border-t border-white/20">
-        <div className="max-w-md mx-auto px-4 py-3">
+      <div className="fixed bottom-0 left-0 right-0 bg-brich-dark/95 backdrop-blur-xl border-t border-white/10 md:hidden">
+        <div className="max-w-md mx-auto px-2 py-3">
           <div className="grid grid-cols-4 gap-1">
-            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white hover:bg-white/10 h-auto py-2">
-              <Heart className="h-5 w-5" />
-              <span className="text-xs">Inicio</span>
+            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white hover:bg-white/10 h-auto py-3 rounded-xl transition-all duration-200">
+              <div className="relative">
+                <Heart className="h-5 w-5" />
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-brich-blue-500 rounded-full"></div>
+              </div>
+              <span className="text-xs font-medium">Inicio</span>
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
               onClick={() => window.location.href = '/matches'}
             >
               <Users className="h-5 w-5" />
@@ -315,7 +318,7 @@ export default function Index() {
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
               onClick={() => window.location.href = '/chats'}
             >
               <MessageCircle className="h-5 w-5" />
@@ -323,7 +326,7 @@ export default function Index() {
             </Button>
             <Button
               variant="ghost"
-              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 hover:text-white h-auto py-3 rounded-xl transition-all duration-200"
               onClick={() => window.location.href = '/profile'}
             >
               <Settings className="h-5 w-5" />
