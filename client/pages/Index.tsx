@@ -189,39 +189,14 @@ export default function Index() {
         </p>
       </div>
 
-      {/* Map Area */}
+      {/* Interactive Map Area */}
       <div className="max-w-md mx-auto px-4 mb-6">
         <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
           <CardContent className="p-0">
-            <div className="h-48 bg-gradient-to-br from-brich-blue-900/20 to-brich-red-900/20 relative flex items-center justify-center">
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iIzMzMzMzMyIgZmlsbC1vcGFjaXR5PSIwLjEiLz4KPC9zdmc+')] opacity-30" />
-              
-              {/* Simulated Map with User Pins */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className={`w-4 h-4 ${modeConfig[activeMode].gradient} rounded-full animate-pulse-slow shadow-lg`} />
-                  <div className="absolute -top-1 -left-1 w-6 h-6 border-2 border-white rounded-full animate-ping" />
-                </div>
-                
-                {/* Nearby people indicators */}
-                <div className="absolute top-8 right-8">
-                  <div className="w-3 h-3 bg-brich-blue-gradient rounded-full" />
-                </div>
-                <div className="absolute bottom-12 left-12">
-                  <div className="w-3 h-3 bg-brich-amber-gradient rounded-full" />
-                </div>
-                <div className="absolute top-16 left-8">
-                  <div className="w-3 h-3 bg-brich-red-gradient rounded-full" />
-                </div>
-              </div>
-              
-              <div className="absolute bottom-3 left-3 bg-black/50 rounded-lg px-2 py-1">
-                <div className="flex items-center space-x-1 text-white">
-                  <MapPin className="h-3 w-3" />
-                  <span className="text-xs">Radio: 5km</span>
-                </div>
-              </div>
-            </div>
+            <InteractiveMap
+              activeMode={activeMode}
+              onRadiusChange={handleRadiusChange}
+            />
           </CardContent>
         </Card>
       </div>
