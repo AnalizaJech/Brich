@@ -201,22 +201,13 @@ export default function Matches() {
                 key={mode}
                 onClick={() => setActiveFilter(mode)}
                 variant="ghost"
-                className={`flex-shrink-0 px-4 py-2 rounded-2xl transition-all duration-300 ${
+                className={`flex-shrink-0 px-4 py-2 rounded-lg border transition-all duration-200 ${
                   isActive
-                    ? "text-white border-2 shadow-xl"
-                    : "text-gray-400 bg-slate-800/40 border border-slate-700/50"
+                    ? "bg-slate-700 border-slate-600 text-white"
+                    : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
                 }`}
-                style={
-                  isActive
-                    ? {
-                        backgroundColor: `${modeConfig[mode].color}20`,
-                        borderColor: modeConfig[mode].color,
-                        boxShadow: `0 4px 15px ${modeConfig[mode].color}30`,
-                      }
-                    : {}
-                }
               >
-                <IconComponent className="h-4 w-4 mr-2" />
+                <IconComponent className={`h-4 w-4 mr-2 ${isActive ? modeConfig[mode].color.replace('text-', 'text-') : ''}`} />
                 <span className="text-sm font-medium">{modeConfig[mode].name}</span>
               </Button>
             );
