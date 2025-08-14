@@ -6,7 +6,7 @@ interface PageHeaderProps {
   title: string;
   subtitle?: string;
   icon: ReactNode;
-  iconGradient: string;
+  iconColor: string;
   credits?: number;
   isPremium?: boolean;
   rightContent?: ReactNode;
