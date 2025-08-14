@@ -167,27 +167,13 @@ export default function Matches() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brich-dark via-slate-900 to-brich-dark">
-      {/* Header */}
-      <div className="bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-lg">
-        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center shadow-lg">
-              <Heart className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">Matches</h1>
-              <p className="text-xs text-slate-400">{filteredMatches.length} conexiones</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-2 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-2 shadow-lg">
-              <CreditCard className="h-4 w-4 text-amber-400" />
-              <span className="text-sm font-semibold text-white">{credits}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Matches"
+        subtitle={`${filteredMatches.length} conexiones`}
+        icon={<Heart className="h-6 w-6 text-white" />}
+        iconGradient="from-pink-500 to-rose-600"
+        credits={credits}
+      />
 
       {/* Filters and Search */}
       <div className="max-w-md mx-auto px-4 py-4 space-y-4">
