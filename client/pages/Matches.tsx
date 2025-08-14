@@ -171,8 +171,8 @@ export default function Matches() {
       <PageHeader
         title="Matches"
         subtitle={`${filteredMatches.length} conexiones`}
-        icon={<Heart className="h-6 w-6 text-white" />}
-        iconGradient="from-pink-500 to-rose-600"
+        icon={<Heart className="h-6 w-6" />}
+        iconColor="text-pink-500"
         credits={credits}
       />
 
