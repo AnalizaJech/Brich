@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import GoogleMapComponent from "@/components/GoogleMapComponent";
+import GoogleMapsEmbed from "@/components/GoogleMapsEmbed";
 import StoriesSection from "@/components/StoriesSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -165,7 +165,7 @@ export default function Index() {
               onClick={() => navigate('/auth')}
               className="w-full bg-brich-blue-gradient text-white hover:opacity-90"
             >
-              Iniciar Sesi��n
+              Iniciar Sesión
             </Button>
             <Button
               variant="outline"
