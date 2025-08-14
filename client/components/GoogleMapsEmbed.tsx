@@ -114,9 +114,9 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
 
         {/* Center User Pin */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div 
+          <div
             className="w-5 h-5 rounded-full border-3 border-white shadow-lg animate-pulse"
-            style={{ backgroundColor: modeConfig[activeMode].color }}
+            style={{ backgroundColor: (modeConfig[activeMode] || modeConfig.all).color }}
           />
         </div>
       </div>
