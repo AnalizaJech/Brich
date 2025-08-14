@@ -153,20 +153,20 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                   {/* Story-style profile picture */}
                   <div className="relative">
                     <div className={`
-                      rounded-full p-1 transition-all duration-300 transform
+                      w-16 h-16 rounded-full p-1 transition-all duration-300
                       ${isActive
-                        ? `w-20 h-20 border-3 shadow-xl scale-110 shadow-lg`
-                        : 'w-16 h-16 border-2 border-gray-600 hover:scale-105'
+                        ? `border-4 shadow-xl`
+                        : 'border-2 border-gray-600'
                       }
                     `}
                     style={isActive ? {
                       borderColor: modeConfig[mode].color,
-                      boxShadow: `0 8px 25px ${modeConfig[mode].color}40`
+                      boxShadow: `0 4px 15px ${modeConfig[mode].color}50`
                     } : {}}
                     >
                       <div className="w-full h-full bg-brich-dark rounded-full flex items-center justify-center">
                         <IconComponent
-                          className={`transition-all duration-300 ${isActive ? 'h-8 w-8' : 'h-6 w-6'}`}
+                          className={`transition-all duration-300 ${isActive ? 'h-8 w-8' : 'h-5 w-5'}`}
                           style={{ color: isActive ? modeConfig[mode].color : '#9CA3AF' }}
                         />
                       </div>
