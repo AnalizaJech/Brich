@@ -30,7 +30,7 @@ interface PersonCard {
 
 export default function Index() {
   const navigate = useNavigate();
-  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red'>('blue');
+  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red' | 'all'>('blue');
   const [credits, setCredits] = useState(15);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [searchRadius, setSearchRadius] = useState(5000);
@@ -61,7 +61,7 @@ export default function Index() {
       age: 24,
       distance: "4.1 km",
       mode: "red",
-      story: "Pasión y química 🔥",
+      story: "Pasión y química ���",
       online: false,
       verified: true
     },
