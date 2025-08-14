@@ -9,6 +9,7 @@ import PageHeader from "@/components/PageHeader";
 import {
   Heart,
   Users,
+  MessageCircle,
   Flame,
   Star,
   Clock,
