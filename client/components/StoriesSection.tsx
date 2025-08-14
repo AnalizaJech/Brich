@@ -98,21 +98,32 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
       border: "border-blue-500",
       icon: Heart,
       name: "Serio",
-      description: "Relaciones duraderas"
+      description: "Relaciones duraderas",
+      color: "#3B82F6"
     },
     amber: {
       gradient: "bg-gradient-to-br from-amber-500 to-orange-500",
       border: "border-amber-500",
       icon: Sparkles,
       name: "Aventura",
-      description: "Experiencias divertidas"
+      description: "Experiencias divertidas",
+      color: "#F59E0B"
     },
     red: {
       gradient: "bg-gradient-to-br from-red-500 to-pink-500",
       border: "border-red-500",
       icon: Flame,
       name: "Pasión",
-      description: "Conexiones intensas"
+      description: "Conexiones intensas",
+      color: "#EF4444"
+    },
+    all: {
+      gradient: "bg-gradient-to-br from-slate-600 to-slate-700",
+      border: "border-slate-500",
+      icon: Users,
+      name: "Todos",
+      description: "Ver todos los tipos",
+      color: "#64748B"
     }
   };
 
