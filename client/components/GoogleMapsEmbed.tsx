@@ -45,12 +45,26 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     onRadiusChange(newRadius);
   };
 
+  const generateMapUrl = (zoomLevel: number) => {
+    // Base URL with San Vicente de Cañete coordinates
+    const baseUrl = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d";
+    const coords = "!2d-76.3856!3d-13.0751";
+    const mapType = "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f";
+    const location = "!5m2!1ses-419!2spe";
+
+    // Calculate distance based on zoom (higher zoom = smaller distance)
+    const distance = Math.round(20000 / Math.pow(2, zoomLevel - 10));
+
+    return `${baseUrl}${distance}${coords}${mapType}${zoomLevel}${location}`;
+  };
+
   const handleZoomIn = () => {
     const newZoom = Math.min(18, zoom + 1);
     const newRadius = Math.round(5000 / Math.pow(2, newZoom - 13));
     const clampedRadius = Math.max(500, Math.min(20000, newRadius));
-    
+
     setZoom(newZoom);
+    setMapUrl(generateMapUrl(newZoom));
     updateRadius(clampedRadius);
   };
 
@@ -58,8 +72,9 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     const newZoom = Math.max(10, zoom - 1);
     const newRadius = Math.round(5000 / Math.pow(2, newZoom - 13));
     const clampedRadius = Math.max(500, Math.min(20000, newRadius));
-    
+
     setZoom(newZoom);
+    setMapUrl(generateMapUrl(newZoom));
     updateRadius(clampedRadius);
   };
 
