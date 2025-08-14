@@ -288,7 +288,7 @@ export default function Index() {
 
             {/* Right Column - People List (Desktop) / Full Width (Mobile) */}
             <div className="lg:col-span-2">
-              <div className="max-w-md mx-auto lg:max-w-none px-4 mb-20 lg:mb-6">
+              <div className="max-w-md mx-auto lg:max-w-none px-4 mb-24 lg:mb-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-2">
