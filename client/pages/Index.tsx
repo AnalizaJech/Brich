@@ -18,6 +18,7 @@ import {
   Share2,
   Eye,
   Zap,
+  Radar,
 } from "lucide-react";
 
 interface PersonCard {
