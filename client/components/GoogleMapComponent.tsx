@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { MapPin, Locate, Minus, Plus, Navigation } from "lucide-react";
 
 interface PersonPin {
   id: number;
   name: string;
-  lat: number;
-  lng: number;
+  x: number; // percentage position
+  y: number; // percentage position
   mode: 'blue' | 'amber' | 'red';
   distance: number;
   profileImage?: string;
@@ -17,30 +17,22 @@ interface GoogleMapComponentProps {
   onRadiusChange: (radius: number) => void;
 }
 
-declare global {
-  interface Window {
-    google: any;
-    initMap: () => void;
-  }
-}
-
 export default function GoogleMapComponent({ activeMode, onRadiusChange }: GoogleMapComponentProps) {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<any>(null);
-  const [circle, setCircle] = useState<any>(null);
   const [radius, setRadius] = useState(5000);
-  const [userLocation, setUserLocation] = useState({ lat: -13.0751, lng: -76.3856 }); // San Vicente de Cañete
-  const [markers, setMarkers] = useState<any[]>([]);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [lastPinchDistance, setLastPinchDistance] = useState(0);
+  const [selectedPerson, setSelectedPerson] = useState<PersonPin | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
 
-  // Sample people around San Vicente de Cañete
+  // Sample people positioned around San Vicente de Cañete (simulated coordinates)
   const nearbyPeople: PersonPin[] = [
-    { id: 1, name: "Maria", lat: -13.0751, lng: -76.3856, mode: "blue", distance: 2300, profileImage: "M" },
-    { id: 2, name: "Carlos", lat: -13.0821, lng: -76.3756, mode: "amber", distance: 1800, profileImage: "C" },
-    { id: 3, name: "Sofia", lat: -13.0651, lng: -76.3956, mode: "red", distance: 4100, profileImage: "S" },
-    { id: 4, name: "Miguel", lat: -13.0781, lng: -76.3806, mode: "blue", distance: 3200, profileImage: "M" },
-    { id: 5, name: "Lucia", lat: -13.0701, lng: -76.3906, mode: "amber", distance: 2800, profileImage: "L" },
-    { id: 6, name: "Diego", lat: -13.0831, lng: -76.3706, mode: "red", distance: 3500, profileImage: "D" },
+    { id: 1, name: "Maria", x: 45, y: 35, mode: "blue", distance: 2300, profileImage: "M" },
+    { id: 2, name: "Carlos", x: 65, y: 55, mode: "amber", distance: 1800, profileImage: "C" },
+    { id: 3, name: "Sofia", x: 25, y: 65, mode: "red", distance: 4100, profileImage: "S" },
+    { id: 4, name: "Miguel", x: 55, y: 25, mode: "blue", distance: 3200, profileImage: "M" },
+    { id: 5, name: "Lucia", x: 75, y: 40, mode: "amber", distance: 2800, profileImage: "L" },
+    { id: 6, name: "Diego", x: 35, y: 75, mode: "red", distance: 3500, profileImage: "D" },
   ];
 
   const modeConfig = {
@@ -49,175 +41,81 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
     red: { color: "#EF4444", name: "Pasión" }
   };
 
-  // Initialize Google Map
-  const initializeMap = () => {
-    if (!window.google || !mapRef.current) return;
+  const filteredPeople = nearbyPeople.filter(person =>
+    person.mode === activeMode && person.distance <= radius
+  );
 
-    const mapOptions = {
-      center: userLocation,
-      zoom: 13,
-      styles: [
-        {
-          featureType: "all",
-          stylers: [{ saturation: -20 }]
-        },
-        {
-          featureType: "road",
-          stylers: [{ visibility: "on" }]
-        },
-        {
-          featureType: "landscape",
-          stylers: [{ color: "#1f2937" }]
-        },
-        {
-          featureType: "water",
-          stylers: [{ color: "#1e40af" }]
-        }
-      ],
-      disableDefaultUI: true,
-      zoomControl: false,
-      gestureHandling: 'greedy',
-      backgroundColor: '#1f2937'
-    };
-
-    const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
-    
-    // Create radius circle
-    const newCircle = new window.google.maps.Circle({
-      strokeColor: modeConfig[activeMode].color,
-      strokeOpacity: 0.6,
-      strokeWeight: 2,
-      fillColor: modeConfig[activeMode].color,
-      fillOpacity: 0.1,
-      map: newMap,
-      center: userLocation,
-      radius: radius,
-    });
-
-    // User location marker
-    new window.google.maps.Marker({
-      position: userLocation,
-      map: newMap,
-      icon: {
-        path: window.google.maps.SymbolPath.CIRCLE,
-        scale: 8,
-        fillColor: modeConfig[activeMode].color,
-        fillOpacity: 1,
-        strokeWeight: 2,
-        strokeColor: '#ffffff',
-      },
-      title: "Tu ubicación"
-    });
-
-    setMap(newMap);
-    setCircle(newCircle);
-    setIsMapLoaded(true);
-
-    // Listen for zoom changes
-    newMap.addListener('zoom_changed', () => {
-      const zoom = newMap.getZoom();
-      const newRadius = Math.max(500, Math.min(20000, 10000 / Math.pow(2, zoom - 13)));
-      updateRadius(newRadius);
-    });
+  // Calculate distance between two touch points
+  const getTouchDistance = (touches: TouchList) => {
+    if (touches.length < 2) return 0;
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
   };
 
-  // Load Google Maps script
-  useEffect(() => {
-    if (window.google) {
-      initializeMap();
-      return;
+  // Handle touch start for pinch detection
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      const distance = getTouchDistance(e.touches);
+      setLastPinchDistance(distance);
+      setIsDragging(true);
     }
+  };
 
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBl2pWN-k4T-8xX-2j_mIr0zNzVp3H5LWw&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    
-    window.initMap = initializeMap;
-    document.head.appendChild(script);
+  // Handle touch move for pinch-to-zoom
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
 
-    return () => {
-      if (script.parentNode) {
-        document.head.removeChild(script);
+    if (e.touches.length === 2 && isDragging) {
+      const currentDistance = getTouchDistance(e.touches);
+
+      if (lastPinchDistance > 0) {
+        const pinchDelta = currentDistance - lastPinchDistance;
+        const zoomSensitivity = 0.005;
+        const newZoom = Math.max(0.5, Math.min(3, zoom + pinchDelta * zoomSensitivity));
+
+        // Calculate new radius based on zoom level (inverse relationship)
+        const baseRadius = 5000; // 5km base
+        const newRadius = Math.round(baseRadius / newZoom);
+        const clampedRadius = Math.max(500, Math.min(20000, newRadius));
+
+        setZoom(newZoom);
+        updateRadius(clampedRadius);
       }
-    };
-  }, []);
 
-  // Update markers when mode changes
-  useEffect(() => {
-    if (!map || !isMapLoaded) return;
-
-    // Clear existing markers
-    markers.forEach(marker => marker.setMap(null));
-
-    // Filter and create new markers
-    const filteredPeople = nearbyPeople.filter(person => person.mode === activeMode);
-    const newMarkers = filteredPeople.map(person => {
-      const marker = new window.google.maps.Marker({
-        position: { lat: person.lat, lng: person.lng },
-        map: map,
-        icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 6,
-          fillColor: modeConfig[person.mode].color,
-          fillOpacity: 0.9,
-          strokeWeight: 2,
-          strokeColor: '#ffffff',
-        },
-        title: person.name
-      });
-
-      // Add click listener
-      marker.addListener('click', () => {
-        const infoWindow = new window.google.maps.InfoWindow({
-          content: `
-            <div style="padding: 8px; text-align: center;">
-              <div style="width: 40px; height: 40px; border-radius: 50%; background: ${modeConfig[person.mode].color}; 
-                          display: flex; align-items: center; justify-content: center; color: white; 
-                          font-weight: bold; margin: 0 auto 8px;">${person.profileImage}</div>
-              <div style="font-weight: bold; color: #1f2937;">${person.name}</div>
-              <div style="font-size: 12px; color: #6b7280;">${(person.distance/1000).toFixed(1)} km</div>
-            </div>
-          `
-        });
-        infoWindow.open(map, marker);
-      });
-
-      return marker;
-    });
-
-    setMarkers(newMarkers);
-  }, [activeMode, map, isMapLoaded]);
-
-  // Update circle color when mode changes
-  useEffect(() => {
-    if (circle) {
-      circle.setOptions({
-        strokeColor: modeConfig[activeMode].color,
-        fillColor: modeConfig[activeMode].color,
-      });
+      setLastPinchDistance(currentDistance);
     }
-  }, [activeMode, circle]);
+  };
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    setLastPinchDistance(0);
+  };
 
   const updateRadius = (newRadius: number) => {
     setRadius(newRadius);
     onRadiusChange(newRadius);
-    
-    if (circle) {
-      circle.setRadius(newRadius);
-    }
   };
 
   const handleZoomIn = () => {
-    if (map) {
-      map.setZoom(map.getZoom() + 1);
-    }
+    const newZoom = Math.min(3, zoom * 1.2);
+    const newRadius = Math.round(5000 / newZoom);
+    const clampedRadius = Math.max(500, Math.min(20000, newRadius));
+
+    setZoom(newZoom);
+    updateRadius(clampedRadius);
   };
 
   const handleZoomOut = () => {
-    if (map) {
-      map.setZoom(map.getZoom() - 1);
-    }
+    const newZoom = Math.max(0.5, zoom / 1.2);
+    const newRadius = Math.round(5000 / newZoom);
+    const clampedRadius = Math.max(500, Math.min(20000, newRadius));
+
+    setZoom(newZoom);
+    updateRadius(clampedRadius);
   };
 
   const getRadiusDisplay = (radiusMeters: number) => {
@@ -227,77 +125,166 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
     return `${radiusMeters} m`;
   };
 
-  const filteredCount = nearbyPeople.filter(person => person.mode === activeMode).length;
+  const circleSize = 120 * zoom;
 
   return (
     <div className="relative h-48 rounded-lg overflow-hidden">
-      {/* Google Maps container */}
-      <div ref={mapRef} className="w-full h-full" />
-      
-      {/* Loading overlay */}
-      {!isMapLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-brich-blue-900/20 to-brich-red-900/20 flex items-center justify-center">
-          <div className="bg-black/50 rounded-lg px-4 py-2">
-            <div className="flex items-center space-x-2 text-white">
-              <Navigation className="h-4 w-4 animate-spin" />
-              <span className="text-sm">Cargando mapa...</span>
+      {/* Simulated map background with San Vicente de Cañete style */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-900/30 to-yellow-900/30">
+        {/* Streets pattern */}
+        <svg className="w-full h-full opacity-30" viewBox="0 0 200 120">
+          {/* Main streets of San Vicente de Cañete */}
+          <line x1="0" y1="40" x2="200" y2="40" stroke="#ffffff" strokeWidth="1" />
+          <line x1="0" y1="80" x2="200" y2="80" stroke="#ffffff" strokeWidth="1" />
+          <line x1="50" y1="0" x2="50" y2="120" stroke="#ffffff" strokeWidth="1" />
+          <line x1="100" y1="0" x2="100" y2="120" stroke="#ffffff" strokeWidth="1" />
+          <line x1="150" y1="0" x2="150" y2="120" stroke="#ffffff" strokeWidth="1" />
+
+          {/* Plaza and important locations */}
+          <rect x="90" y="35" width="20" height="10" fill="#ffffff" fillOpacity="0.2" />
+          <circle cx="100" cy="40" r="3" fill="#ffffff" fillOpacity="0.3" />
+
+          {/* Diagonal streets */}
+          <line x1="0" y1="0" x2="80" y2="60" stroke="#ffffff" strokeWidth="0.5" />
+          <line x1="120" y1="60" x2="200" y2="120" stroke="#ffffff" strokeWidth="0.5" />
+        </svg>
+      </div>
+
+      {/* Interactive map area */}
+      <div
+        ref={mapRef}
+        className="relative w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ touchAction: 'none' }}
+      >
+        {/* Search radius circle */}
+        <div
+          className="absolute border-2 border-white/40 rounded-full flex items-center justify-center transition-all duration-300"
+          style={{
+            width: `${circleSize}px`,
+            height: `${circleSize}px`,
+            transform: 'translate(-50%, -50%)',
+            left: '50%',
+            top: '50%',
+            borderColor: modeConfig[activeMode].color + '66'
+          }}
+        >
+          {/* User location (center) */}
+          <div className="relative">
+            <div
+              className="w-4 h-4 rounded-full shadow-lg"
+              style={{ backgroundColor: modeConfig[activeMode].color }}
+            />
+            <div className="absolute -top-1 -left-1 w-6 h-6 border-2 border-white rounded-full animate-ping" />
+          </div>
+
+          {/* Nearby people pins within radius */}
+          {filteredPeople.map((pin) => (
+            <div
+              key={pin.id}
+              className="absolute w-8 h-8 rounded-full shadow-sm transition-all duration-300 hover:scale-110 cursor-pointer"
+              style={{
+                left: `${(pin.x - 50) * (circleSize / 120)}px`,
+                top: `${(pin.y - 50) * (circleSize / 120)}px`,
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: modeConfig[pin.mode].color
+              }}
+              onClick={() => setSelectedPerson(pin)}
+            >
+              <div className="w-full h-full rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white">
+                {pin.profileImage}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Location info */}
+      <div className="absolute top-3 left-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
+        <div className="flex items-center space-x-2 text-white">
+          <MapPin className="h-3 w-3" />
+          <span className="text-xs font-medium">San Vicente de Cañete</span>
+        </div>
+      </div>
+
+      {/* Radius indicator */}
+      <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
+        <div className="flex items-center space-x-2 text-white">
+          <Locate className="h-3 w-3" />
+          <span className="text-xs font-medium">Radio: {getRadiusDisplay(radius)}</span>
+        </div>
+      </div>
+
+      {/* Zoom controls */}
+      <div className="absolute bottom-3 right-3 flex flex-col space-y-1">
+        <Button
+          size="icon"
+          variant="ghost"
+          className="w-8 h-8 bg-black/70 backdrop-blur text-white hover:bg-black/80"
+          onClick={handleZoomIn}
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+        <Button
+          size="icon"
+          variant="ghost"
+          className="w-8 h-8 bg-black/70 backdrop-blur text-white hover:bg-black/80"
+          onClick={handleZoomOut}
+        >
+          <Minus className="h-4 w-4" />
+        </Button>
+      </div>
+
+      {/* Mode indicator */}
+      <div className="absolute top-3 right-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
+        <div className="flex items-center space-x-2">
+          <div
+            className="w-3 h-3 rounded-full"
+            style={{ backgroundColor: modeConfig[activeMode].color }}
+          />
+          <span className="text-xs text-white font-medium">
+            {filteredPeople.length} {modeConfig[activeMode].name.toLowerCase()}
+          </span>
+        </div>
+      </div>
+
+      {/* Person info popup */}
+      {selectedPerson && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+          <div className="bg-white rounded-lg p-4 mx-4 max-w-xs">
+            <div className="text-center">
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2"
+                style={{ backgroundColor: modeConfig[selectedPerson.mode].color }}
+              >
+                {selectedPerson.profileImage}
+              </div>
+              <h3 className="font-bold text-gray-900">{selectedPerson.name}</h3>
+              <p className="text-sm text-gray-600">{(selectedPerson.distance/1000).toFixed(1)} km de distancia</p>
+              <Button
+                className="mt-3 w-full"
+                onClick={() => setSelectedPerson(null)}
+              >
+                Cerrar
+              </Button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Controls overlay */}
-      {isMapLoaded && (
-        <>
-          {/* Location info */}
-          <div className="absolute top-3 left-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
-            <div className="flex items-center space-x-2 text-white">
-              <MapPin className="h-3 w-3" />
-              <span className="text-xs font-medium">San Vicente de Cañete</span>
-            </div>
+      {/* Touch gesture hint */}
+      {zoom === 1 && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="bg-black/60 rounded-lg px-3 py-2 animate-pulse">
+            <p className="text-xs text-white text-center">
+              Pellizca para hacer zoom
+              <br />
+              <span className="text-white/70">y ajustar el radio</span>
+            </p>
           </div>
-
-          {/* Radius indicator */}
-          <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
-            <div className="flex items-center space-x-2 text-white">
-              <Locate className="h-3 w-3" />
-              <span className="text-xs font-medium">Radio: {getRadiusDisplay(radius)}</span>
-            </div>
-          </div>
-
-          {/* Zoom controls */}
-          <div className="absolute bottom-3 right-3 flex flex-col space-y-1">
-            <Button
-              size="icon"
-              variant="ghost"
-              className="w-8 h-8 bg-black/70 backdrop-blur text-white hover:bg-black/80"
-              onClick={handleZoomIn}
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="w-8 h-8 bg-black/70 backdrop-blur text-white hover:bg-black/80"
-              onClick={handleZoomOut}
-            >
-              <Minus className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Mode indicator */}
-          <div className="absolute top-3 right-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
-            <div className="flex items-center space-x-2">
-              <div 
-                className="w-3 h-3 rounded-full" 
-                style={{ backgroundColor: modeConfig[activeMode].color }}
-              />
-              <span className="text-xs text-white font-medium">
-                {filteredCount} {modeConfig[activeMode].name.toLowerCase()}
-              </span>
-            </div>
-          </div>
-        </>
+        </div>
       )}
     </div>
   );
