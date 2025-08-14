@@ -295,19 +295,7 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="max-w-md mx-auto px-4 pb-6">
-        <div className="grid grid-cols-2 gap-3">
-          <Button className="bg-brich-amber-gradient text-white hover:opacity-90 h-12">
-            <CreditCard className="h-5 w-5 mr-2" />
-            Recargar Créditos
-          </Button>
-          <Button className="bg-brich-blue-gradient text-white hover:opacity-90 h-12">
-            <Share2 className="h-5 w-5 mr-2" />
-            Invitar Amigos
-          </Button>
-        </div>
-      </div>
+      {/* Quick Actions - Moved to header or removed for cleaner UI */}
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-lg border-t border-white/20">
