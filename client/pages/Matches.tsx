@@ -342,7 +342,7 @@ export default function Matches() {
             </p>
             <Button
               onClick={() => navigate("/")}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+              className="bg-blue-600 text-white hover:bg-blue-700"
             >
               Explorar personas
             </Button>
