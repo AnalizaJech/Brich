@@ -119,8 +119,8 @@ export default function Profile() {
       <PageHeader
         title="Mi Perfil"
         subtitle="Gestiona tu información"
-        icon={<Settings className="h-6 w-6 text-white" />}
-        iconGradient="from-purple-500 to-indigo-600"
+        icon={<Settings className="h-6 w-6" />}
+        iconColor="text-purple-500"
         credits={credits}
         isPremium={userProfile.premium}
       />
