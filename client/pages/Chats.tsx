@@ -392,8 +392,8 @@ export default function Chats() {
                 <div
                   className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl relative ${
                     message.senderId === 0
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
-                      : "bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 text-white"
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-800 border border-slate-700 text-white"
                   }`}
                 >
                   <p className="text-sm">{message.text}</p>
