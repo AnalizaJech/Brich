@@ -104,13 +104,27 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           )}
         </div>
 
-        {/* Story text with enhanced styling */}
+        {/* Story text without background container */}
         <div className="absolute bottom-32 left-6 right-6">
-          <div className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <p className="text-white text-xl font-semibold text-center leading-relaxed drop-shadow-lg">
-              {story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '')}
-            </p>
-          </div>
+          <p className="text-white text-xl font-semibold text-center leading-relaxed drop-shadow-2xl">
+            {displayText}
+            {shouldTruncate && !isTextExpanded && (
+              <button
+                onClick={() => setIsTextExpanded(true)}
+                className="ml-2 text-amber-400 hover:text-amber-300 font-bold underline transition-colors duration-200"
+              >
+                ver más...
+              </button>
+            )}
+            {shouldTruncate && isTextExpanded && (
+              <button
+                onClick={() => setIsTextExpanded(false)}
+                className="ml-2 text-amber-400 hover:text-amber-300 font-bold underline transition-colors duration-200"
+              >
+                ver menos
+              </button>
+            )}
+          </p>
         </div>
 
         {/* Action buttons */}
