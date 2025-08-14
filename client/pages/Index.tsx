@@ -369,10 +369,10 @@ export default function Index() {
                   {filteredPeople.length > 4 && (
                     <Button
                       variant="ghost"
-                      className="w-full mt-4 py-3 text-white/90 hover:text-white hover:bg-white/10 border border-white/30 rounded-xl transition-all duration-200 backdrop-blur-sm"
+                      className="w-full mt-6 py-4 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl text-white hover:bg-slate-700/60 hover:scale-105 shadow-xl transition-all duration-300"
                     >
-                      <Users className="h-4 w-4 mr-2" />
-                      Ver más personas ({filteredPeople.length - 4} más)
+                      <Users className="h-5 w-5 mr-3" />
+                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} más)</span>
                     </Button>
                   )}
                 </div>
