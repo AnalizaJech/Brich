@@ -31,6 +31,18 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
   // Simulate multiple stories for this person
   const totalStories = 3;
 
+  // Stable callback to avoid useEffect dependency issues
+  const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
+  // Reset state when story changes
+  useEffect(() => {
+    setCurrentStoryIndex(0);
+    setProgress(0);
+    setIsTextExpanded(false);
+  }, [story?.id]);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(prev => {
@@ -39,7 +51,7 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
             setCurrentStoryIndex(prev => prev + 1);
             return 0;
           } else {
-            onClose();
+            handleClose();
             return 100;
           }
         }
@@ -48,12 +60,12 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
     }, 50);
 
     return () => clearInterval(timer);
-  }, [currentStoryIndex, onClose]);
+  }, [currentStoryIndex, handleClose]);
 
-  const handleStoryBarClick = (index: number) => {
+  const handleStoryBarClick = useCallback((index: number) => {
     setCurrentStoryIndex(index);
     setProgress(0);
-  };
+  }, []);
 
   const modeConfig = {
     blue: {
