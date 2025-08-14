@@ -142,7 +142,9 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         {/* Location info */}
         <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl px-4 py-2 shadow-2xl pointer-events-none">
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+            <svg className="h-4 w-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
             <span className="text-sm font-semibold text-white">San Vicente de Cañete</span>
           </div>
         </div>
@@ -150,38 +152,42 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         {/* Radius indicator */}
         <div className="absolute bottom-4 left-4 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl px-4 py-2 shadow-2xl pointer-events-none">
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+            <svg className="h-4 w-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+              <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
+              <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            </svg>
             <span className="text-sm font-semibold text-white">Radio: {getRadiusDisplay(radius)}</span>
           </div>
         </div>
 
-        {/* Zoom controls */}
+        {/* Zoom controls - Responsive sizing */}
         <div className="absolute bottom-4 right-4 flex flex-col space-y-1 pointer-events-auto">
           <Button
             size="icon"
             variant="ghost"
-            className="w-12 h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
+            className="w-8 h-8 sm:w-12 sm:h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
             onClick={handleZoomIn}
           >
-            <Plus className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            <Plus className="h-4 w-4 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="w-12 h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
+            className="w-8 h-8 sm:w-12 sm:h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
             onClick={handleZoomOut}
           >
-            <Minus className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            <Minus className="h-4 w-4 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
           </Button>
         </div>
 
         {/* Mode indicator */}
         <div className="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl px-4 py-2 shadow-2xl pointer-events-none">
           <div className="flex items-center space-x-2">
-            <div
-              className="w-2 h-2 rounded-full animate-pulse"
-              style={{ backgroundColor: (modeConfig[activeMode] || modeConfig.all).color }}
-            />
+            <svg className="h-4 w-4" fill={(modeConfig[activeMode] || modeConfig.all).color} viewBox="0 0 24 24">
+              <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v-3h2.5c1.04 0 2.08-.35 3-1.08l1.01 1.01c-.41.41-.77.78-1.01 1.07v2h3c1.1 0 2 .9 2 2v4H4z"/>
+              <circle cx="8.5" cy="8.5" r="2.5" fill={(modeConfig[activeMode] || modeConfig.all).color} opacity="0.8"/>
+            </svg>
             <span className="text-sm text-white font-semibold">
               {filteredPeople.length} {(modeConfig[activeMode] || modeConfig.all).name.toLowerCase()}
             </span>
