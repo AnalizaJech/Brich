@@ -96,7 +96,7 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
     all: {
       gradient: "bg-gradient-to-br from-purple-600 to-pink-600",
       border: "border-purple-500",
-      icon: Users,
+      icon: Compass,
       name: "Explorar",
       description: "Descubre todo tipo de personas",
       color: "#9333EA"
