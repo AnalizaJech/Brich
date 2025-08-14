@@ -22,6 +22,7 @@ interface StoriesSectionProps {
 }
 
 export default function StoriesSection({ activeMode, onModeChange }: StoriesSectionProps) {
+  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [stories, setStories] = useState<Story[]>([
     {
       id: 1,
