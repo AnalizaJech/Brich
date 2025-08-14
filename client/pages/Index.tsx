@@ -306,19 +306,7 @@ export default function Index() {
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-4">
                           <div className="relative flex-shrink-0">
-                            <div className={`w-14 h-14 ${modeConfig[person.mode].gradient} rounded-full flex items-center justify-center`}>
-                              <span className="text-white font-bold text-lg">
-                                {person.name.charAt(0)}
-                              </span>
-                            </div>
-                            {person.online && (
-                              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
-                            )}
-                            {person.verified && (
-                              <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
-                                <Shield className="h-2 w-2 text-white" />
-                              </div>
-                            )}
+                            <ProfilePhoto name={person.name} size="lg" className="border-2 border-white/20" />
                           </div>
                           
                           <div className="flex-1 min-w-0">
