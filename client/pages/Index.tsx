@@ -243,11 +243,9 @@ export default function Index() {
         <div className="lg:hidden bg-brich-dark/90 backdrop-blur-lg border-b border-white/10">
           <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-brich-blue-500 to-brich-red-500 rounded-lg flex items-center justify-center">
-                <Heart className="h-4 w-4 text-white" />
-              </div>
+              <Heart className="h-6 w-6 text-brich-red-500" />
               <div>
-                <h1 className="text-lg font-bold text-white">Brich</h1>
+                <h1 className="text-lg font-bold bg-gradient-to-r from-brich-blue-500 via-brich-red-500 to-brich-amber-500 bg-clip-text text-transparent">Brich</h1>
                 <p className="text-xs text-white/70">Encuentra tu match</p>
               </div>
             </div>
