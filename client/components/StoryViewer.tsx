@@ -107,11 +107,27 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
 
         {/* Close button - removed, will be replaced by bottom X button */}
 
-        {/* Story progress indicator with personality color */}
+        {/* Interactive Story progress indicator */}
         <div className="absolute top-4 left-4 right-4 flex space-x-1">
-          <div className={`flex-1 h-1 bg-${modeConfig[story.mode].color}/90 rounded-full`} />
-          <div className={`flex-1 h-1 bg-${modeConfig[story.mode].color}/40 rounded-full`} />
-          <div className={`flex-1 h-1 bg-${modeConfig[story.mode].color}/40 rounded-full`} />
+          {Array.from({ length: totalStories }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleStoryBarClick(index)}
+              className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1.5 transition-all duration-200"
+            >
+              <div
+                className={`h-full rounded-full transition-all duration-300 ${
+                  story.mode === 'blue' ? 'bg-blue-500' :
+                  story.mode === 'amber' ? 'bg-amber-500' :
+                  'bg-red-500'
+                }`}
+                style={{
+                  width: index < currentStoryIndex ? '100%' :
+                         index === currentStoryIndex ? `${progress}%` : '0%'
+                }}
+              />
+            </button>
+          ))}
         </div>
 
         {/* User info header */}
