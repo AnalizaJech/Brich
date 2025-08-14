@@ -119,7 +119,8 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
     <div className="max-w-md mx-auto px-4 py-6">
       {/* Mode Selector as Stories */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-white mb-3">Modo de búsqueda</h2>
+        <h2 className="text-xl font-bold text-white mb-1">¿Qué buscas hoy?</h2>
+        <p className="text-sm text-white/60 mb-4">Descubre personas compatibles contigo</p>
         <div className="flex space-x-4 overflow-x-auto pb-2">
           {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => {
             const IconComponent = modeConfig[mode].icon;
