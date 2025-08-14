@@ -25,6 +25,7 @@ interface PersonCard {
   age: number;
   distance: string;
   mode: 'blue' | 'amber' | 'red';
+  gender: 'male' | 'female';
   story: string;
   online: boolean;
   verified: boolean;
