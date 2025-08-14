@@ -568,7 +568,7 @@ export default function Chats() {
             </p>
             <Button
               onClick={() => navigate("/matches")}
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
+              className="bg-blue-600 text-white hover:bg-blue-700"
             >
               Ver Matches
             </Button>
