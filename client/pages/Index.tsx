@@ -290,15 +290,17 @@ export default function Index() {
             {/* Right Column - People List (Desktop) / Full Width (Mobile) */}
             <div className="lg:col-span-2">
               <div className="max-w-md mx-auto lg:max-w-none px-4 mb-20 lg:mb-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-white">Personas cerca</h2>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-2">
-                    <Badge variant="secondary" className="bg-white/10 text-white border-white/20">
-                      {filteredPeople.length}
-                    </Badge>
-                    <Badge variant="secondary" className="bg-brich-blue-500/20 text-brich-blue-300 border-brich-blue-500/30 text-xs">
-                      {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
-                    </Badge>
+                    <div className="bg-gradient-to-r from-brich-blue-500/20 to-brich-blue-600/20 border border-brich-blue-500/30 rounded-full px-3 py-1">
+                      <span className="text-xs font-bold text-brich-blue-300">{filteredPeople.length} personas</span>
+                    </div>
+                    <div className="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 rounded-full px-2 py-1">
+                      <span className="text-xs font-medium text-white/80">
+                        {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 
