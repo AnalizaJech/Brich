@@ -83,7 +83,12 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
 
         {/* User info header */}
         <div className="absolute top-12 left-4 right-4 flex items-center space-x-3">
-          <ProfilePhoto name={story.name} size="sm" />
+          <ProfilePhoto
+            name={story.name}
+            gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
+            personalityType={story.mode}
+            size="sm"
+          />
           <div className="flex-1">
             <div className="flex items-center space-x-2">
               <span className="text-white font-bold text-sm">{story.name}</span>
