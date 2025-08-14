@@ -6,6 +6,7 @@ import StoriesSection from "@/components/StoriesSection";
 import ProfilePhoto from "@/components/ProfilePhoto";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { nearbyPeople as initialPeople, type PersonCard } from "@/data/people";
 import {
   MapPin,
   Heart,
