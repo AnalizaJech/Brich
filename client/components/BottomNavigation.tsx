@@ -45,9 +45,9 @@ export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavi
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 z-40">
-      <div className="max-w-md mx-auto px-4 py-3 pb-safe">
-        <div className="grid grid-cols-4 gap-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-slate-700/50 z-40">
+      <div className="max-w-md mx-auto px-6 py-4">
+        <div className="flex justify-between items-center">
           {navItems.map((item) => {
             const IconComponent = item.icon;
             const isActive = location.pathname === item.path;
@@ -56,40 +56,30 @@ export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavi
               <Button
                 key={item.path}
                 variant="ghost"
-                className={`relative flex flex-col items-center space-y-2 h-auto py-4 rounded-2xl transition-all duration-300 group ${
-                  isActive 
-                    ? "text-white hover:bg-white/10" 
-                    : "text-white/70 hover:bg-white/10 hover:text-white"
-                }`}
+                className="relative flex flex-col items-center space-y-1 h-auto py-2 px-4 hover:bg-white/5 transition-all duration-200"
                 onClick={() => navigate(item.path)}
               >
                 <div className="relative">
-                  <div className={`p-2 rounded-xl transition-colors ${
-                    isActive 
-                      ? `bg-gradient-to-br ${item.activeGradient} border ${item.activeBorder}` 
-                      : "bg-white/5 group-hover:bg-white/10"
-                  }`}>
-                    <IconComponent className={`h-6 w-6 ${
-                      isActive ? item.activeIconColor : ""
-                    }`} />
-                  </div>
-                  
-                  {/* Active indicator */}
-                  {isActive && (
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-white to-gray-200 rounded-full"></div>
-                  )}
-                  
+                  <IconComponent className={`h-6 w-6 transition-colors duration-200 ${
+                    isActive ? item.activeColor : "text-gray-400"
+                  }`} />
+
                   {/* Notification dot for chats */}
-                  {item.hasNotification && !isActive && (
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  {item.hasNotification && (
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
                   )}
                 </div>
-                
-                <span className={`text-xs transition-all duration-300 ${
-                  isActive ? "font-bold" : "font-medium"
+
+                <span className={`text-xs transition-colors duration-200 ${
+                  isActive ? `${item.activeColor} font-medium` : "text-gray-400 font-normal"
                 }`}>
                   {item.label}
                 </span>
+
+                {/* Simple active indicator */}
+                {isActive && (
+                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${item.activeColor.replace('text-', 'bg-')}`}></div>
+                )}
               </Button>
             );
           })}
