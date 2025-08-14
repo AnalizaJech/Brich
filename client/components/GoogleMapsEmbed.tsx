@@ -15,8 +15,8 @@ interface GoogleMapsEmbedProps {
 }
 
 export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMapsEmbedProps) {
-  const [radius, setRadius] = useState(5000);
-  const [zoom, setZoom] = useState(13);
+  const [radius, setRadius] = useState(5000); // Start at 5km
+  const [zoom, setZoom] = useState(14); // Closer zoom for better detail
   const [mapUrl, setMapUrl] = useState("");
 
   const nearbyPeople: PersonPin[] = [
