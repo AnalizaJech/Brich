@@ -312,7 +312,17 @@ export default function Index() {
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-4">
                           <div className="relative flex-shrink-0">
-                            <ProfilePhoto name={person.name} size="lg" className="border-2 border-white/20" />
+                            <ProfilePhoto
+                              name={person.name}
+                              gender={person.gender || 'female'}
+                              personalityType={person.mode}
+                              size="lg"
+                              className={`border-3 ${
+                                person.mode === 'blue' ? 'border-brich-blue-500' :
+                                person.mode === 'amber' ? 'border-brich-amber-500' :
+                                'border-brich-red-500'
+                              }`}
+                            />
                           </div>
                           
                           <div className="flex-1 min-w-0">
