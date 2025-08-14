@@ -167,7 +167,7 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
             {shouldTruncate && !isTextExpanded && (
               <button
                 onClick={() => setIsTextExpanded(true)}
-                className={`ml-2 text-${modeConfig[story.mode].color} hover:text-${modeConfig[story.mode].color}/80 font-bold underline transition-colors duration-200`}
+                className={`ml-2 ${modeConfig[story.mode].textColor} hover:opacity-80 font-bold underline transition-colors duration-200`}
               >
                 ver más...
               </button>
