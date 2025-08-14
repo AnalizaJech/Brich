@@ -81,7 +81,7 @@ export default function Index() {
       age: 25,
       distance: "2.8 km",
       mode: "amber",
-      story: "Viajera en busca de aventuras ✈️",
+      story: "Viajera en busca de aventuras",
       online: false,
       verified: false
     },
