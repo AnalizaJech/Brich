@@ -127,7 +127,9 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
     }
   };
 
-  const filteredStories = stories.filter(story => story.mode === activeMode);
+  const filteredStories = activeMode === 'all'
+    ? stories
+    : stories.filter(story => story.mode === activeMode);
 
   return (
     <div className="max-w-md mx-auto px-4 py-6">
