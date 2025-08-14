@@ -294,12 +294,15 @@ export default function Index() {
               <div className="max-w-md mx-auto lg:max-w-none px-4 pb-32 lg:pb-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
-                  <div className="flex items-center space-x-2">
-                    <div className="bg-gradient-to-r from-brich-blue-500/25 to-brich-blue-600/25 backdrop-blur-sm border border-brich-blue-400/40 rounded-full px-3 py-1.5 shadow-sm">
-                      <span className="text-xs font-bold text-brich-blue-300">{filteredPeople.length} personas</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
+                      <div className="w-2 h-2 bg-brich-blue-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm font-semibold text-white">{filteredPeople.length}</span>
+                      <span className="text-xs text-slate-300">personas</span>
                     </div>
-                    <div className="bg-gradient-to-r from-white/15 to-white/10 backdrop-blur-sm border border-white/30 rounded-full px-3 py-1.5 shadow-sm">
-                      <span className="text-xs font-bold text-white">
+                    <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <span className="text-sm font-semibold text-white">
                         {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
                       </span>
                     </div>
