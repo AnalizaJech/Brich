@@ -1,62 +1,321 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  MapPin, 
+  Heart, 
+  MessageCircle, 
+  Settings, 
+  CreditCard,
+  Users,
+  Smartphone,
+  Share2,
+  Eye,
+  Camera,
+  Shield,
+  Zap
+} from "lucide-react";
+
+interface PersonCard {
+  id: number;
+  name: string;
+  age: number;
+  distance: string;
+  mode: 'blue' | 'amber' | 'red';
+  story: string;
+  online: boolean;
+  verified: boolean;
+}
 
 export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
+  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red'>('blue');
+  const [credits, setCredits] = useState(15);
+  const [nearbyPeople, setNearbyPeople] = useState<PersonCard[]>([
+    {
+      id: 1,
+      name: "Maria",
+      age: 26,
+      distance: "2.3 km",
+      mode: "blue",
+      story: "Buscando algo serio 💙",
+      online: true,
+      verified: true
+    },
+    {
+      id: 2,
+      name: "Carlos",
+      age: 29,
+      distance: "1.8 km",
+      mode: "amber",
+      story: "Aventuras y diversión 🌟",
+      online: true,
+      verified: false
+    },
+    {
+      id: 3,
+      name: "Sofia",
+      age: 24,
+      distance: "4.1 km",
+      mode: "red",
+      story: "Pasión y química 🔥",
+      online: false,
+      verified: true
+    }
+  ]);
 
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
+  const modeConfig = {
+    blue: {
+      gradient: "bg-brich-blue-gradient",
+      color: "text-brich-blue-600",
+      bg: "bg-brich-blue-50",
+      border: "border-brich-blue-500",
+      description: "Relaciones serias y duraderas"
+    },
+    amber: {
+      gradient: "bg-brich-amber-gradient",
+      color: "text-brich-amber-600",
+      bg: "bg-brich-amber-50",
+      border: "border-brich-amber-500",
+      description: "Aventuras y experiencias divertidas"
+    },
+    red: {
+      gradient: "bg-brich-red-gradient",
+      color: "text-brich-red-600",
+      bg: "bg-brich-red-50",
+      border: "border-brich-red-500",
+      description: "Conexiones intensas y apasionadas"
     }
   };
 
+  const filteredPeople = nearbyPeople.filter(person => person.mode === activeMode);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
+    <div className="min-h-screen bg-gradient-to-br from-brich-dark via-slate-900 to-brich-dark">
+      {/* Header */}
+      <div className="bg-white/5 backdrop-blur-lg border-b border-white/10">
+        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-brich-hero-gradient rounded-xl flex items-center justify-center">
+              <Heart className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white">Brich</h1>
+              <p className="text-xs text-white/70">Encuentra tu conexión</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 bg-white/10 rounded-full px-3 py-1">
+              <CreditCard className="h-4 w-4 text-brich-amber-500" />
+              <span className="text-sm font-medium text-white">{credits}</span>
+            </div>
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+              <Settings className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
       </div>
+
+      {/* Personality Mode Selector */}
+      <div className="max-w-md mx-auto px-4 py-6">
+        <h2 className="text-lg font-semibold text-white mb-3">Modo de búsqueda</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => (
+            <Button
+              key={mode}
+              onClick={() => setActiveMode(mode)}
+              className={`
+                h-auto p-3 flex flex-col items-center space-y-2 transition-all duration-300
+                ${activeMode === mode 
+                  ? `${modeConfig[mode].gradient} text-white shadow-lg scale-105` 
+                  : 'bg-white/10 text-white/70 hover:bg-white/20'
+                }
+              `}
+              variant="ghost"
+            >
+              <div className={`w-8 h-8 rounded-full ${modeConfig[mode].bg} flex items-center justify-center`}>
+                <div className={`w-4 h-4 rounded-full ${modeConfig[mode].gradient}`} />
+              </div>
+              <span className="text-xs font-medium capitalize">{mode}</span>
+            </Button>
+          ))}
+        </div>
+        <p className="text-sm text-white/60 mt-2 text-center">
+          {modeConfig[activeMode].description}
+        </p>
+      </div>
+
+      {/* Map Area */}
+      <div className="max-w-md mx-auto px-4 mb-6">
+        <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
+          <CardContent className="p-0">
+            <div className="h-48 bg-gradient-to-br from-brich-blue-900/20 to-brich-red-900/20 relative flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iIzMzMzMzMyIgZmlsbC1vcGFjaXR5PSIwLjEiLz4KPC9zdmc+')] opacity-30" />
+              
+              {/* Simulated Map with User Pins */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className={`w-4 h-4 ${modeConfig[activeMode].gradient} rounded-full animate-pulse-slow shadow-lg`} />
+                  <div className="absolute -top-1 -left-1 w-6 h-6 border-2 border-white rounded-full animate-ping" />
+                </div>
+                
+                {/* Nearby people indicators */}
+                <div className="absolute top-8 right-8">
+                  <div className="w-3 h-3 bg-brich-blue-gradient rounded-full" />
+                </div>
+                <div className="absolute bottom-12 left-12">
+                  <div className="w-3 h-3 bg-brich-amber-gradient rounded-full" />
+                </div>
+                <div className="absolute top-16 left-8">
+                  <div className="w-3 h-3 bg-brich-red-gradient rounded-full" />
+                </div>
+              </div>
+              
+              <div className="absolute bottom-3 left-3 bg-black/50 rounded-lg px-2 py-1">
+                <div className="flex items-center space-x-1 text-white">
+                  <MapPin className="h-3 w-3" />
+                  <span className="text-xs">Radio: 5km</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Nearby People Stories */}
+      <div className="max-w-md mx-auto px-4 mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-white">Cerca de ti</h2>
+          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">
+            {filteredPeople.length} personas
+          </Badge>
+        </div>
+        
+        <div className="space-y-3">
+          {filteredPeople.map((person) => (
+            <Card key={person.id} className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300">
+              <CardContent className="p-4">
+                <div className="flex items-center space-x-3">
+                  <div className="relative">
+                    <div className={`w-12 h-12 ${modeConfig[person.mode].gradient} rounded-full flex items-center justify-center`}>
+                      <span className="text-white font-semibold text-lg">
+                        {person.name.charAt(0)}
+                      </span>
+                    </div>
+                    {person.online && (
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+                    )}
+                    {person.verified && (
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                        <Shield className="h-2 w-2 text-white" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2">
+                      <h3 className="font-semibold text-white">{person.name}</h3>
+                      <span className="text-white/60 text-sm">{person.age}</span>
+                    </div>
+                    <p className="text-white/70 text-sm">{person.story}</p>
+                    <div className="flex items-center space-x-1 mt-1">
+                      <MapPin className="h-3 w-3 text-white/50" />
+                      <span className="text-xs text-white/50">{person.distance}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex space-x-2">
+                    <Button size="sm" variant="ghost" className="text-white hover:bg-white/10">
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      className={`${modeConfig[person.mode].gradient} text-white hover:opacity-90`}
+                      onClick={() => setCredits(prev => Math.max(0, prev - 1))}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="max-w-md mx-auto px-4 pb-6">
+        <div className="grid grid-cols-2 gap-3">
+          <Button className="bg-brich-amber-gradient text-white hover:opacity-90 h-12">
+            <CreditCard className="h-5 w-5 mr-2" />
+            Recargar Créditos
+          </Button>
+          <Button className="bg-brich-blue-gradient text-white hover:opacity-90 h-12">
+            <Share2 className="h-5 w-5 mr-2" />
+            Invitar Amigos
+          </Button>
+        </div>
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur-lg border-t border-white/20">
+        <div className="max-w-md mx-auto px-4 py-3">
+          <div className="grid grid-cols-4 gap-1">
+            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white hover:bg-white/10 h-auto py-2">
+              <Heart className="h-5 w-5" />
+              <span className="text-xs">Inicio</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+              <Users className="h-5 w-5" />
+              <span className="text-xs">Matches</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+              <MessageCircle className="h-5 w-5" />
+              <span className="text-xs">Chats</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+              <Settings className="h-5 w-5" />
+              <span className="text-xs">Perfil</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Action Button for Camera/Stories */}
+      <div className="fixed bottom-20 right-4">
+        <Button 
+          size="icon" 
+          className="w-14 h-14 bg-brich-hero-gradient rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-float"
+        >
+          <Camera className="h-6 w-6 text-white" />
+        </Button>
+      </div>
+
+      {/* Authentication Prompt (if needed) */}
+      {credits < 5 && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+          <Card className="bg-white backdrop-blur-lg border-white/20 shadow-2xl max-w-sm mx-4">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-brich-amber-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-brich-dark mb-2">Créditos bajos</h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Recarga tus créditos para seguir conversando o invita amigos para ganar más.
+              </p>
+              <div className="space-y-2">
+                <Button className="w-full bg-brich-amber-gradient text-white">
+                  Recargar con Yape/Plin
+                </Button>
+                <Button variant="outline" className="w-full">
+                  Invitar Amigos (+3 créditos)
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
