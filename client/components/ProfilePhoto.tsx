@@ -54,7 +54,7 @@ export default function ProfilePhoto({ name, gender = 'female', personalityType 
   return (
     <div className={`${sizeClasses[size]} ${className} rounded-full overflow-hidden bg-white/10`}>
       <img
-        src={generateAvatarUrl(name)}
+        src={generateAvatarUrl(name, gender, personalityType)}
         alt={`${name} profile`}
         className="w-full h-full object-cover"
         onError={() => setImageError(true)}
