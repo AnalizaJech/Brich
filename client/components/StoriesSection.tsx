@@ -198,14 +198,14 @@ export default function StoriesSection({
                       >
                         <div className="w-full h-full bg-brich-dark rounded-full flex items-center justify-center">
                           <IconComponent
-                            size={isActive ? 40 : 20}
+                            size={isActive ? 28 : 20}
                             className="transition-all duration-300"
                             style={{
                               color: isActive
                                 ? modeConfig[mode].color
                                 : "#9CA3AF",
-                              width: isActive ? "40px" : "20px",
-                              height: isActive ? "40px" : "20px",
+                              width: isActive ? "28px" : "20px",
+                              height: isActive ? "28px" : "20px",
                             }}
                           />
                         </div>
