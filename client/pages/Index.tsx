@@ -253,13 +253,10 @@ export default function Index() {
             </div>
             
             <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1 bg-white/10 rounded-full px-3 py-1">
-                <CreditCard className="h-4 w-4 text-brich-amber-500" />
-                <span className="text-sm font-medium text-white">{credits}</span>
+              <div className="flex items-center space-x-1 bg-gradient-to-r from-brich-amber-500/20 to-brich-amber-600/20 border border-brich-amber-500/30 rounded-full px-3 py-1.5">
+                <CreditCard className="h-4 w-4 text-brich-amber-400" />
+                <span className="text-sm font-bold text-white">{credits}</span>
               </div>
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
-                <Settings className="h-5 w-5" />
-              </Button>
             </div>
           </div>
         </div>
