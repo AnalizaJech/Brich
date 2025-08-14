@@ -27,6 +27,31 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        brich: {
+          blue: {
+            50: "hsl(var(--brich-blue-50))",
+            100: "hsl(var(--brich-blue-100))",
+            500: "hsl(var(--brich-blue-500))",
+            600: "hsl(var(--brich-blue-600))",
+            900: "hsl(var(--brich-blue-900))",
+          },
+          amber: {
+            50: "hsl(var(--brich-amber-50))",
+            100: "hsl(var(--brich-amber-100))",
+            500: "hsl(var(--brich-amber-500))",
+            600: "hsl(var(--brich-amber-600))",
+            900: "hsl(var(--brich-amber-900))",
+          },
+          red: {
+            50: "hsl(var(--brich-red-50))",
+            100: "hsl(var(--brich-red-100))",
+            500: "hsl(var(--brich-red-500))",
+            600: "hsl(var(--brich-red-600))",
+            900: "hsl(var(--brich-red-900))",
+          },
+          dark: "hsl(var(--brich-dark))",
+          light: "hsl(var(--brich-light))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -63,6 +88,12 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        'brich-blue-gradient': 'linear-gradient(135deg, hsl(var(--brich-blue-500)), hsl(var(--brich-blue-600)))',
+        'brich-amber-gradient': 'linear-gradient(135deg, hsl(var(--brich-amber-500)), hsl(var(--brich-amber-600)))',
+        'brich-red-gradient': 'linear-gradient(135deg, hsl(var(--brich-red-500)), hsl(var(--brich-red-600)))',
+        'brich-hero-gradient': 'linear-gradient(135deg, hsl(var(--brich-blue-900)), hsl(var(--brich-red-900)), hsl(var(--brich-amber-900)))',
+      },
       keyframes: {
         "accordion-down": {
           from: {
@@ -84,6 +115,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "float": "float 6s ease-in-out infinite",
+        "glow": "glow 2s ease-in-out infinite alternate",
       },
     },
   },
