@@ -231,31 +231,27 @@ export default function GoogleMapsEmbed({
 
       {/* Controls overlay */}
       <div className="absolute inset-0">
-        {/* Modern Location Badge */}
-        <div className="absolute top-3 left-3 bg-blue-500/10 backdrop-blur-lg border border-blue-400/20 rounded-2xl px-3 py-2 shadow-2xl pointer-events-none transition-all duration-300 hover:bg-blue-500/15">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center">
-              <svg
-                className="h-3 w-3 text-blue-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-              </svg>
-            </div>
-            <span className="text-xs font-semibold text-blue-50">
+        {/* Location Badge */}
+        <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm border border-blue-200 rounded-lg px-2 py-1 shadow-md pointer-events-none">
+          <div className="flex items-center space-x-1.5">
+            <svg
+              className="h-3 w-3 text-blue-600"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span className="text-xs font-medium text-gray-800">
               San Vicente
             </span>
           </div>
         </div>
 
-        {/* Modern Radius Badge */}
-        <div className="absolute bottom-3 left-3 bg-emerald-500/10 backdrop-blur-lg border border-emerald-400/20 rounded-2xl px-3 py-2 shadow-2xl pointer-events-none transition-all duration-300 hover:bg-emerald-500/15">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
-              <Radar className="h-3 w-3 text-emerald-300" />
-            </div>
-            <span className="text-xs font-semibold text-emerald-50">
+        {/* Radius Badge */}
+        <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm border border-emerald-200 rounded-lg px-2 py-1 shadow-md pointer-events-none">
+          <div className="flex items-center space-x-1.5">
+            <Radar className="h-3 w-3 text-emerald-600" />
+            <span className="text-xs font-medium text-gray-800">
               {getRadiusDisplay(radius)}
             </span>
           </div>
@@ -281,30 +277,17 @@ export default function GoogleMapsEmbed({
           </Button>
         </div>
 
-        {/* Modern People Count Badge */}
-        <div
-          className="absolute top-3 right-3 backdrop-blur-lg border rounded-2xl px-3 py-2 shadow-2xl pointer-events-none transition-all duration-300"
-          style={{
-            backgroundColor: `${(modeConfig[activeMode] || modeConfig.all).color}10`,
-            borderColor: `${(modeConfig[activeMode] || modeConfig.all).color}20`
-          }}
-        >
-          <div className="flex items-center space-x-2">
-            <div
-              className="w-6 h-6 rounded-full flex items-center justify-center"
-              style={{
-                backgroundColor: `${(modeConfig[activeMode] || modeConfig.all).color}20`
-              }}
+        {/* People Count Badge */}
+        <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border rounded-lg px-2 py-1 shadow-md pointer-events-none" style={{ borderColor: `${(modeConfig[activeMode] || modeConfig.all).color}50` }}>
+          <div className="flex items-center space-x-1.5">
+            <svg
+              className="h-3 w-3"
+              fill={(modeConfig[activeMode] || modeConfig.all).color}
+              viewBox="0 0 24 24"
             >
-              <svg
-                className="h-3 w-3"
-                fill={(modeConfig[activeMode] || modeConfig.all).color}
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-            </div>
-            <span className="text-xs font-semibold text-white">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            <span className="text-xs font-medium text-gray-800">
               {filteredPeople.length}
             </span>
           </div>
