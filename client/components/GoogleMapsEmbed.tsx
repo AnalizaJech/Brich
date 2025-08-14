@@ -59,7 +59,7 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     const clampedRadius = Math.max(500, Math.min(20000, newRadius));
 
     setZoom(newZoom);
-    setMapUrl(generateMapUrl(newZoom));
+    setMapUrl(getMapUrl(newZoom));
     updateRadius(clampedRadius);
   };
 
@@ -69,7 +69,7 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     const clampedRadius = Math.max(500, Math.min(20000, newRadius));
 
     setZoom(newZoom);
-    setMapUrl(generateMapUrl(newZoom));
+    setMapUrl(getMapUrl(newZoom));
     updateRadius(clampedRadius);
   };
 
