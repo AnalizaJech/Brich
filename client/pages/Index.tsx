@@ -244,25 +244,24 @@ export default function Index() {
       {/* Main Content */}
       <div className="lg:ml-80">
         {/* Enhanced Mobile Header */}
-        <div className="lg:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/50 shadow-2xl">
-          <div className="max-w-md mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="lg:hidden bg-gradient-to-r from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-2xl border-b border-white/10 shadow-2xl">
+          <div className="max-w-md mx-auto px-6 py-5 flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <Heart className="h-8 w-8 text-brich-red-500 drop-shadow-lg" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-red-500 rounded-full animate-ping opacity-75"></div>
+                <div className="w-12 h-12 bg-gradient-to-br from-brich-red-500 via-brich-red-600 to-brich-red-700 rounded-2xl flex items-center justify-center shadow-2xl">
+                  <Heart className="h-7 w-7 text-white" />
+                </div>
               </div>
               <div>
-                <h1 className="text-2xl font-black bg-gradient-to-r from-brich-blue-500 via-brich-red-500 to-brich-amber-500 bg-clip-text text-transparent drop-shadow-sm">Brich</h1>
-                <p className="text-xs text-slate-400 font-medium">Encuentra tu conexión perfecta</p>
+                <h1 className="text-2xl font-black bg-gradient-to-r from-white via-brich-red-200 to-white bg-clip-text text-transparent">Brich</h1>
+                <p className="text-xs text-white/60 font-medium">Encuentra tu conexión perfecta</p>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="flex items-center space-x-2 bg-slate-800/80 backdrop-blur-sm border border-slate-700/60 rounded-2xl px-4 py-2.5 shadow-xl">
-                <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                <span className="text-lg font-black text-white">{credits}</span>
-              </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full animate-bounce"></div>
+            <div className="flex items-center space-x-2 bg-gradient-to-r from-brich-amber-500/20 to-brich-amber-600/20 backdrop-blur-xl border border-brich-amber-500/30 rounded-2xl px-4 py-3 shadow-xl">
+              <CreditCard className="h-5 w-5 text-brich-amber-400" />
+              <span className="text-lg font-bold text-white">{credits}</span>
+              <span className="text-xs text-brich-amber-200 font-medium">créditos</span>
             </div>
           </div>
         </div>
@@ -297,17 +296,17 @@ export default function Index() {
 
             {/* Right Column - People List (Desktop) / Full Width (Mobile) */}
             <div className="lg:col-span-2">
-              <div className="max-w-md mx-auto lg:max-w-none px-4 pb-32 lg:pb-6">
+              <div className="max-w-md mx-auto lg:max-w-none px-4 pb-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <div className="w-2 h-2 bg-brich-blue-400 rounded-full animate-pulse"></div>
+                      <Users className="h-4 w-4 text-brich-blue-400" />
                       <span className="text-sm font-semibold text-white">{filteredPeople.length}</span>
                       <span className="text-xs text-slate-300">personas</span>
                     </div>
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                      <MapPin className="h-4 w-4 text-emerald-400" />
                       <span className="text-sm font-semibold text-white">
                         {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
                       </span>
@@ -372,7 +371,7 @@ export default function Index() {
                       className="w-full mt-6 py-4 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl text-white hover:bg-slate-700/60 hover:scale-105 shadow-xl transition-all duration-300"
                     >
                       <Users className="h-5 w-5 mr-3" />
-                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} más)</span>
+                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} m��s)</span>
                     </Button>
                   )}
                 </div>
@@ -382,53 +381,7 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Enhanced Bottom Navigation (Mobile Only) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden z-50">
-        <div className="max-w-md mx-auto px-4 py-3 pb-safe">
-          <div className="grid grid-cols-4 gap-2">
-            <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
-              <div className="relative">
-                <div className="p-2 bg-gradient-to-br from-brich-blue-500/20 to-brich-blue-600/20 rounded-xl border border-brich-blue-500/30">
-                  <Home className="h-6 w-6 text-brich-blue-400" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-blue-500 rounded-full"></div>
-              </div>
-              <span className="text-xs font-bold">Inicio</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/matches'}
-            >
-              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <Users className="h-6 w-6" />
-              </div>
-              <span className="text-xs font-medium">Matches</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/chats'}
-            >
-              <div className="relative p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <MessageCircle className="h-6 w-6" />
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              </div>
-              <span className="text-xs font-medium">Chats</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/profile'}
-            >
-              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <Settings className="h-6 w-6" />
-              </div>
-              <span className="text-xs font-medium">Perfil</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* Bottom Navigation removed for mobile/tablet - only showing in desktop sidebar */}
 
       {/* Low Credits Modal */}
       {credits < 5 && (
