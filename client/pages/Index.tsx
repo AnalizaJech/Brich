@@ -341,6 +341,17 @@ export default function Index() {
                       </CardContent>
                     </Card>
                   ))}
+
+                  {/* Ver más button for people */}
+                  {filteredPeople.length > 6 && (
+                    <Button
+                      variant="ghost"
+                      className="w-full mt-4 py-2 text-white/80 hover:text-white hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200"
+                    >
+                      <Users className="h-4 w-4 mr-2" />
+                      Ver más personas ({filteredPeople.length - 6} más)
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
