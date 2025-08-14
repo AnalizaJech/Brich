@@ -576,55 +576,7 @@ export default function Chats() {
         )}
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 z-40">
-        <div className="max-w-md mx-auto px-4 py-3 pb-safe">
-          <div className="grid grid-cols-4 gap-2">
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => navigate("/")}
-            >
-              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <Home className="h-6 w-6" />
-              </div>
-              <span className="text-xs font-medium">Inicio</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => navigate("/matches")}
-            >
-              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <Users className="h-6 w-6" />
-              </div>
-              <span className="text-xs font-medium">Matches</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group"
-            >
-              <div className="relative">
-                <div className="p-2 bg-gradient-to-br from-blue-500/20 to-cyan-600/20 rounded-xl border border-blue-500/30">
-                  <MessageCircle className="h-6 w-6 text-blue-400" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full"></div>
-              </div>
-              <span className="text-xs font-bold">Chats</span>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => navigate("/profile")}
-            >
-              <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
-                <Settings className="h-6 w-6" />
-              </div>
-              <span className="text-xs font-medium">Perfil</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      <BottomNavigation totalUnreadMessages={totalUnreadMessages} />
     </div>
   );
 }
