@@ -85,18 +85,24 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     return `${radiusMeters} m`;
   };
 
+  // Initialize map URL on first render
+  useState(() => {
+    setMapUrl(generateMapUrl(zoom));
+  });
+
   return (
     <div className="relative w-full h-48 lg:h-80 rounded-lg overflow-hidden">
-      {/* Google Maps Embed */}
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d15544.873545863364!2d-76.4068570447244!3d-13.085341426263092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x910ff9495dbe053f%3A0x10f4c235753f7244!2sSan%20Vicente%20de%20Ca%C3%B1ete%2C%20Per%C3%BA!3m2!1d-13.076476699999999!2d-76.38488319999999!4m5!1s0x910ff9495dbe053f%3A0x10f4c235753f7244!2sSan%20Vicente%20de%20Ca%C3%B1ete%2C%20Per%C3%BA!3m2!1d-13.076476699999999!2d-76.38488319999999!5e0!3m2!1ses-419!2spe!4v1755149517211!5m2!1ses-419!2spe"
-        width="100%" 
-        height="100%" 
-        style={{ border: 0, filter: 'contrast(1.1) saturate(0.8)' }} 
-        allowFullScreen 
-        loading="lazy" 
+      {/* Google Maps Embed with dynamic zoom */}
+      <iframe
+        src={mapUrl || "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15544!2d-76.3856!3d-13.0751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5m2!1ses-419!2spe"}
+        width="100%"
+        height="100%"
+        style={{ border: 0, filter: 'contrast(1.1) saturate(0.8)' }}
+        allowFullScreen
+        loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         className="absolute inset-0"
+        key={zoom} // Force reload when zoom changes
       />
       
       {/* Overlay with controls and radius indicator */}
