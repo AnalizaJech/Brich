@@ -450,7 +450,7 @@ export default function Chats() {
                   size="icon"
                   onClick={sendMessage}
                   disabled={credits === 0}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:opacity-90 disabled:opacity-50"
+                  className="bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
                 >
                   <Send className="h-5 w-5" />
                 </Button>
