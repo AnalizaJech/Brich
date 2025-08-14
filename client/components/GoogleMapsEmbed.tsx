@@ -162,12 +162,12 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         {/* Mode indicator */}
         <div className="absolute top-3 right-3 bg-black/80 backdrop-blur rounded-lg px-3 py-1 pointer-events-none">
           <div className="flex items-center space-x-2">
-            <div 
-              className="w-3 h-3 rounded-full" 
-              style={{ backgroundColor: modeConfig[activeMode].color }}
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: (modeConfig[activeMode] || modeConfig.all).color }}
             />
             <span className="text-xs text-white font-medium">
-              {filteredPeople.length} {modeConfig[activeMode].name.toLowerCase()}
+              {filteredPeople.length} {(modeConfig[activeMode] || modeConfig.all).name.toLowerCase()}
             </span>
           </div>
         </div>
