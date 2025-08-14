@@ -396,7 +396,7 @@ export default function Index() {
                               {person.story}
                             </p>
                             <div className="flex items-center space-x-1">
-                              <MapPin className="h-3 w-3 text-white/50" />
+                              <MapPin className="h-3 w-3 text-purple-400" />
                               <span className="text-xs text-white/50">
                                 {person.distance}
                               </span>
