@@ -312,9 +312,9 @@ export default function Matches() {
                 <div className="flex space-x-2 mt-4">
                   <Button
                     size="sm"
-                    variant="ghost"
+                    variant="outline"
                     onClick={() => handleUnmatch(match.id)}
-                    className="flex-1 bg-red-500/20 text-red-300 border border-red-500/30 hover:bg-red-500/30"
+                    className="flex-1 border-red-500/50 text-red-400 hover:bg-red-500/10 hover:border-red-500"
                   >
                     <X className="h-4 w-4 mr-2" />
                     Deshacer
@@ -322,7 +322,7 @@ export default function Matches() {
                   <Button
                     size="sm"
                     onClick={() => handleStartChat(match.id)}
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:opacity-90"
+                    className="flex-1 bg-blue-600 text-white hover:bg-blue-700"
                   >
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Chatear
