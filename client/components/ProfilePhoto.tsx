@@ -18,23 +18,25 @@ export default function ProfilePhoto({ name, gender = 'female', personalityType 
     xl: 'w-24 h-24'
   };
 
-  // Generate a consistent realistic photo URL based on the name
-  const generateAvatarUrl = (name: string) => {
-    // Create a seed based on the name to ensure consistency
+  // Generate attractive photos based on personality type and gender
+  const generateAvatarUrl = (name: string, gender: string, personalityType: string) => {
     const seed = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-    // Use specific photo IDs that show faces from Lorem Picsum
-    const facePhotoIds = [
-      91, 177, 211, 287, 342, 399, 407, 494,
-      548, 554, 593, 659, 661, 665, 683, 714,
-      790, 823, 836, 856, 883, 885, 886, 887
-    ];
+    // Use RandomUser.me API for real, attractive photos
+    // Different nationalities and styles based on personality type
+    const nationalityMap = {
+      blue: ['us', 'ca', 'gb'], // Professional, serious looking
+      amber: ['au', 'nl', 'dk'], // Adventurous, fun looking
+      red: ['es', 'it', 'br'] // Passionate, attractive looking
+    };
 
-    const photoId = facePhotoIds[seed % facePhotoIds.length];
-    const size = 200; // Size for good quality
+    const nationalities = nationalityMap[personalityType as keyof typeof nationalityMap] || ['us'];
+    const nationality = nationalities[seed % nationalities.length];
 
-    // Using Lorem Picsum with specific face photo IDs
-    return `https://picsum.photos/id/${photoId}/${size}/${size}`;
+    // Use a consistent seed for the same person
+    const seedValue = `${name}-${gender}-${personalityType}`;
+
+    return `https://randomuser.me/api/portraits/${gender === 'male' ? 'men' : 'women'}/${(seed % 99) + 1}.jpg`;
   };
 
   const fallbackInitial = name.charAt(0).toUpperCase();
