@@ -93,6 +93,36 @@ export default function Index() {
 
   const filteredPeople = nearbyPeople.filter(person => person.mode === activeMode);
 
+  // Show auth prompt if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-brich-dark via-slate-900 to-brich-dark flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <div className="w-20 h-20 bg-brich-hero-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Heart className="h-10 w-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-4">Bienvenido a Brich</h1>
+          <p className="text-white/70 mb-8">La app de citas más segura y divertida del Perú</p>
+          <div className="space-y-3">
+            <Button
+              onClick={() => navigate('/auth')}
+              className="w-full bg-brich-blue-gradient text-white hover:opacity-90"
+            >
+              Iniciar Sesión
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => navigate('/auth')}
+              className="w-full border-white/20 text-white hover:bg-white/10"
+            >
+              Crear Cuenta
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-brich-dark via-slate-900 to-brich-dark">
       {/* Header */}
