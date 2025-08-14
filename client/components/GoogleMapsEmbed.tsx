@@ -122,19 +122,101 @@ export default function GoogleMapsEmbed({
           />
         </div>
 
-        {/* Person Pins Simulation */}
-        {filteredPeople.map((person, index) => (
-          <div
-            key={person.id}
-            className="absolute w-4 h-4 rounded-full border-2 border-white shadow-lg pointer-events-none"
-            style={{
-              backgroundColor: modeConfig[person.mode].color,
-              left: `${45 + index * 8 + Math.sin(index) * 20}%`,
-              top: `${40 + index * 6 + Math.cos(index) * 15}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-        ))}
+        {/* Enhanced Person Pins with Redesigned Badges */}
+        {filteredPeople.map((person, index) => {
+          const isBlue = person.mode === 'blue';
+          const isAmber = person.mode === 'amber';
+          const isRed = person.mode === 'red';
+
+          return (
+            <div
+              key={person.id}
+              className="absolute pointer-events-none"
+              style={{
+                left: `${45 + index * 8 + Math.sin(index) * 20}%`,
+                top: `${40 + index * 6 + Math.cos(index) * 15}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {/* Outer glow ring */}
+              <div
+                className="absolute inset-0 rounded-full opacity-60 animate-pulse"
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  background: `radial-gradient(circle, ${modeConfig[person.mode].color}40 0%, transparent 70%)`,
+                  transform: 'translate(-50%, -50%)',
+                  left: '50%',
+                  top: '50%',
+                }}
+              />
+
+              {/* Main badge */}
+              <div
+                className={`relative w-5 h-5 rounded-full border-2 border-white shadow-lg transition-all duration-300 ${
+                  isBlue ? 'animate-bounce' : isAmber ? 'animate-spin' : 'animate-pulse'
+                }`}
+                style={{
+                  backgroundColor: modeConfig[person.mode].color,
+                  boxShadow: `0 0 15px ${modeConfig[person.mode].color}60, 0 4px 8px rgba(0,0,0,0.3)`,
+                  animationDuration: isBlue ? '2s' : isAmber ? '3s' : '1.5s',
+                  animationDelay: `${index * 0.3}s`
+                }}
+              >
+                {/* Inner highlight */}
+                <div
+                  className="absolute inset-1 rounded-full opacity-80"
+                  style={{
+                    background: `linear-gradient(135deg, ${modeConfig[person.mode].color}30 0%, transparent 50%, white20 100%)`
+                  }}
+                />
+
+                {/* Mode-specific decorative elements */}
+                {isBlue && (
+                  <div
+                    className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full animate-ping"
+                    style={{ backgroundColor: modeConfig[person.mode].color }}
+                  />
+                )}
+
+                {isAmber && (
+                  <>
+                    <div
+                      className="absolute -top-0.5 -left-0.5 w-1 h-1 rounded-full animate-bounce"
+                      style={{ backgroundColor: modeConfig[person.mode].color, animationDelay: '0.5s' }}
+                    />
+                    <div
+                      className="absolute -bottom-0.5 -right-0.5 w-1 h-1 rounded-full animate-bounce"
+                      style={{ backgroundColor: modeConfig[person.mode].color, animationDelay: '1s' }}
+                    />
+                  </>
+                )}
+
+                {isRed && (
+                  <div
+                    className="absolute inset-0 rounded-full opacity-50 animate-pulse"
+                    style={{
+                      background: `conic-gradient(from 0deg, ${modeConfig[person.mode].color} 0%, transparent 50%, ${modeConfig[person.mode].color} 100%)`,
+                      animationDuration: '1s'
+                    }}
+                  />
+                )}
+              </div>
+
+              {/* Floating particles for extra visual interest */}
+              <div
+                className="absolute w-1 h-1 rounded-full opacity-40 animate-ping"
+                style={{
+                  backgroundColor: modeConfig[person.mode].color,
+                  left: '100%',
+                  top: '0%',
+                  animationDelay: `${index * 0.7}s`,
+                  animationDuration: '2s'
+                }}
+              />
+            </div>
+          );
+        })}
 
         {/* Center User Pin */}
         <div className="absolute inset-0 flex items-center justify-center">
