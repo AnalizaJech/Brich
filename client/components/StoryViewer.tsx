@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { X, Heart, MessageCircle, User } from "lucide-react";
 import ProfilePhoto from "./ProfilePhoto";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 
 interface StoryViewerProps {
   story: {
@@ -21,37 +21,68 @@ interface StoryViewerProps {
   onViewProfile: () => void;
 }
 
+const TOTAL_STORIES = 3;
+
+// Move mode config outside component to prevent recreation
+const MODE_CONFIG = {
+  blue: {
+    gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
+    name: "Serio",
+    icon: Heart,
+    color: "blue-500",
+    textColor: "text-blue-500",
+    bgColor: "bg-blue-500",
+    chatButtonClass: "bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50 hover:border-blue-300"
+  },
+  amber: {
+    gradient: "bg-gradient-to-br from-amber-500 to-orange-500",
+    name: "Aventura",
+    icon: Heart,
+    color: "amber-500",
+    textColor: "text-amber-500",
+    bgColor: "bg-amber-500",
+    chatButtonClass: "bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50 hover:border-amber-300"
+  },
+  red: {
+    gradient: "bg-gradient-to-br from-red-500 to-pink-500",
+    name: "Pasión",
+    icon: Heart,
+    color: "red-500",
+    textColor: "text-red-500",
+    bgColor: "bg-red-500",
+    chatButtonClass: "bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50 hover:border-red-300"
+  }
+} as const;
+
 export default function StoryViewer({ story, onClose, onLike, onChat, onViewProfile }: StoryViewerProps) {
   if (!story) return null;
 
   const [isTextExpanded, setIsTextExpanded] = useState(false);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-
-  // Simulate multiple stories for this person
-  const totalStories = 3;
-
-  // Stable callback to avoid useEffect dependency issues
-  const handleClose = useCallback(() => {
-    onClose();
-  }, [onClose]);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset state when story changes
   useEffect(() => {
     setCurrentStoryIndex(0);
     setProgress(0);
     setIsTextExpanded(false);
-  }, [story?.id]);
+  }, [story.id]);
 
+  // Progress timer
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
-          if (currentStoryIndex < totalStories - 1) {
+          if (currentStoryIndex < TOTAL_STORIES - 1) {
             setCurrentStoryIndex(prev => prev + 1);
             return 0;
           } else {
-            handleClose();
+            onClose();
             return 100;
           }
         }
@@ -59,57 +90,64 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
       });
     }, 50);
 
-    return () => clearInterval(timer);
-  }, [currentStoryIndex, handleClose]);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [currentStoryIndex, onClose]);
 
   const handleStoryBarClick = useCallback((index: number) => {
     setCurrentStoryIndex(index);
     setProgress(0);
   }, []);
 
-  // Memoize config to prevent re-renders
-  const modeConfig = useMemo(() => ({
-    blue: {
-      gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
-      name: "Serio",
-      icon: Heart,
-      color: "blue-500",
-      textColor: "text-blue-500",
-      bgColor: "bg-blue-500",
-      chatButtonClass: "bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50 hover:border-blue-300"
-    },
-    amber: {
-      gradient: "bg-gradient-to-br from-amber-500 to-orange-500",
-      name: "Aventura",
-      icon: Heart,
-      color: "amber-500",
-      textColor: "text-amber-500",
-      bgColor: "bg-amber-500",
-      chatButtonClass: "bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50 hover:border-amber-300"
-    },
-    red: {
-      gradient: "bg-gradient-to-br from-red-500 to-pink-500",
-      name: "Pasión",
-      icon: Heart,
-      color: "red-500",
-      textColor: "text-red-500",
-      bgColor: "bg-red-500",
-      chatButtonClass: "bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50 hover:border-red-300"
-    }
-  }), []);
+  const handleExpandText = useCallback(() => {
+    setIsTextExpanded(true);
+  }, []);
 
-  // Clean story text and check if it needs truncation
-  const cleanStoryText = story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '');
-  const shouldTruncate = cleanStoryText.length > 100;
-  const displayText = shouldTruncate && !isTextExpanded
-    ? cleanStoryText.substring(0, 100)
-    : cleanStoryText;
+  const handleCollapseText = useCallback(() => {
+    setIsTextExpanded(false);
+  }, []);
+
+  // Memoize text processing
+  const textData = useMemo(() => {
+    const cleanStoryText = story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '');
+    const shouldTruncate = cleanStoryText.length > 100;
+    const displayText = shouldTruncate && !isTextExpanded
+      ? cleanStoryText.substring(0, 100)
+      : cleanStoryText;
+    
+    return { cleanStoryText, shouldTruncate, displayText };
+  }, [story.story, isTextExpanded]);
+
+  // Memoize story bars to prevent recreation
+  const storyBars = useMemo(() => {
+    return Array.from({ length: TOTAL_STORIES }, (_, index) => {
+      const progressWidth = index < currentStoryIndex ? '100%' :
+                           index === currentStoryIndex ? `${progress}%` : '0%';
+      
+      return (
+        <button
+          key={`story-bar-${index}`}
+          onClick={() => handleStoryBarClick(index)}
+          className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1.5 transition-all duration-200"
+        >
+          <div
+            className={`h-full rounded-full transition-all duration-300 ${MODE_CONFIG[story.mode].bgColor}`}
+            style={{ width: progressWidth }}
+          />
+        </button>
+      );
+    });
+  }, [currentStoryIndex, progress, story.mode, handleStoryBarClick]);
+
+  const modeConfig = MODE_CONFIG[story.mode];
 
   return (
     <div className="fixed inset-0 bg-black z-50">
-      {/* Story Container - Fullscreen */}
       <div className="relative w-full h-full">
-        {/* Fullscreen Background Image */}
+        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -117,30 +155,13 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           }}
         />
 
-        {/* Gradient overlays for better text readability */}
+        {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
 
-        {/* Close button - removed, will be replaced by bottom X button */}
-
-        {/* Interactive Story progress indicator */}
+        {/* Progress indicators */}
         <div className="absolute top-4 left-4 right-4 flex space-x-1">
-          {Array.from({ length: totalStories }, (_, index) => {
-            const progressWidth = index < currentStoryIndex ? '100%' :
-                                 index === currentStoryIndex ? `${progress}%` : '0%';
-            return (
-              <button
-                key={`story-${story.id}-${index}`}
-                onClick={() => handleStoryBarClick(index)}
-                className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1.5 transition-all duration-200"
-              >
-                <div
-                  className={`h-full rounded-full transition-all duration-300 ${modeConfig[story.mode].bgColor}`}
-                  style={{ width: progressWidth }}
-                />
-              </button>
-            );
-          })}
+          {storyBars}
         </div>
 
         {/* User info header */}
@@ -154,28 +175,28 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           <div className="flex-1">
             <div className="flex items-center space-x-2">
               <span className="text-white font-bold text-sm">{story.name}</span>
-              <span className={`${modeConfig[story.mode].textColor} font-semibold text-sm`}>{story.age} años</span>
+              <span className={`${modeConfig.textColor} font-semibold text-sm`}>{story.age} años</span>
             </div>
             <span className="text-white/70 text-xs">{story.distance}</span>
           </div>
         </div>
 
-        {/* Story text without background container - Responsive */}
+        {/* Story text */}
         <div className="absolute bottom-24 sm:bottom-32 left-4 sm:left-6 right-4 sm:right-6">
           <p className="text-white text-lg sm:text-xl font-semibold text-center leading-relaxed drop-shadow-2xl">
-            {displayText}
-            {shouldTruncate && !isTextExpanded && (
+            {textData.displayText}
+            {textData.shouldTruncate && !isTextExpanded && (
               <button
-                onClick={() => setIsTextExpanded(true)}
-                className={`ml-2 ${modeConfig[story.mode].textColor} hover:opacity-80 font-bold underline transition-colors duration-200`}
+                onClick={handleExpandText}
+                className={`ml-2 ${modeConfig.textColor} hover:opacity-80 font-bold underline transition-colors duration-200`}
               >
                 ver más...
               </button>
             )}
-            {shouldTruncate && isTextExpanded && (
+            {textData.shouldTruncate && isTextExpanded && (
               <button
-                onClick={() => setIsTextExpanded(false)}
-                className={`ml-2 ${modeConfig[story.mode].textColor} hover:opacity-80 font-bold underline transition-colors duration-200`}
+                onClick={handleCollapseText}
+                className={`ml-2 ${modeConfig.textColor} hover:opacity-80 font-bold underline transition-colors duration-200`}
               >
                 ver menos
               </button>
@@ -183,9 +204,8 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           </p>
         </div>
 
-        {/* Redesigned Action buttons */}
+        {/* Action buttons */}
         <div className="absolute bottom-8 sm:bottom-12 left-6 right-6 flex justify-center space-x-8">
-          {/* Close Button - Minimalist design */}
           <Button
             variant="ghost"
             size="icon"
@@ -195,7 +215,6 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
             <X className="h-6 w-6 sm:h-7 sm:w-7 stroke-2" />
           </Button>
 
-          {/* Like Button - Always red for heart */}
           <Button
             variant="ghost"
             size="icon"
@@ -205,12 +224,11 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
             <Heart className="h-6 w-6 sm:h-7 sm:w-7 fill-current" />
           </Button>
 
-          {/* Chat Button - Uses personality color */}
           <Button
             variant="ghost"
             size="icon"
             onClick={onChat}
-            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl border-2 text-white hover:scale-105 shadow-xl transition-all duration-300 ${modeConfig[story.mode].chatButtonClass}`}
+            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl border-2 text-white hover:scale-105 shadow-xl transition-all duration-300 ${modeConfig.chatButtonClass}`}
           >
             <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
           </Button>
