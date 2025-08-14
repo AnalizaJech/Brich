@@ -152,21 +152,21 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         {/* Radius indicator */}
         <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl px-2 py-1 shadow-lg pointer-events-none">
           <div className="flex items-center space-x-1.5">
-            <svg className="h-3 w-3 text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
-              <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.5"/>
-              <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            <svg className="h-3 w-3 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v6m0 6v6"/>
+              <path d="m21 12-6-6-6 6-6-6"/>
             </svg>
             <span className="text-xs font-medium text-emerald-100">{getRadiusDisplay(radius)}</span>
           </div>
         </div>
 
-        {/* Zoom controls - Responsive sizing */}
+        {/* Zoom controls - Responsive sizing with better hover */}
         <div className="absolute bottom-4 right-4 flex flex-col space-y-1 pointer-events-auto">
           <Button
             size="icon"
             variant="ghost"
-            className="w-8 h-8 sm:w-12 sm:h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
+            className="w-8 h-8 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-xl border border-white/30 rounded-2xl text-gray-800 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:scale-105 shadow-lg transition-all duration-300 group"
             onClick={handleZoomIn}
           >
             <Plus className="h-4 w-4 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
@@ -174,7 +174,7 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
           <Button
             size="icon"
             variant="ghost"
-            className="w-8 h-8 sm:w-12 sm:h-12 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300 group"
+            className="w-8 h-8 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-xl border border-white/30 rounded-2xl text-gray-800 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:scale-105 shadow-lg transition-all duration-300 group"
             onClick={handleZoomOut}
           >
             <Minus className="h-4 w-4 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
@@ -184,9 +184,8 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         {/* Mode indicator */}
         <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl px-2 py-1 shadow-lg pointer-events-none">
           <div className="flex items-center space-x-1.5">
-            <svg className="h-3 w-3" viewBox="0 0 24 24">
-              <path fill={(modeConfig[activeMode] || modeConfig.all).color} d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v-3h2.5c1.04 0 2.08-.35 3-1.08l1.01 1.01c-.41.41-.77.78-1.01 1.07v2h3c1.1 0 2 .9 2 2v4H4z"/>
-              <circle cx="8.5" cy="8.5" r="2.5" fill={(modeConfig[activeMode] || modeConfig.all).color} opacity="0.8"/>
+            <svg className="h-3 w-3" fill={(modeConfig[activeMode] || modeConfig.all).color} viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
             <span className="text-xs font-medium text-white">
               {filteredPeople.length}
