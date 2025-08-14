@@ -154,7 +154,7 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           <div className="flex-1">
             <div className="flex items-center space-x-2">
               <span className="text-white font-bold text-sm">{story.name}</span>
-              <span className={`text-${modeConfig[story.mode].color} font-semibold text-sm`}>{story.age} años</span>
+              <span className={`${modeConfig[story.mode].textColor} font-semibold text-sm`}>{story.age} años</span>
             </div>
             <span className="text-white/70 text-xs">{story.distance}</span>
           </div>
