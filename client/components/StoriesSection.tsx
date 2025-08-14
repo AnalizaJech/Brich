@@ -282,23 +282,14 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
           ))}
         </div>
         
-        {/* View all button */}
-        {activeMode === 'all' && (
+        {/* View more button */}
+        {filteredStories.length > 4 && (
           <Button
             variant="ghost"
-            className="w-full mt-4 py-3 text-white/90 hover:text-white hover:bg-white/10 border border-white/20 rounded-xl transition-all duration-200"
+            className="w-full mt-4 py-2 text-white/80 hover:text-white hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200"
           >
             <Users className="h-4 w-4 mr-2" />
-            Ver más personas
-          </Button>
-        )}
-
-        {filteredStories.length > 6 && activeMode !== 'all' && (
-          <Button
-            variant="ghost"
-            className="w-full mt-3 text-white/70 hover:text-white hover:bg-white/10"
-          >
-            Ver todas las historias ({filteredStories.length - 6} más)
+            Ver más historias ({filteredStories.length - 4} más)
           </Button>
         )}
       </div>
