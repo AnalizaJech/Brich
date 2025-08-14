@@ -215,20 +215,11 @@ export default function Profile() {
                     key={mode}
                     onClick={() => handlePersonalityChange(mode)}
                     variant="ghost"
-                    className={`w-full p-4 justify-start rounded-2xl transition-all duration-300 ${
+                    className={`w-full p-4 justify-start rounded-lg border transition-all duration-200 ${
                       isActive
-                        ? "text-white border-2 shadow-xl"
-                        : "text-gray-400 bg-slate-800/40 border border-slate-700/50 hover:bg-slate-700/60"
+                        ? "bg-slate-700 border-slate-600 text-white"
+                        : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
                     }`}
-                    style={
-                      isActive
-                        ? {
-                            backgroundColor: `${modeConfig[mode].color}20`,
-                            borderColor: modeConfig[mode].color,
-                            boxShadow: `0 4px 15px ${modeConfig[mode].color}30`,
-                          }
-                        : {}
-                    }
                   >
                     <IconComponent className="h-5 w-5 mr-3" />
                     <div className="text-left">
