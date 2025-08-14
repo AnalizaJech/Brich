@@ -17,8 +17,8 @@ interface Story {
 }
 
 interface StoriesSectionProps {
-  activeMode: 'blue' | 'amber' | 'red';
-  onModeChange: (mode: 'blue' | 'amber' | 'red') => void;
+  activeMode: 'blue' | 'amber' | 'red' | 'all';
+  onModeChange: (mode: 'blue' | 'amber' | 'red' | 'all') => void;
 }
 
 export default function StoriesSection({ activeMode, onModeChange }: StoriesSectionProps) {
