@@ -8,7 +8,7 @@ interface ProfilePhotoProps {
   className?: string;
 }
 
-export default function ProfilePhoto({ name, size = 'md', className = '' }: ProfilePhotoProps) {
+export default function ProfilePhoto({ name, gender = 'female', personalityType = 'blue', size = 'md', className = '' }: ProfilePhotoProps) {
   const [imageError, setImageError] = useState(false);
 
   const sizeClasses = {
