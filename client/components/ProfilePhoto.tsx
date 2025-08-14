@@ -21,17 +21,18 @@ export default function ProfilePhoto({ name, size = 'md', className = '' }: Prof
     // Create a seed based on the name to ensure consistency
     const seed = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-    // Use Picsum Photos with a specific ID based on the name seed
-    // This gives us realistic photos of people
-    const photoId = 200 + (seed % 800); // Range 200-999 for varied photos
+    // Use specific photo IDs that show faces from Lorem Picsum
+    const facePhotoIds = [
+      91, 177, 211, 287, 342, 399, 407, 494,
+      548, 554, 593, 659, 661, 665, 683, 714,
+      790, 823, 836, 856, 883, 885, 886, 887
+    ];
 
-    // Determine gender preference based on name (simple heuristic)
-    const femaleNames = ['Maria', 'Sofia', 'Lucia', 'Ana', 'Carmen', 'Elena', 'Isabel', 'Paula'];
-    const isFemale = femaleNames.includes(name);
+    const photoId = facePhotoIds[seed % facePhotoIds.length];
+    const size = 200; // Size for good quality
 
-    // Using This Person Does Not Exist API for ultra-realistic fake people
-    // Fallback to Lorem Picsum with face filter
-    return `https://thispersondoesnotexist.com/image?${seed}`;
+    // Using Lorem Picsum with specific face photo IDs
+    return `https://picsum.photos/id/${photoId}/${size}/${size}`;
   };
 
   const fallbackInitial = name.charAt(0).toUpperCase();
