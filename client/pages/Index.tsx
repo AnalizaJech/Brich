@@ -71,7 +71,7 @@ export default function Index() {
       age: 31,
       distance: "3.2 km",
       mode: "blue",
-      story: "Profesional buscando estabilidad 💼",
+      story: "Profesional buscando estabilidad",
       online: true,
       verified: true
     },
