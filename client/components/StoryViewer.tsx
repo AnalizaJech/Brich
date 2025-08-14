@@ -125,36 +125,36 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           </p>
         </div>
 
-        {/* Action buttons - Circular with personality colors */}
-        <div className="absolute bottom-6 sm:bottom-12 left-6 right-6 flex justify-center space-x-4 sm:space-x-6">
-          {/* Like Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onLike}
-            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full ${modeConfig[story.mode].buttonBg} ${modeConfig[story.mode].hoverBg} backdrop-blur-xl border border-white/20 text-white hover:scale-110 shadow-2xl transition-all duration-300`}
-          >
-            <Heart className="h-6 w-6 sm:h-7 sm:w-7" />
-          </Button>
-
-          {/* Chat Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onChat}
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500/90 hover:bg-green-600 backdrop-blur-xl border border-white/20 text-white hover:scale-110 shadow-2xl transition-all duration-300"
-          >
-            <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
-          </Button>
-
-          {/* Close Button (replaces profile button) */}
+        {/* Action buttons - Redesigned with ideal colors, X button first */}
+        <div className="absolute bottom-8 sm:bottom-12 left-6 right-6 flex justify-center space-x-6 sm:space-x-8">
+          {/* Close Button - First position */}
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-500/90 hover:bg-gray-600 backdrop-blur-xl border border-white/20 text-white hover:scale-110 shadow-2xl transition-all duration-300"
+            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300 hover:rotate-90"
           >
-            <X className="h-6 w-6 sm:h-7 sm:w-7" />
+            <X className="h-7 w-7 sm:h-8 sm:w-8" />
+          </Button>
+
+          {/* Like Button - Personality color */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onLike}
+            className={`w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-${modeConfig[story.mode].color} to-${modeConfig[story.mode].color}/80 hover:from-${modeConfig[story.mode].color}/90 hover:to-${modeConfig[story.mode].color}/70 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300`}
+          >
+            <Heart className="h-7 w-7 sm:h-8 sm:w-8 fill-current" />
+          </Button>
+
+          {/* Chat Button - Premium purple gradient */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onChat}
+            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 backdrop-blur-2xl border border-white/30 text-white hover:scale-110 shadow-2xl transition-all duration-300"
+          >
+            <MessageCircle className="h-7 w-7 sm:h-8 sm:w-8" />
           </Button>
         </div>
       </div>
