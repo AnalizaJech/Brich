@@ -244,7 +244,11 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                         <span className="text-white font-semibold text-sm">{story.name}</span>
                         <span className="text-white/80 text-xs">{story.age}</span>
                       </div>
-                      <p className="text-white/90 text-xs leading-tight line-clamp-2">
+                      <p className="text-white/90 text-xs leading-tight overflow-hidden" style={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical'
+                      }}>
                         {story.story}
                       </p>
                       <p className="text-white/70 text-xs mt-1">
