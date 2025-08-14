@@ -146,18 +146,18 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
       {/* Controls overlay */}
       <div className="absolute inset-0">
         {/* Location info */}
-        <div className="absolute top-3 left-3 bg-black/80 backdrop-blur rounded-lg px-3 py-1 pointer-events-none">
-          <div className="flex items-center space-x-2 text-white">
-            <MapPin className="h-3 w-3" />
-            <span className="text-xs font-medium">San Vicente de Cañete</span>
+        <div className="absolute top-3 left-3 bg-gradient-to-r from-black/70 to-black/50 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1.5 pointer-events-none">
+          <div className="flex items-center space-x-2">
+            <MapPin className="h-3 w-3 text-brich-blue-400" />
+            <span className="text-xs font-bold text-white">San Vicente de Cañete</span>
           </div>
         </div>
 
         {/* Radius indicator */}
-        <div className="absolute bottom-3 left-3 bg-black/80 backdrop-blur rounded-lg px-3 py-1 pointer-events-none">
-          <div className="flex items-center space-x-2 text-white">
-            <Locate className="h-3 w-3" />
-            <span className="text-xs font-medium">Radio: {getRadiusDisplay(radius)}</span>
+        <div className="absolute bottom-3 left-3 bg-gradient-to-r from-black/70 to-black/50 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1.5 pointer-events-none">
+          <div className="flex items-center space-x-2">
+            <Locate className="h-3 w-3 text-brich-amber-400" />
+            <span className="text-xs font-bold text-white">Radio: {getRadiusDisplay(radius)}</span>
           </div>
         </div>
 
