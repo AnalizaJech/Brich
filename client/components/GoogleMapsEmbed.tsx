@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Locate, Minus, Plus } from "lucide-react";
+import { MapPin, Locate, Minus, Plus, Radar } from "lucide-react";
 
 interface PersonPin {
   id: number;
