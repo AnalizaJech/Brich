@@ -41,7 +41,7 @@ export default function Index() {
       age: 26,
       distance: "2.3 km",
       mode: "blue",
-      story: "Buscando algo serio 💙",
+      story: "Buscando algo serio y duradero",
       online: true,
       verified: true
     },
@@ -61,7 +61,7 @@ export default function Index() {
       age: 24,
       distance: "4.1 km",
       mode: "red",
-      story: "Pasión y química ���",
+      story: "Pasión y química 🔥",
       online: false,
       verified: true
     },
