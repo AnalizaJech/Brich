@@ -292,11 +292,11 @@ export default function Index() {
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-2">
-                    <div className="bg-gradient-to-r from-brich-blue-500/20 to-brich-blue-600/20 border border-brich-blue-500/30 rounded-full px-3 py-1">
+                    <div className="bg-gradient-to-r from-brich-blue-500/25 to-brich-blue-600/25 backdrop-blur-sm border border-brich-blue-400/40 rounded-full px-3 py-1.5 shadow-sm">
                       <span className="text-xs font-bold text-brich-blue-300">{filteredPeople.length} personas</span>
                     </div>
-                    <div className="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 rounded-full px-2 py-1">
-                      <span className="text-xs font-medium text-white/80">
+                    <div className="bg-gradient-to-r from-white/15 to-white/10 backdrop-blur-sm border border-white/30 rounded-full px-3 py-1.5 shadow-sm">
+                      <span className="text-xs font-bold text-white">
                         {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
                       </span>
                     </div>
