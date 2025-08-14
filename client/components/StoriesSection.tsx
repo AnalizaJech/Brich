@@ -214,11 +214,16 @@ export default function StoriesSection({
 
                     <div className="text-center">
                       <span
-                        className="text-sm font-medium transition-colors duration-300"
+                        className={`text-sm transition-all duration-300 ${
+                          isActive ? "font-bold" : "font-medium"
+                        }`}
                         style={{
                           color: isActive
                             ? modeConfig[mode].color
                             : "#9CA3AF",
+                          textShadow: isActive
+                            ? `0 0 10px ${modeConfig[mode].color}, 0 0 20px ${modeConfig[mode].color}, 0 0 30px ${modeConfig[mode].color}`
+                            : "none",
                         }}
                       >
                         {modeConfig[mode].name}
