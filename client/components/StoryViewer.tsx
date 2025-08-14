@@ -24,6 +24,8 @@ interface StoryViewerProps {
 export default function StoryViewer({ story, onClose, onLike, onChat, onViewProfile }: StoryViewerProps) {
   if (!story) return null;
 
+  const [isTextExpanded, setIsTextExpanded] = useState(false);
+
   const modeConfig = {
     blue: {
       gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
@@ -41,6 +43,13 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
       icon: Heart
     }
   };
+
+  // Clean story text and check if it needs truncation
+  const cleanStoryText = story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '');
+  const shouldTruncate = cleanStoryText.length > 100;
+  const displayText = shouldTruncate && !isTextExpanded
+    ? cleanStoryText.substring(0, 100)
+    : cleanStoryText;
 
   return (
     <div className="fixed inset-0 bg-black z-50">
