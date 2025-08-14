@@ -56,7 +56,9 @@ export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavi
               <Button
                 key={item.path}
                 variant="ghost"
-                className="relative flex flex-col items-center space-y-1 h-auto py-2 px-4 hover:bg-white/5 transition-all duration-200"
+                className={`relative flex flex-col items-center space-y-1 h-auto py-2 px-4 transition-all duration-200 ${
+                  isActive ? "" : "hover:bg-white/5"
+                }`}
                 onClick={() => navigate(item.path)}
               >
                 <div className="relative">
