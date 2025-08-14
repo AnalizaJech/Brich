@@ -378,8 +378,8 @@ export default function Index() {
       </div>
 
       {/* Enhanced Bottom Navigation (Mobile Only) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden">
-        <div className="max-w-md mx-auto px-4 py-2">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden z-50">
+        <div className="max-w-md mx-auto px-4 py-3 pb-safe">
           <div className="grid grid-cols-4 gap-2">
             <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
               <div className="relative">
