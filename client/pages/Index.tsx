@@ -278,12 +278,10 @@ export default function Index() {
               <div className="max-w-md mx-auto lg:max-w-none px-4 mb-6">
                 <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
                   <CardContent className="p-0">
-                    <div className="lg:h-80">
-                      <GoogleMapComponent
-                        activeMode={activeMode}
-                        onRadiusChange={handleRadiusChange}
-                      />
-                    </div>
+                    <GoogleMapsEmbed
+                      activeMode={activeMode}
+                      onRadiusChange={handleRadiusChange}
+                    />
                   </CardContent>
                 </Card>
               </div>
