@@ -104,7 +104,7 @@ export default function Index() {
       age: 23,
       distance: "6.2 km",
       mode: "blue",
-      story: "Relación seria y comprometida ���",
+      story: "Relación seria y comprometida 💕",
       online: false,
       verified: true
     },
@@ -211,40 +211,17 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Personality Mode Selector */}
-      <div className="max-w-md mx-auto px-4 py-6">
-        <h2 className="text-lg font-semibold text-white mb-3">Modo de búsqueda</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => (
-            <Button
-              key={mode}
-              onClick={() => setActiveMode(mode)}
-              className={`
-                h-auto p-3 flex flex-col items-center space-y-2 transition-all duration-300
-                ${activeMode === mode 
-                  ? `${modeConfig[mode].gradient} text-white shadow-lg scale-105` 
-                  : 'bg-white/10 text-white/70 hover:bg-white/20'
-                }
-              `}
-              variant="ghost"
-            >
-              <div className={`w-8 h-8 rounded-full ${modeConfig[mode].bg} flex items-center justify-center`}>
-                <div className={`w-4 h-4 rounded-full ${modeConfig[mode].gradient}`} />
-              </div>
-              <span className="text-xs font-medium capitalize">{mode}</span>
-            </Button>
-          ))}
-        </div>
-        <p className="text-sm text-white/60 mt-2 text-center">
-          {modeConfig[activeMode].description}
-        </p>
-      </div>
+      {/* Stories Section (replaces old mode selector) */}
+      <StoriesSection
+        activeMode={activeMode}
+        onModeChange={setActiveMode}
+      />
 
-      {/* Interactive Map Area */}
+      {/* Google Map Area */}
       <div className="max-w-md mx-auto px-4 mb-6">
         <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
           <CardContent className="p-0">
-            <InteractiveMap
+            <GoogleMapComponent
               activeMode={activeMode}
               onRadiusChange={handleRadiusChange}
             />
