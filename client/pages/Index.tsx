@@ -93,7 +93,15 @@ export default function Index() {
     }
   };
 
-  const filteredPeople = nearbyPeople.filter(person => person.mode === activeMode);
+  // Filter people by mode and distance based on search radius
+  const filteredPeople = nearbyPeople.filter(person => {
+    const personDistanceMeters = parseFloat(person.distance.replace(' km', '')) * 1000;
+    return person.mode === activeMode && personDistanceMeters <= searchRadius;
+  });
+
+  const handleRadiusChange = (newRadius: number) => {
+    setSearchRadius(newRadius);
+  };
 
   // Show auth prompt if not authenticated
   if (!isAuthenticated) {
