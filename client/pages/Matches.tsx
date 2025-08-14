@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ProfilePhoto from "@/components/ProfilePhoto";
+import BottomNavigation from "@/components/BottomNavigation";
+import PageHeader from "@/components/PageHeader";
 import {
   Heart,
-  Home,
-  MessageCircle,
-  Settings,
   Users,
   Flame,
   Star,
