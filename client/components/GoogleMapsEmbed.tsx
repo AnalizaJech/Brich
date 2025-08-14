@@ -231,38 +231,30 @@ export default function GoogleMapsEmbed({
 
       {/* Controls overlay */}
       <div className="absolute inset-0">
-        {/* Enhanced Location info */}
-        <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-xl border border-blue-400/40 rounded-2xl px-4 py-2.5 shadow-xl pointer-events-none group hover:scale-105 transition-all duration-300">
-          <div className="flex items-center space-x-2">
-            <div className="relative">
-              <svg
-                className="h-4 w-4 text-blue-400 drop-shadow-lg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-              </svg>
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-60"></div>
-            </div>
-            <span className="text-sm font-semibold text-blue-100 drop-shadow">
+        {/* Location info */}
+        <div className="absolute top-2 left-2 bg-black/70 backdrop-blur-md border border-blue-300/30 rounded-xl px-3 py-1.5 shadow-lg pointer-events-none transition-all duration-200 hover:bg-black/80">
+          <div className="flex items-center space-x-1.5">
+            <svg
+              className="h-3 w-3 text-blue-300"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            <span className="text-xs font-medium text-blue-100">
               San Vicente
             </span>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent rounded-2xl animate-pulse"></div>
         </div>
 
-        {/* Enhanced Radius indicator */}
-        <div className="absolute bottom-2 left-2 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl border border-emerald-400/40 rounded-2xl px-4 py-2.5 shadow-xl pointer-events-none group hover:scale-105 transition-all duration-300">
-          <div className="flex items-center space-x-2">
-            <div className="relative">
-              <Radar className="h-4 w-4 text-emerald-400 drop-shadow-lg animate-spin" style={{ animationDuration: '3s' }} />
-              <div className="absolute inset-0 bg-emerald-400/20 rounded-full animate-ping"></div>
-            </div>
-            <span className="text-sm font-semibold text-emerald-100 drop-shadow">
+        {/* Radius indicator */}
+        <div className="absolute bottom-2 left-2 bg-black/70 backdrop-blur-md border border-emerald-300/30 rounded-xl px-3 py-1.5 shadow-lg pointer-events-none transition-all duration-200 hover:bg-black/80">
+          <div className="flex items-center space-x-1.5">
+            <Radar className="h-3 w-3 text-emerald-300" />
+            <span className="text-xs font-medium text-emerald-100">
               {getRadiusDisplay(radius)}
             </span>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent rounded-2xl animate-pulse" style={{ animationDuration: '2s' }}></div>
         </div>
 
         {/* Zoom controls - Responsive sizing with better hover */}
@@ -285,39 +277,20 @@ export default function GoogleMapsEmbed({
           </Button>
         </div>
 
-        {/* Enhanced Mode indicator */}
-        <div
-          className="absolute top-2 right-2 backdrop-blur-xl border rounded-2xl px-4 py-2.5 shadow-xl pointer-events-none group hover:scale-105 transition-all duration-300"
-          style={{
-            background: `linear-gradient(135deg, ${(modeConfig[activeMode] || modeConfig.all).color}20, ${(modeConfig[activeMode] || modeConfig.all).color}10)`,
-            borderColor: `${(modeConfig[activeMode] || modeConfig.all).color}40`
-          }}
-        >
-          <div className="flex items-center space-x-2">
-            <div className="relative">
-              <svg
-                className="h-4 w-4 drop-shadow-lg"
-                fill={(modeConfig[activeMode] || modeConfig.all).color}
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-              <div
-                className="absolute -top-1 -right-1 w-2 h-2 rounded-full animate-bounce"
-                style={{ backgroundColor: (modeConfig[activeMode] || modeConfig.all).color }}
-              ></div>
-            </div>
-            <span className="text-sm font-semibold text-white drop-shadow">
+        {/* Mode indicator */}
+        <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-md border border-white/25 rounded-xl px-3 py-1.5 shadow-lg pointer-events-none transition-all duration-200 hover:bg-black/80">
+          <div className="flex items-center space-x-1.5">
+            <svg
+              className="h-3 w-3"
+              fill={(modeConfig[activeMode] || modeConfig.all).color}
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            <span className="text-xs font-medium text-white">
               {filteredPeople.length}
             </span>
           </div>
-          <div
-            className="absolute inset-0 rounded-2xl animate-pulse"
-            style={{
-              background: `linear-gradient(90deg, ${(modeConfig[activeMode] || modeConfig.all).color}10, transparent)`,
-              animationDuration: '2s'
-            }}
-          ></div>
         </div>
       </div>
     </div>
