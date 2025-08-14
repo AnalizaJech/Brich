@@ -125,4 +125,29 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide scrollbars on mobile while keeping functionality */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  /* For Firefox */
+  html {
+    scrollbar-width: none;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+  }
 }
