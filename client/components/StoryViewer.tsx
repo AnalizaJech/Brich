@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { X, Heart, MessageCircle, User } from "lucide-react";
 import ProfilePhoto from "./ProfilePhoto";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface StoryViewerProps {
   story: {
