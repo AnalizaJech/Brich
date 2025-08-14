@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MapPin, Locate, Minus, Plus } from "lucide-react";
+import { MapPin, Locate, Minus, Plus, Radar } from "lucide-react";
 
 interface PersonPin {
   id: number;
@@ -168,17 +168,7 @@ export default function GoogleMapsEmbed({
         {/* Radius indicator */}
         <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm border border-white/20 rounded-xl px-2 py-1 shadow-lg pointer-events-none">
           <div className="flex items-center space-x-1.5">
-            <svg
-              className="h-3 w-3 text-emerald-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-            >
-              <circle cx="12" cy="12" r="3" />
-              <path d="M12 1v6m0 6v6" />
-              <path d="m21 12-6-6-6 6-6-6" />
-            </svg>
+            <Radar className="h-3 w-3 text-emerald-300" />
             <span className="text-xs font-medium text-emerald-100">
               {getRadiusDisplay(radius)}
             </span>

@@ -18,6 +18,7 @@ import {
   Share2,
   Eye,
   Zap,
+  Radar,
 } from "lucide-react";
 
 interface PersonCard {
@@ -333,21 +334,14 @@ export default function Index() {
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <Users className="h-4 w-4 text-brich-blue-400" />
+                      <Users className="h-4 w-4 text-purple-400" />
                       <span className="text-sm font-semibold text-white">
                         {filteredPeople.length}
                       </span>
                       <span className="text-xs text-slate-300">personas</span>
                     </div>
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <svg
-                        className="h-4 w-4 text-emerald-400"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        <circle cx="12" cy="9" r="2.5" opacity="0.3" />
-                      </svg>
+                      <Radar className="h-4 w-4 text-emerald-400" />
                       <span className="text-sm font-semibold text-white">
                         {searchRadius >= 1000
                           ? `${(searchRadius / 1000).toFixed(1)}km`
@@ -396,7 +390,15 @@ export default function Index() {
                               {person.story}
                             </p>
                             <div className="flex items-center space-x-1">
-                              <MapPin className="h-3 w-3 text-white/50" />
+                              <MapPin
+                                className={`h-3 w-3 ${
+                                  person.mode === "blue"
+                                    ? "text-brich-blue-500"
+                                    : person.mode === "amber"
+                                      ? "text-brich-amber-500"
+                                      : "text-brich-red-500"
+                                }`}
+                              />
                               <span className="text-xs text-white/50">
                                 {person.distance}
                               </span>
