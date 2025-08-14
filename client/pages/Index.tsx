@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   MapPin,
   Heart,
+  Home,
   MessageCircle,
   Settings,
   CreditCard,
