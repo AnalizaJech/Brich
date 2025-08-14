@@ -10,7 +10,7 @@ interface PersonPin {
 }
 
 interface GoogleMapsEmbedProps {
-  activeMode: 'blue' | 'amber' | 'red';
+  activeMode: 'blue' | 'amber' | 'red' | 'all';
   onRadiusChange: (radius: number) => void;
 }
 
