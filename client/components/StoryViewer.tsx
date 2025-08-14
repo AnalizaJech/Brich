@@ -210,13 +210,7 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
             variant="ghost"
             size="icon"
             onClick={onChat}
-            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl border-2 text-white hover:scale-105 shadow-xl transition-all duration-300 ${
-              story.mode === 'blue'
-                ? 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50 hover:border-blue-300'
-                : story.mode === 'amber'
-                ? 'bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50 hover:border-amber-300'
-                : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50 hover:border-red-300'
-            }`}
+            className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl border-2 text-white hover:scale-105 shadow-xl transition-all duration-300 ${modeConfig[story.mode].chatButtonClass}`}
           >
             <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
           </Button>
