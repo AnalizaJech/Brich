@@ -390,7 +390,13 @@ export default function Index() {
                               {person.story}
                             </p>
                             <div className="flex items-center space-x-1">
-                              <MapPin className="h-3 w-3 text-purple-400" />
+                              <MapPin className={`h-3 w-3 ${
+                                person.mode === "blue"
+                                  ? "text-brich-blue-400"
+                                  : person.mode === "amber"
+                                    ? "text-brich-amber-400"
+                                    : "text-brich-red-400"
+                              }`} />
                               <span className="text-xs text-white/50">
                                 {person.distance}
                               </span>
