@@ -30,12 +30,14 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
   const modeConfig = {
     blue: { color: "#3B82F6", name: "Serio" },
     amber: { color: "#F59E0B", name: "Aventura" },
-    red: { color: "#EF4444", name: "Pasión" }
+    red: { color: "#EF4444", name: "Pasión" },
+    all: { color: "#64748B", name: "Todos" }
   };
 
-  const filteredPeople = nearbyPeople.filter(person => 
-    person.mode === activeMode && person.distance <= radius
-  );
+  const filteredPeople = nearbyPeople.filter(person => {
+    const modeMatch = activeMode === 'all' || person.mode === activeMode;
+    return modeMatch && person.distance <= radius;
+  });
 
   const updateRadius = (newRadius: number) => {
     setRadius(newRadius);
