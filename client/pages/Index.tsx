@@ -35,6 +35,7 @@ export default function Index() {
   const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red'>('blue');
   const [credits, setCredits] = useState(15);
   const [isAuthenticated, setIsAuthenticated] = useState(true); // For demo purposes
+  const [searchRadius, setSearchRadius] = useState(5000); // in meters
   const [nearbyPeople, setNearbyPeople] = useState<PersonCard[]>([
     {
       id: 1,
