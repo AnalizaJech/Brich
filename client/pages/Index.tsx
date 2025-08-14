@@ -255,9 +255,14 @@ export default function Index() {
       <div className="max-w-md mx-auto px-4 mb-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-white">Cerca de ti</h2>
-          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">
-            {filteredPeople.length} personas
-          </Badge>
+          <div className="flex items-center space-x-2">
+            <Badge variant="secondary" className="bg-white/10 text-white border-white/20">
+              {filteredPeople.length} personas
+            </Badge>
+            <Badge variant="secondary" className="bg-brich-blue-500/20 text-brich-blue-300 border-brich-blue-500/30 text-xs">
+              {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
+            </Badge>
+          </div>
         </div>
         
         <div className="space-y-3">
