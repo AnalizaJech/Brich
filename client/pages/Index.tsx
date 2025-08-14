@@ -3,18 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import GoogleMapsEmbed from "@/components/GoogleMapsEmbed";
 import StoriesSection from "@/components/StoriesSection";
+import ProfilePhoto from "@/components/ProfilePhoto";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  MapPin, 
-  Heart, 
-  MessageCircle, 
-  Settings, 
+import {
+  MapPin,
+  Heart,
+  MessageCircle,
   CreditCard,
   Users,
   Share2,
   Eye,
-  Shield,
   Zap
 } from "lucide-react";
 
