@@ -480,8 +480,8 @@ export default function Chats() {
       <PageHeader
         title="Chats"
         subtitle={`${totalUnreadMessages} mensajes sin leer`}
-        icon={<MessageCircle className="h-6 w-6 text-white" />}
-        iconGradient="from-blue-500 to-cyan-600"
+        icon={<MessageCircle className="h-6 w-6" />}
+        iconColor="text-blue-500"
         credits={credits}
       />
 
