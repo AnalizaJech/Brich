@@ -94,11 +94,13 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
           )}
         </div>
 
-        {/* Story text */}
-        <div className="absolute bottom-24 left-4 right-4">
-          <p className="text-white text-lg font-medium text-center leading-relaxed">
-            {story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '')}
-          </p>
+        {/* Story text with enhanced styling */}
+        <div className="absolute bottom-32 left-6 right-6">
+          <div className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <p className="text-white text-xl font-semibold text-center leading-relaxed drop-shadow-lg">
+              {story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '')}
+            </p>
+          </div>
         </div>
 
         {/* Action buttons */}
