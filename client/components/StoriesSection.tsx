@@ -215,6 +215,7 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
               key={story.id}
               variant="ghost"
               className="p-0 h-auto hover:bg-transparent group"
+              onClick={() => setSelectedStory(story)}
             >
               <div className="relative w-full">
                 {/* Enhanced Story container */}
@@ -229,23 +230,7 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                   {/* Profile picture at top */}
                   <div className="absolute top-4 left-4">
                     <div className="relative">
-                      <div className="w-12 h-12 bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/40">
-                        <span className="text-white font-bold text-base">
-                          {story.profileInitial}
-                        </span>
-                      </div>
-
-                      {/* Online status */}
-                      {story.isOnline && (
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full" />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Story viewed indicator */}
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-black/40 backdrop-blur rounded-full p-2">
-                      <Eye className="h-4 w-4 text-white" />
+                      <ProfilePhoto name={story.name} size="md" className="border-2 border-white/40" />
                     </div>
                   </div>
 
