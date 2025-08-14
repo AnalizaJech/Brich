@@ -54,6 +54,28 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brich Brand Colors */
+    --brich-blue-50: 219 95% 97%;
+    --brich-blue-100: 218 88% 95%;
+    --brich-blue-500: 217 91% 60%;
+    --brich-blue-600: 221 83% 53%;
+    --brich-blue-900: 224 76% 48%;
+
+    --brich-amber-50: 48 100% 96%;
+    --brich-amber-100: 48 96% 89%;
+    --brich-amber-500: 45 93% 58%;
+    --brich-amber-600: 43 96% 56%;
+    --brich-amber-900: 28 92% 56%;
+
+    --brich-red-50: 0 86% 97%;
+    --brich-red-100: 0 93% 94%;
+    --brich-red-500: 0 84% 60%;
+    --brich-red-600: 0 72% 51%;
+    --brich-red-900: 0 63% 31%;
+
+    --brich-dark: 220 39% 11%;
+    --brich-light: 0 0% 98%;
   }
 
   .dark {
