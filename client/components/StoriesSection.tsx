@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, Sparkles, Flame, Plus, Users } from "lucide-react";
+import { Heart, Sparkles, Flame, Plus, Users, Compass } from "lucide-react";
 import ProfilePhoto from "./ProfilePhoto";
 import StoryViewer from "./StoryViewer";
 
