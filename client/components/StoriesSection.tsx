@@ -223,12 +223,16 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
               <div className="relative w-full">
                 {/* Enhanced Story container */}
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-lg">
-                  <div className={`
-                    absolute inset-0 ${modeConfig[story.mode].gradient} opacity-90
-                  `} />
+                  {/* Background image based on personality type and name */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(https://picsum.photos/seed/${story.name}-${story.mode}/400/600)`,
+                    }}
+                  />
 
-                  {/* Subtle pattern overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
+                  {/* Darker overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/70" />
 
                   {/* Profile picture at top */}
                   <div className="absolute top-4 left-4">
