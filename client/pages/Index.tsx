@@ -299,15 +299,27 @@ export default function Index() {
               <Heart className="h-5 w-5" />
               <span className="text-xs">Inicio</span>
             </Button>
-            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              onClick={() => window.location.href = '/matches'}
+            >
               <Users className="h-5 w-5" />
               <span className="text-xs">Matches</span>
             </Button>
-            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              onClick={() => window.location.href = '/chats'}
+            >
               <MessageCircle className="h-5 w-5" />
               <span className="text-xs">Chats</span>
             </Button>
-            <Button variant="ghost" className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2">
+            <Button
+              variant="ghost"
+              className="flex flex-col items-center space-y-1 text-white/60 hover:bg-white/10 h-auto py-2"
+              onClick={() => window.location.href = '/profile'}
+            >
               <Settings className="h-5 w-5" />
               <span className="text-xs">Perfil</span>
             </Button>
