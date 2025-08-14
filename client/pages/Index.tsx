@@ -333,15 +333,6 @@ export default function Index() {
         </div>
       </div>
 
-      {/* Floating Action Button for Camera/Stories */}
-      <div className="fixed bottom-20 right-4">
-        <Button 
-          size="icon" 
-          className="w-14 h-14 bg-brich-hero-gradient rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-float"
-        >
-          <Camera className="h-6 w-6 text-white" />
-        </Button>
-      </div>
 
       {/* Authentication Prompt (if needed) */}
       {credits < 5 && (
