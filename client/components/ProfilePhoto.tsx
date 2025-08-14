@@ -2,6 +2,8 @@ import { useState } from "react";
 
 interface ProfilePhotoProps {
   name: string;
+  gender?: 'male' | 'female';
+  personalityType?: 'blue' | 'amber' | 'red';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
 }
