@@ -28,10 +28,10 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
   ];
 
   const modeConfig = {
+    all: { color: "#9333EA", name: "Explorar" },
     blue: { color: "#3B82F6", name: "Serio" },
     amber: { color: "#F59E0B", name: "Aventura" },
-    red: { color: "#EF4444", name: "Pasión" },
-    all: { color: "#64748B", name: "Todos" }
+    red: { color: "#EF4444", name: "Pasión" }
   };
 
   const filteredPeople = nearbyPeople.filter(person => {
