@@ -374,16 +374,26 @@ export default function StoriesSection({
           ))}
         </div>
 
-        {/* View more button */}
+        {/* Enhanced View more button */}
         {filteredStories.length > 4 && (
           <Button
             variant="ghost"
-            className="w-full mt-6 py-4 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl text-white hover:bg-slate-700/60 hover:scale-105 shadow-xl transition-all duration-300"
+            className="relative w-full mt-6 py-4 bg-gradient-to-r from-slate-800/60 to-slate-700/60 backdrop-blur-xl border border-slate-600/50 rounded-2xl text-white hover:from-purple-600/40 hover:to-pink-600/40 hover:border-purple-500/60 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 shadow-xl transition-all duration-500 group overflow-hidden"
           >
-            <Users className="h-5 w-5 mr-3" />
-            <span className="font-semibold">
-              Ver más historias ({filteredStories.length - 4} más)
-            </span>
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-500/20 to-pink-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+            </div>
+
+            <div className="relative flex items-center justify-center">
+              <Users className="h-5 w-5 mr-3 group-hover:text-purple-300 group-hover:scale-110 transition-all duration-300" />
+              <span className="font-semibold group-hover:text-purple-100 transition-colors duration-300">
+                Ver más historias ({filteredStories.length - 4} más)
+              </span>
+            </div>
           </Button>
         )}
       </div>

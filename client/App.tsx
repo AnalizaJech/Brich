@@ -8,7 +8,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
-import Placeholder from "./pages/Placeholder";
+import Matches from "./pages/Matches";
+import Chats from "./pages/Chats";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,33 +24,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route
-            path="/matches"
-            element={
-              <Placeholder
-                title="Matches"
-                description="Aquí verás todas las personas que han mostrado interés mutuo contigo."
-              />
-            }
-          />
-          <Route
-            path="/chats"
-            element={
-              <Placeholder
-                title="Chats"
-                description="Tus conversaciones activas aparecerán aquí."
-              />
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <Placeholder
-                title="Perfil"
-                description="Configura tu perfil, preferencias y configuración de la cuenta."
-              />
-            }
-          />
+          <Route path="/matches" element={<Matches />} />
+          <Route path="/chats" element={<Chats />} />
+          <Route path="/profile" element={<Profile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
