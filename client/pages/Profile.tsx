@@ -187,7 +187,7 @@ export default function Profile() {
 
               <Button
                 onClick={() => setIsEditing(!isEditing)}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:opacity-90"
+                className="w-full bg-blue-600 text-white hover:bg-blue-700"
               >
                 <Edit className="h-4 w-4 mr-2" />
                 {isEditing ? "Guardar cambios" : "Editar perfil"}
