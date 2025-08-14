@@ -416,7 +416,7 @@ export default function Profile() {
                   <span>Perfil verificado automáticamente</span>
                 </div>
               </div>
-              <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:opacity-90">
+              <Button className="w-full bg-yellow-500 text-black hover:bg-yellow-600 font-medium">
                 <Crown className="h-4 w-4 mr-2" />
                 Hacerse Premium - S/ 29.90/mes
               </Button>
