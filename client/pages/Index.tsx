@@ -365,7 +365,7 @@ export default function Index() {
             <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
               <div className="relative">
                 <div className="p-2 bg-gradient-to-br from-brich-blue-500/20 to-brich-blue-600/20 rounded-xl border border-brich-blue-500/30">
-                  <Heart className="h-6 w-6 text-brich-blue-400" />
+                  <Home className="h-6 w-6 text-brich-blue-400" />
                 </div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-blue-500 rounded-full"></div>
               </div>
