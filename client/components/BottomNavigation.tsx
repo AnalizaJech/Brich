@@ -1,18 +1,14 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Home,
-  Users,
-  MessageCircle,
-  Settings,
-  Heart,
-} from "lucide-react";
+import { Home, Users, MessageCircle, Settings, Heart } from "lucide-react";
 
 interface BottomNavigationProps {
   totalUnreadMessages?: number;
 }
 
-export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavigationProps) {
+export default function BottomNavigation({
+  totalUnreadMessages = 0,
+}: BottomNavigationProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -62,9 +58,11 @@ export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavi
                 onClick={() => navigate(item.path)}
               >
                 <div className="relative">
-                  <IconComponent className={`h-6 w-6 transition-colors duration-200 ${
-                    isActive ? item.activeColor : "text-gray-400"
-                  }`} />
+                  <IconComponent
+                    className={`h-6 w-6 transition-colors duration-200 ${
+                      isActive ? item.activeColor : "text-gray-400"
+                    }`}
+                  />
 
                   {/* Notification dot for chats */}
                   {item.hasNotification && (
@@ -72,15 +70,21 @@ export default function BottomNavigation({ totalUnreadMessages = 0 }: BottomNavi
                   )}
                 </div>
 
-                <span className={`text-xs transition-colors duration-200 ${
-                  isActive ? `${item.activeColor} font-medium` : "text-gray-400 font-normal"
-                }`}>
+                <span
+                  className={`text-xs transition-colors duration-200 ${
+                    isActive
+                      ? `${item.activeColor} font-medium`
+                      : "text-gray-400 font-normal"
+                  }`}
+                >
                   {item.label}
                 </span>
 
                 {/* Simple active indicator */}
                 {isActive && (
-                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${item.activeColor.replace('text-', 'bg-')}`}></div>
+                  <div
+                    className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${item.activeColor.replace("text-", "bg-")}`}
+                  ></div>
                 )}
               </Button>
             );

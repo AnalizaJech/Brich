@@ -53,7 +53,7 @@ export default function Chats() {
   const [searchParams] = useSearchParams();
   const [credits, setCredits] = useState(15);
   const [selectedChat, setSelectedChat] = useState<number | null>(
-    searchParams.get("match") ? parseInt(searchParams.get("match")!) : null
+    searchParams.get("match") ? parseInt(searchParams.get("match")!) : null,
   );
   const [newMessage, setNewMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -231,7 +231,7 @@ export default function Chats() {
   ]);
 
   const filteredChats = chats.filter((chat) =>
-    chat.name.toLowerCase().includes(searchQuery.toLowerCase())
+    chat.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const currentChat = chats.find((chat) => chat.id === selectedChat);
@@ -250,78 +250,97 @@ export default function Chats() {
         id: Date.now(),
         senderId: 0,
         text: newMessage.trim(),
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
         read: true,
         type: "text",
       };
 
-      setChats(prev => prev.map(chat => {
-        if (chat.id === selectedChat) {
-          return {
-            ...chat,
-            messages: [...chat.messages, message],
-            lastMessage: newMessage.trim(),
-            lastMessageTime: message.timestamp,
-          };
-        }
-        return chat;
-      }));
-
-      setNewMessage("");
-      setCredits(prev => Math.max(0, prev - 1));
-
-      // Simular respuesta automática después de 2-3 segundos
-      setTimeout(() => {
-        const responses = [
-          "¡Me gusta cómo piensas! 😊",
-          "Totalmente de acuerdo contigo",
-          "Eso suena genial, cuéntame más",
-          "Me encanta tu perspectiva",
-          "¡Qué interesante! 🤔",
-          "Me parece una gran idea",
-          "Deberíamos hablar más sobre esto",
-        ];
-
-        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-        const responseMessage: Message = {
-          id: Date.now() + 1,
-          senderId: selectedChat,
-          text: randomResponse,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          read: false,
-          type: "text",
-        };
-
-        setChats(prev => prev.map(chat => {
+      setChats((prev) =>
+        prev.map((chat) => {
           if (chat.id === selectedChat) {
             return {
               ...chat,
-              messages: [...chat.messages, responseMessage],
-              lastMessage: randomResponse,
-              lastMessageTime: responseMessage.timestamp,
-              unreadCount: chat.unreadCount + 1,
+              messages: [...chat.messages, message],
+              lastMessage: newMessage.trim(),
+              lastMessageTime: message.timestamp,
             };
           }
           return chat;
-        }));
-      }, Math.random() * 2000 + 1000);
+        }),
+      );
+
+      setNewMessage("");
+      setCredits((prev) => Math.max(0, prev - 1));
+
+      // Simular respuesta automática después de 2-3 segundos
+      setTimeout(
+        () => {
+          const responses = [
+            "¡Me gusta cómo piensas! 😊",
+            "Totalmente de acuerdo contigo",
+            "Eso suena genial, cuéntame más",
+            "Me encanta tu perspectiva",
+            "¡Qué interesante! 🤔",
+            "Me parece una gran idea",
+            "Deberíamos hablar más sobre esto",
+          ];
+
+          const randomResponse =
+            responses[Math.floor(Math.random() * responses.length)];
+          const responseMessage: Message = {
+            id: Date.now() + 1,
+            senderId: selectedChat,
+            text: randomResponse,
+            timestamp: new Date().toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            read: false,
+            type: "text",
+          };
+
+          setChats((prev) =>
+            prev.map((chat) => {
+              if (chat.id === selectedChat) {
+                return {
+                  ...chat,
+                  messages: [...chat.messages, responseMessage],
+                  lastMessage: randomResponse,
+                  lastMessageTime: responseMessage.timestamp,
+                  unreadCount: chat.unreadCount + 1,
+                };
+              }
+              return chat;
+            }),
+          );
+        },
+        Math.random() * 2000 + 1000,
+      );
     }
   };
 
   const markAsRead = (chatId: number) => {
-    setChats(prev => prev.map(chat => {
-      if (chat.id === chatId) {
-        return {
-          ...chat,
-          unreadCount: 0,
-          messages: chat.messages.map(msg => ({ ...msg, read: true }))
-        };
-      }
-      return chat;
-    }));
+    setChats((prev) =>
+      prev.map((chat) => {
+        if (chat.id === chatId) {
+          return {
+            ...chat,
+            unreadCount: 0,
+            messages: chat.messages.map((msg) => ({ ...msg, read: true })),
+          };
+        }
+        return chat;
+      }),
+    );
   };
 
-  const totalUnreadMessages = chats.reduce((total, chat) => total + chat.unreadCount, 0);
+  const totalUnreadMessages = chats.reduce(
+    (total, chat) => total + chat.unreadCount,
+    0,
+  );
 
   if (selectedChat && currentChat) {
     return (
@@ -338,7 +357,7 @@ export default function Chats() {
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              
+
               <div className="relative">
                 <ProfilePhoto
                   name={currentChat.name}
@@ -351,7 +370,7 @@ export default function Chats() {
                   <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
                 )}
               </div>
-              
+
               <div>
                 <h2 className="text-lg font-bold text-white flex items-center space-x-2">
                   <span>{currentChat.name}</span>
@@ -368,13 +387,25 @@ export default function Chats() {
             </div>
 
             <div className="flex items-center space-x-2">
-              <Button size="icon" variant="ghost" className="text-white hover:bg-white/10">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+              >
                 <Phone className="h-5 w-5" />
               </Button>
-              <Button size="icon" variant="ghost" className="text-white hover:bg-white/10">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+              >
                 <Video className="h-5 w-5" />
               </Button>
-              <Button size="icon" variant="ghost" className="text-white hover:bg-white/10">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+              >
                 <MoreHorizontal className="h-5 w-5" />
               </Button>
             </div>
@@ -398,7 +429,9 @@ export default function Chats() {
                 >
                   <p className="text-sm">{message.text}</p>
                   <div className="flex items-center justify-end space-x-1 mt-1">
-                    <span className="text-xs opacity-70">{message.timestamp}</span>
+                    <span className="text-xs opacity-70">
+                      {message.timestamp}
+                    </span>
                     {message.senderId === 0 && (
                       <div className="text-xs">
                         {message.read ? (
@@ -420,13 +453,21 @@ export default function Chats() {
         <div className="bg-slate-900/95 backdrop-blur-xl border-t border-slate-700/50 p-4">
           <div className="max-w-md mx-auto">
             <div className="flex items-center space-x-2">
-              <Button size="icon" variant="ghost" className="text-gray-400 hover:bg-white/10">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="text-gray-400 hover:bg-white/10"
+              >
                 <Plus className="h-5 w-5" />
               </Button>
-              <Button size="icon" variant="ghost" className="text-gray-400 hover:bg-white/10">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="text-gray-400 hover:bg-white/10"
+              >
                 <Image className="h-5 w-5" />
               </Button>
-              
+
               <div className="flex-1 relative">
                 <input
                   type="text"
@@ -444,7 +485,7 @@ export default function Chats() {
                   <Smile className="h-5 w-5" />
                 </Button>
               </div>
-              
+
               {newMessage.trim() ? (
                 <Button
                   size="icon"
@@ -455,15 +496,21 @@ export default function Chats() {
                   <Send className="h-5 w-5" />
                 </Button>
               ) : (
-                <Button size="icon" variant="ghost" className="text-gray-400 hover:bg-white/10">
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="text-gray-400 hover:bg-white/10"
+                >
                   <Mic className="h-5 w-5" />
                 </Button>
               )}
             </div>
-            
+
             {credits === 0 && (
               <div className="mt-2 text-center">
-                <span className="text-xs text-red-400">Sin créditos para enviar mensajes</span>
+                <span className="text-xs text-red-400">
+                  Sin créditos para enviar mensajes
+                </span>
               </div>
             )}
           </div>
@@ -543,15 +590,21 @@ export default function Chats() {
                         )}
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-xs text-gray-400">{chat.lastMessageTime}</span>
+                        <span className="text-xs text-gray-400">
+                          {chat.lastMessageTime}
+                        </span>
                         {chat.unreadCount > 0 && (
                           <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-                            <span className="text-xs font-bold text-white">{chat.unreadCount}</span>
+                            <span className="text-xs font-bold text-white">
+                              {chat.unreadCount}
+                            </span>
                           </div>
                         )}
                       </div>
                     </div>
-                    <p className="text-sm text-gray-300 truncate">{chat.lastMessage}</p>
+                    <p className="text-sm text-gray-300 truncate">
+                      {chat.lastMessage}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -562,9 +615,13 @@ export default function Chats() {
             <div className="w-20 h-20 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageCircle className="h-10 w-10 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-300 mb-2">No hay chats</h3>
+            <h3 className="text-xl font-semibold text-gray-300 mb-2">
+              No hay chats
+            </h3>
             <p className="text-gray-400 mb-4">
-              {searchQuery ? "No se encontraron chats" : "Aún no tienes conversaciones"}
+              {searchQuery
+                ? "No se encontraron chats"
+                : "Aún no tienes conversaciones"}
             </p>
             <Button
               onClick={() => navigate("/matches")}

@@ -124,9 +124,9 @@ export default function GoogleMapsEmbed({
 
         {/* Enhanced Person Pins with Redesigned Badges */}
         {filteredPeople.map((person, index) => {
-          const isBlue = person.mode === 'blue';
-          const isAmber = person.mode === 'amber';
-          const isRed = person.mode === 'red';
+          const isBlue = person.mode === "blue";
+          const isAmber = person.mode === "amber";
+          const isRed = person.mode === "red";
 
           return (
             <div
@@ -142,32 +142,36 @@ export default function GoogleMapsEmbed({
               <div
                 className="absolute inset-0 rounded-full opacity-60 animate-pulse"
                 style={{
-                  width: '24px',
-                  height: '24px',
+                  width: "24px",
+                  height: "24px",
                   background: `radial-gradient(circle, ${modeConfig[person.mode].color}40 0%, transparent 70%)`,
-                  transform: 'translate(-50%, -50%)',
-                  left: '50%',
-                  top: '50%',
+                  transform: "translate(-50%, -50%)",
+                  left: "50%",
+                  top: "50%",
                 }}
               />
 
               {/* Main badge */}
               <div
                 className={`relative w-5 h-5 rounded-full border-2 border-white shadow-lg transition-all duration-300 ${
-                  isBlue ? 'animate-bounce' : isAmber ? 'animate-spin' : 'animate-pulse'
+                  isBlue
+                    ? "animate-bounce"
+                    : isAmber
+                      ? "animate-spin"
+                      : "animate-pulse"
                 }`}
                 style={{
                   backgroundColor: modeConfig[person.mode].color,
                   boxShadow: `0 0 15px ${modeConfig[person.mode].color}60, 0 4px 8px rgba(0,0,0,0.3)`,
-                  animationDuration: isBlue ? '2s' : isAmber ? '3s' : '1.5s',
-                  animationDelay: `${index * 0.3}s`
+                  animationDuration: isBlue ? "2s" : isAmber ? "3s" : "1.5s",
+                  animationDelay: `${index * 0.3}s`,
                 }}
               >
                 {/* Inner highlight */}
                 <div
                   className="absolute inset-1 rounded-full opacity-80"
                   style={{
-                    background: `linear-gradient(135deg, ${modeConfig[person.mode].color}30 0%, transparent 50%, white20 100%)`
+                    background: `linear-gradient(135deg, ${modeConfig[person.mode].color}30 0%, transparent 50%, white20 100%)`,
                   }}
                 />
 
@@ -183,11 +187,17 @@ export default function GoogleMapsEmbed({
                   <>
                     <div
                       className="absolute -top-0.5 -left-0.5 w-1 h-1 rounded-full animate-bounce"
-                      style={{ backgroundColor: modeConfig[person.mode].color, animationDelay: '0.5s' }}
+                      style={{
+                        backgroundColor: modeConfig[person.mode].color,
+                        animationDelay: "0.5s",
+                      }}
                     />
                     <div
                       className="absolute -bottom-0.5 -right-0.5 w-1 h-1 rounded-full animate-bounce"
-                      style={{ backgroundColor: modeConfig[person.mode].color, animationDelay: '1s' }}
+                      style={{
+                        backgroundColor: modeConfig[person.mode].color,
+                        animationDelay: "1s",
+                      }}
                     />
                   </>
                 )}
@@ -197,7 +207,7 @@ export default function GoogleMapsEmbed({
                     className="absolute inset-0 rounded-full opacity-50 animate-pulse"
                     style={{
                       background: `conic-gradient(from 0deg, ${modeConfig[person.mode].color} 0%, transparent 50%, ${modeConfig[person.mode].color} 100%)`,
-                      animationDuration: '1s'
+                      animationDuration: "1s",
                     }}
                   />
                 )}
@@ -208,10 +218,10 @@ export default function GoogleMapsEmbed({
                 className="absolute w-1 h-1 rounded-full opacity-40 animate-ping"
                 style={{
                   backgroundColor: modeConfig[person.mode].color,
-                  left: '100%',
-                  top: '0%',
+                  left: "100%",
+                  top: "0%",
                   animationDelay: `${index * 0.7}s`,
-                  animationDuration: '2s'
+                  animationDuration: "2s",
                 }}
               />
             </div>
@@ -278,7 +288,12 @@ export default function GoogleMapsEmbed({
         </div>
 
         {/* People Count Badge */}
-        <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border rounded-lg px-2 py-1 shadow-md pointer-events-none" style={{ borderColor: `${(modeConfig[activeMode] || modeConfig.all).color}50` }}>
+        <div
+          className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border rounded-lg px-2 py-1 shadow-md pointer-events-none"
+          style={{
+            borderColor: `${(modeConfig[activeMode] || modeConfig.all).color}50`,
+          }}
+        >
           <div className="flex items-center space-x-1.5">
             <svg
               className="h-3 w-3"

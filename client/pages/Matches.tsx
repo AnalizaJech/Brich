@@ -42,9 +42,11 @@ interface Match {
 export default function Matches() {
   const navigate = useNavigate();
   const [credits, setCredits] = useState(15);
-  const [activeFilter, setActiveFilter] = useState<"all" | "blue" | "amber" | "red">("all");
+  const [activeFilter, setActiveFilter] = useState<
+    "all" | "blue" | "amber" | "red"
+  >("all");
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const [matches, setMatches] = useState<Match[]>([
     {
       id: 1,
@@ -149,22 +151,26 @@ export default function Matches() {
 
   const filteredMatches = matches.filter((match) => {
     const modeMatch = activeFilter === "all" || match.mode === activeFilter;
-    const searchMatch = searchQuery === "" || 
+    const searchMatch =
+      searchQuery === "" ||
       match.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       match.story.toLowerCase().includes(searchQuery.toLowerCase());
     return modeMatch && searchMatch;
   });
 
   const handleStartChat = (matchId: number) => {
-    setCredits(prev => Math.max(0, prev - 1));
+    setCredits((prev) => Math.max(0, prev - 1));
     navigate(`/chats?match=${matchId}`);
   };
 
   const handleUnmatch = (matchId: number) => {
-    setMatches(prev => prev.filter(match => match.id !== matchId));
+    setMatches((prev) => prev.filter((match) => match.id !== matchId));
   };
 
-  const totalUnreadMessages = matches.reduce((total, match) => total + (match.unreadMessages || 0), 0);
+  const totalUnreadMessages = matches.reduce(
+    (total, match) => total + (match.unreadMessages || 0),
+    0,
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brich-dark via-slate-900 to-brich-dark">
@@ -192,26 +198,32 @@ export default function Matches() {
 
         {/* Mode Filters */}
         <div className="flex space-x-2 overflow-x-auto pb-2">
-          {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => {
-            const IconComponent = modeConfig[mode].icon;
-            const isActive = activeFilter === mode;
+          {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map(
+            (mode) => {
+              const IconComponent = modeConfig[mode].icon;
+              const isActive = activeFilter === mode;
 
-            return (
-              <Button
-                key={mode}
-                onClick={() => setActiveFilter(mode)}
-                variant="ghost"
-                className={`flex-shrink-0 px-4 py-2 rounded-lg border transition-all duration-200 ${
-                  isActive
-                    ? "bg-slate-700 border-slate-600 text-white"
-                    : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
-                }`}
-              >
-                <IconComponent className={`h-4 w-4 mr-2 ${isActive ? modeConfig[mode].color.replace('text-', 'text-') : ''}`} />
-                <span className="text-sm font-medium">{modeConfig[mode].name}</span>
-              </Button>
-            );
-          })}
+              return (
+                <Button
+                  key={mode}
+                  onClick={() => setActiveFilter(mode)}
+                  variant="ghost"
+                  className={`flex-shrink-0 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                    isActive
+                      ? "bg-slate-700 border-slate-600 text-white"
+                      : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
+                  }`}
+                >
+                  <IconComponent
+                    className={`h-4 w-4 mr-2 ${isActive ? modeConfig[mode].color.replace("text-", "text-") : ""}`}
+                  />
+                  <span className="text-sm font-medium">
+                    {modeConfig[mode].name}
+                  </span>
+                </Button>
+              );
+            },
+          )}
         </div>
       </div>
 
@@ -245,7 +257,9 @@ export default function Matches() {
                     )}
                     {match.unreadMessages && match.unreadMessages > 0 && (
                       <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                        <span className="text-xs font-bold text-white">{match.unreadMessages}</span>
+                        <span className="text-xs font-bold text-white">
+                          {match.unreadMessages}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -253,9 +267,13 @@ export default function Matches() {
                   {/* Match Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2 mb-1">
-                      <h3 className="font-bold text-white text-lg">{match.name}</h3>
+                      <h3 className="font-bold text-white text-lg">
+                        {match.name}
+                      </h3>
                       <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-2 py-1">
-                        <span className="text-sm font-bold text-white">{match.age}</span>
+                        <span className="text-sm font-bold text-white">
+                          {match.age}
+                        </span>
                       </div>
                       {match.verified && (
                         <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
@@ -269,41 +287,55 @@ export default function Matches() {
                     <div className="flex items-center space-x-2 mb-2">
                       <div className="flex items-center space-x-1">
                         <Star className="h-4 w-4 text-yellow-400" />
-                        <span className="text-sm font-semibold text-yellow-400">{match.compatibility}%</span>
-                        <span className="text-xs text-gray-400">compatibilidad</span>
+                        <span className="text-sm font-semibold text-yellow-400">
+                          {match.compatibility}%
+                        </span>
+                        <span className="text-xs text-gray-400">
+                          compatibilidad
+                        </span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <MapPin className="h-3 w-3 text-gray-400" />
-                        <span className="text-xs text-gray-400">{match.distance}</span>
+                        <span className="text-xs text-gray-400">
+                          {match.distance}
+                        </span>
                       </div>
                     </div>
 
                     {/* Story */}
-                    <p className="text-white/80 text-sm mb-2 line-clamp-2">{match.story}</p>
+                    <p className="text-white/80 text-sm mb-2 line-clamp-2">
+                      {match.story}
+                    </p>
 
                     {/* Last Message */}
                     {match.lastMessage && (
                       <div className="bg-slate-800/40 rounded-lg p-2 mb-2">
-                        <p className="text-sm text-gray-300 italic">"{match.lastMessage}"</p>
+                        <p className="text-sm text-gray-300 italic">
+                          "{match.lastMessage}"
+                        </p>
                       </div>
                     )}
 
                     {/* Common Interests */}
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {match.commonInterests.slice(0, 3).map((interest, index) => (
-                        <Badge
-                          key={index}
-                          className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs"
-                        >
-                          {interest}
-                        </Badge>
-                      ))}
+                      {match.commonInterests
+                        .slice(0, 3)
+                        .map((interest, index) => (
+                          <Badge
+                            key={index}
+                            className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs"
+                          >
+                            {interest}
+                          </Badge>
+                        ))}
                     </div>
 
                     {/* Match Date */}
                     <div className="flex items-center space-x-1 mb-3">
                       <Clock className="h-3 w-3 text-gray-400" />
-                      <span className="text-xs text-gray-400">Match {match.matchDate}</span>
+                      <span className="text-xs text-gray-400">
+                        Match {match.matchDate}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -336,9 +368,13 @@ export default function Matches() {
             <div className="w-20 h-20 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Heart className="h-10 w-10 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-300 mb-2">No hay matches</h3>
+            <h3 className="text-xl font-semibold text-gray-300 mb-2">
+              No hay matches
+            </h3>
             <p className="text-gray-400 mb-4">
-              {searchQuery ? "No se encontraron resultados" : "Aún no tienes matches con estos filtros"}
+              {searchQuery
+                ? "No se encontraron resultados"
+                : "Aún no tienes matches con estos filtros"}
             </p>
             <Button
               onClick={() => navigate("/")}

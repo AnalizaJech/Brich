@@ -65,7 +65,7 @@ export default function Profile() {
   const [credits, setCredits] = useState(15);
   const [isEditing, setIsEditing] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  
+
   const [userProfile, setUserProfile] = useState<UserProfile>({
     name: "Alex Rivera",
     age: 26,
@@ -78,7 +78,15 @@ export default function Profile() {
     height: "1.78m",
     education: "Universidad Nacional de Ingeniería",
     profession: "Desarrollador Full-Stack",
-    interests: ["Tecnología", "Viajes", "Fotografía", "Cocina", "Libros", "Música", "Deportes"],
+    interests: [
+      "Tecnología",
+      "Viajes",
+      "Fotografía",
+      "Cocina",
+      "Libros",
+      "Música",
+      "Deportes",
+    ],
     languages: ["Español", "Inglés", "Portugués"],
     phone: "+51 987 654 321",
     email: "alex.rivera@email.com",
@@ -88,30 +96,48 @@ export default function Profile() {
   const [newInterest, setNewInterest] = useState("");
 
   const modeConfig = {
-    blue: { color: "#3B82F6", name: "Serio", description: "Relaciones duraderas", icon: Heart },
-    amber: { color: "#F59E0B", name: "Aventura", description: "Experiencias divertidas", icon: Sparkles },
-    red: { color: "#EF4444", name: "Pasión", description: "Conexiones intensas", icon: Flame },
+    blue: {
+      color: "#3B82F6",
+      name: "Serio",
+      description: "Relaciones duraderas",
+      icon: Heart,
+    },
+    amber: {
+      color: "#F59E0B",
+      name: "Aventura",
+      description: "Experiencias divertidas",
+      icon: Sparkles,
+    },
+    red: {
+      color: "#EF4444",
+      name: "Pasión",
+      description: "Conexiones intensas",
+      icon: Flame,
+    },
   };
 
   const addInterest = () => {
-    if (newInterest.trim() && !userProfile.interests.includes(newInterest.trim())) {
-      setUserProfile(prev => ({
+    if (
+      newInterest.trim() &&
+      !userProfile.interests.includes(newInterest.trim())
+    ) {
+      setUserProfile((prev) => ({
         ...prev,
-        interests: [...prev.interests, newInterest.trim()]
+        interests: [...prev.interests, newInterest.trim()],
       }));
       setNewInterest("");
     }
   };
 
   const removeInterest = (interest: string) => {
-    setUserProfile(prev => ({
+    setUserProfile((prev) => ({
       ...prev,
-      interests: prev.interests.filter(i => i !== interest)
+      interests: prev.interests.filter((i) => i !== interest),
     }));
   };
 
   const handlePersonalityChange = (type: "blue" | "amber" | "red") => {
-    setUserProfile(prev => ({ ...prev, personalityType: type }));
+    setUserProfile((prev) => ({ ...prev, personalityType: type }));
   };
 
   return (
@@ -159,15 +185,21 @@ export default function Profile() {
 
               <div className="text-center">
                 <div className="flex items-center justify-center space-x-2 mb-2">
-                  <h2 className="text-2xl font-bold text-white">{userProfile.name}</h2>
+                  <h2 className="text-2xl font-bold text-white">
+                    {userProfile.name}
+                  </h2>
                   <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-1">
-                    <span className="text-sm font-bold text-white">{userProfile.age}</span>
+                    <span className="text-sm font-bold text-white">
+                      {userProfile.age}
+                    </span>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center justify-center space-x-1 mb-3">
                   <MapPin className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-300">{userProfile.location}</span>
+                  <span className="text-sm text-gray-300">
+                    {userProfile.location}
+                  </span>
                 </div>
 
                 <Badge
@@ -178,11 +210,16 @@ export default function Profile() {
                     color: modeConfig[userProfile.personalityType].color,
                   }}
                 >
-                  {React.createElement(modeConfig[userProfile.personalityType].icon, { className: "h-3 w-3 mr-1" })}
+                  {React.createElement(
+                    modeConfig[userProfile.personalityType].icon,
+                    { className: "h-3 w-3 mr-1" },
+                  )}
                   {modeConfig[userProfile.personalityType].name}
                 </Badge>
 
-                <p className="text-sm text-gray-300 leading-relaxed">{userProfile.bio}</p>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {userProfile.bio}
+                </p>
               </div>
 
               <Button
@@ -206,29 +243,35 @@ export default function Profile() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => {
-                const IconComponent = modeConfig[mode].icon;
-                const isActive = userProfile.personalityType === mode;
+              {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map(
+                (mode) => {
+                  const IconComponent = modeConfig[mode].icon;
+                  const isActive = userProfile.personalityType === mode;
 
-                return (
-                  <Button
-                    key={mode}
-                    onClick={() => handlePersonalityChange(mode)}
-                    variant="ghost"
-                    className={`w-full p-4 justify-start rounded-lg border transition-all duration-200 ${
-                      isActive
-                        ? "bg-slate-700 border-slate-600 text-white"
-                        : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
-                    }`}
-                  >
-                    <IconComponent className="h-5 w-5 mr-3" />
-                    <div className="text-left">
-                      <div className="font-semibold">{modeConfig[mode].name}</div>
-                      <div className="text-xs opacity-70">{modeConfig[mode].description}</div>
-                    </div>
-                  </Button>
-                );
-              })}
+                  return (
+                    <Button
+                      key={mode}
+                      onClick={() => handlePersonalityChange(mode)}
+                      variant="ghost"
+                      className={`w-full p-4 justify-start rounded-lg border transition-all duration-200 ${
+                        isActive
+                          ? "bg-slate-700 border-slate-600 text-white"
+                          : "bg-slate-800/50 border-slate-700 text-gray-400 hover:bg-slate-700/50 hover:text-white"
+                      }`}
+                    >
+                      <IconComponent className="h-5 w-5 mr-3" />
+                      <div className="text-left">
+                        <div className="font-semibold">
+                          {modeConfig[mode].name}
+                        </div>
+                        <div className="text-xs opacity-70">
+                          {modeConfig[mode].description}
+                        </div>
+                      </div>
+                    </Button>
+                  );
+                },
+              )}
             </CardContent>
           </Card>
         )}
@@ -247,14 +290,18 @@ export default function Profile() {
                 <Ruler className="h-4 w-4 text-gray-400" />
                 <div>
                   <div className="text-xs text-gray-400">Altura</div>
-                  <div className="text-sm text-white font-medium">{userProfile.height}</div>
+                  <div className="text-sm text-white font-medium">
+                    {userProfile.height}
+                  </div>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Calendar className="h-4 w-4 text-gray-400" />
                 <div>
                   <div className="text-xs text-gray-400">Miembro desde</div>
-                  <div className="text-sm text-white font-medium">{userProfile.joinDate}</div>
+                  <div className="text-sm text-white font-medium">
+                    {userProfile.joinDate}
+                  </div>
                 </div>
               </div>
             </div>
@@ -263,7 +310,9 @@ export default function Profile() {
               <GraduationCap className="h-4 w-4 text-gray-400" />
               <div>
                 <div className="text-xs text-gray-400">Educación</div>
-                <div className="text-sm text-white font-medium">{userProfile.education}</div>
+                <div className="text-sm text-white font-medium">
+                  {userProfile.education}
+                </div>
               </div>
             </div>
 
@@ -271,7 +320,9 @@ export default function Profile() {
               <Briefcase className="h-4 w-4 text-gray-400" />
               <div>
                 <div className="text-xs text-gray-400">Profesión</div>
-                <div className="text-sm text-white font-medium">{userProfile.profession}</div>
+                <div className="text-sm text-white font-medium">
+                  {userProfile.profession}
+                </div>
               </div>
             </div>
           </CardContent>
@@ -290,7 +341,9 @@ export default function Profile() {
               <Phone className="h-4 w-4 text-gray-400" />
               <div>
                 <div className="text-xs text-gray-400">Teléfono</div>
-                <div className="text-sm text-white font-medium">{userProfile.phone}</div>
+                <div className="text-sm text-white font-medium">
+                  {userProfile.phone}
+                </div>
               </div>
             </div>
 
@@ -298,7 +351,9 @@ export default function Profile() {
               <Mail className="h-4 w-4 text-gray-400" />
               <div>
                 <div className="text-xs text-gray-400">Email</div>
-                <div className="text-sm text-white font-medium">{userProfile.email}</div>
+                <div className="text-sm text-white font-medium">
+                  {userProfile.email}
+                </div>
               </div>
             </div>
           </CardContent>
@@ -315,7 +370,11 @@ export default function Profile() {
               {isEditing && (
                 <Button
                   size="sm"
-                  onClick={() => setActiveSection(activeSection === "interests" ? null : "interests")}
+                  onClick={() =>
+                    setActiveSection(
+                      activeSection === "interests" ? null : "interests",
+                    )
+                  }
                   className="bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30"
                 >
                   <Plus className="h-4 w-4" />

@@ -25,14 +25,14 @@ export default function PageHeader({
     <div className="bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50">
       <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className={`w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center ${iconColor}`}>
+          <div
+            className={`w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center ${iconColor}`}
+          >
             {icon}
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">{title}</h1>
-            {subtitle && (
-              <p className="text-sm text-slate-400">{subtitle}</p>
-            )}
+            {subtitle && <p className="text-sm text-slate-400">{subtitle}</p>}
           </div>
         </div>
 
@@ -48,7 +48,9 @@ export default function PageHeader({
               {typeof credits === "number" && (
                 <div className="flex items-center space-x-2 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2">
                   <CreditCard className="h-4 w-4 text-amber-400" />
-                  <span className="text-sm font-semibold text-white">{credits}</span>
+                  <span className="text-sm font-semibold text-white">
+                    {credits}
+                  </span>
                 </div>
               )}
             </>
