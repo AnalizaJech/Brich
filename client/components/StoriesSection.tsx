@@ -218,10 +218,6 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
             </div>
           </Button>
         </div>
-        
-        <p className="text-sm text-white/60 mt-3 text-center">
-          {modeConfig[activeMode].description}
-        </p>
       </div>
 
       {/* Stories Grid */}
