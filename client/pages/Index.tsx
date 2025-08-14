@@ -239,23 +239,29 @@ export default function Index() {
 
       {/* Main Content */}
       <div className="lg:ml-80">
-        {/* Mobile Header */}
-        <div className="lg:hidden bg-white/5 backdrop-blur-lg border-b border-white/10">
-          <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-brich-hero-gradient rounded-xl flex items-center justify-center">
-                <Heart className="h-6 w-6 text-white" />
+        {/* Enhanced Mobile Header */}
+        <div className="lg:hidden bg-gradient-to-r from-brich-dark/95 to-slate-900/95 backdrop-blur-xl border-b border-gradient-to-r from-white/10 to-white/5">
+          <div className="max-w-md mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-brich-blue-500 via-brich-red-500 to-brich-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Heart className="h-7 w-7 text-white" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full animate-pulse" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Brich</h1>
-                <p className="text-xs text-white/70">Encuentra tu conexión</p>
+                <h1 className="text-2xl font-black text-white tracking-tight">Brich</h1>
+                <p className="text-xs text-white/80 font-medium">Tu conexión perfecta</p>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1 bg-gradient-to-r from-brich-amber-500/20 to-brich-amber-600/20 border border-brich-amber-500/30 rounded-full px-3 py-1.5">
-                <CreditCard className="h-4 w-4 text-brich-amber-400" />
-                <span className="text-sm font-bold text-white">{credits}</span>
+
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <div className="flex items-center space-x-2 bg-gradient-to-r from-brich-amber-500/25 to-brich-amber-600/25 border border-brich-amber-400/40 rounded-2xl px-4 py-2 shadow-lg">
+                  <CreditCard className="h-5 w-5 text-brich-amber-300" />
+                  <span className="text-lg font-black text-white">{credits}</span>
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-brich-amber-400 rounded-full animate-bounce" />
               </div>
             </div>
           </div>
