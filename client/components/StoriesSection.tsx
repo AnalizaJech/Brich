@@ -221,9 +221,6 @@ export default function StoriesSection({
                           color: isActive
                             ? modeConfig[mode].color
                             : "#9CA3AF",
-                          textShadow: isActive
-                            ? `0 0 10px ${modeConfig[mode].color}, 0 0 20px ${modeConfig[mode].color}, 0 0 30px ${modeConfig[mode].color}`
-                            : "none",
                         }}
                       >
                         {modeConfig[mode].name}
