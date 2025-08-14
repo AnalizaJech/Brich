@@ -277,7 +277,7 @@ export default function Index() {
               {/* Enhanced Map */}
               <div className="max-w-md mx-auto lg:max-w-none px-4 mb-6">
                 <div className="mb-3">
-                  <h3 className="text-md font-semibold text-white mb-1">Mapa de conexiones</h3>
+                  <h3 className="text-xl font-bold text-white mb-1">Mapa de conexiones</h3>
                   <p className="text-sm text-white/60">Descubre personas en San Vicente de Cañete</p>
                 </div>
                 <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
