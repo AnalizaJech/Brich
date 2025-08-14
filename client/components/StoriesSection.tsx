@@ -93,6 +93,14 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
   ]);
 
   const modeConfig = {
+    all: {
+      gradient: "bg-gradient-to-br from-purple-600 to-pink-600",
+      border: "border-purple-500",
+      icon: Users,
+      name: "Explorar",
+      description: "Descubre todo tipo de personas",
+      color: "#9333EA"
+    },
     blue: {
       gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
       border: "border-blue-500",
@@ -116,14 +124,6 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
       name: "Pasión",
       description: "Conexiones intensas",
       color: "#EF4444"
-    },
-    all: {
-      gradient: "bg-gradient-to-br from-slate-600 to-slate-700",
-      border: "border-slate-500",
-      icon: Users,
-      name: "Todos",
-      description: "Ver todos los tipos",
-      color: "#64748B"
     }
   };
 
