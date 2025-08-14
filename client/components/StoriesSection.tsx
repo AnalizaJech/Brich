@@ -141,7 +141,7 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
           {(Object.keys(modeConfig) as Array<keyof typeof modeConfig>).map((mode) => {
             const IconComponent = modeConfig[mode].icon;
             const isActive = activeMode === mode;
-            
+
             return (
               <Button
                 key={mode}
@@ -154,27 +154,22 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                   <div className="relative">
                     <div className={`
                       w-16 h-16 rounded-full p-1 transition-all duration-300
-                      ${isActive 
-                        ? `bg-gradient-to-br ${modeConfig[mode].gradient.replace('bg-gradient-to-br', '')} shadow-lg` 
-                        : 'bg-gray-600'
+                      ${isActive
+                        ? `border-2 shadow-lg`
+                        : 'border-2 border-gray-600'
                       }
-                    `}>
+                    `}
+                    style={isActive ? { borderColor: modeConfig[mode].color } : {}}
+                    >
                       <div className="w-full h-full bg-brich-dark rounded-full flex items-center justify-center">
-                        <IconComponent className={`
-                          h-6 w-6 transition-all duration-300
-                          ${isActive ? 'text-white' : 'text-gray-400'}
-                        `} />
+                        <IconComponent
+                          className="h-6 w-6 transition-all duration-300"
+                          style={{ color: isActive ? modeConfig[mode].color : '#9CA3AF' }}
+                        />
                       </div>
                     </div>
-                    
-                    {/* Active indicator */}
-                    {isActive && (
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-2 border-brich-dark rounded-full flex items-center justify-center">
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                      </div>
-                    )}
                   </div>
-                  
+
                   <div className="text-center">
                     <span className={`
                       text-sm font-medium transition-colors duration-300
