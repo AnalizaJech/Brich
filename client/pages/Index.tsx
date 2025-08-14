@@ -202,7 +202,7 @@ export default function Index() {
           
           <div className="bg-white/10 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-white/70 text-sm">Créditos disponibles</span>
+              <span className="text-white/70 text-sm">Cr��ditos disponibles</span>
               <div className="flex items-center space-x-1">
                 <CreditCard className="h-4 w-4 text-brich-amber-500" />
                 <span className="text-xl font-bold text-white">{credits}</span>
@@ -331,12 +331,8 @@ export default function Index() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2 mb-1">
                               <h3 className="font-bold text-white text-lg">{person.name}</h3>
-                              <div className={`px-2 py-0.5 rounded-full text-xs font-bold ${
-                                person.mode === 'blue' ? 'bg-brich-blue-500/20 text-brich-blue-300 border border-brich-blue-500/30' :
-                                person.mode === 'amber' ? 'bg-brich-amber-500/20 text-brich-amber-300 border border-brich-amber-500/30' :
-                                'bg-brich-red-500/20 text-brich-red-300 border border-brich-red-500/30'
-                              }`}>
-                                {person.age}
+                              <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-1 shadow-lg">
+                                <span className="text-sm font-bold text-white">{person.age}</span>
                               </div>
                             </div>
                             <p className="text-white/80 text-sm mb-2 line-clamp-2">{person.story}</p>
