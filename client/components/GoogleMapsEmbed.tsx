@@ -176,13 +176,13 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         </div>
 
         {/* Mode indicator */}
-        <div className="absolute top-3 right-3 bg-gradient-to-l from-black/70 to-black/50 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1.5 pointer-events-none">
+        <div className="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-xl border border-slate-700/60 rounded-2xl px-4 py-2 shadow-2xl pointer-events-none">
           <div className="flex items-center space-x-2">
             <div
               className="w-2 h-2 rounded-full animate-pulse"
               style={{ backgroundColor: (modeConfig[activeMode] || modeConfig.all).color }}
             />
-            <span className="text-xs text-white font-bold">
+            <span className="text-sm text-white font-semibold">
               {filteredPeople.length} {(modeConfig[activeMode] || modeConfig.all).name.toLowerCase()}
             </span>
           </div>
