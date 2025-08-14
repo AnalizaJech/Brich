@@ -218,9 +218,7 @@ export default function StoriesSection({
                           isActive ? "font-bold" : "font-medium"
                         }`}
                         style={{
-                          color: isActive
-                            ? modeConfig[mode].color
-                            : "#9CA3AF",
+                          color: isActive ? modeConfig[mode].color : "#9CA3AF",
                         }}
                       >
                         {modeConfig[mode].name}
