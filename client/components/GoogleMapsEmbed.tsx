@@ -93,7 +93,7 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
             style={{
               width: `${Math.min(200, radius / 50)}px`,
               height: `${Math.min(200, radius / 50)}px`,
-              borderColor: modeConfig[activeMode].color + '88'
+              borderColor: (modeConfig[activeMode] || modeConfig.all).color + '88'
             }}
           />
         </div>
