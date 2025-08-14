@@ -156,22 +156,22 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
         </div>
 
         {/* Zoom controls */}
-        <div className="absolute bottom-3 right-3 flex flex-col space-y-1 pointer-events-auto">
+        <div className="absolute bottom-3 right-3 flex flex-col space-y-2 pointer-events-auto">
           <Button
             size="icon"
             variant="ghost"
-            className="w-8 h-8 bg-black/80 backdrop-blur text-white hover:bg-black/90"
+            className="w-10 h-10 bg-gradient-to-br from-black/70 to-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-black/80 shadow-lg transition-all duration-200"
             onClick={handleZoomIn}
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-5 w-5" />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="w-8 h-8 bg-black/80 backdrop-blur text-white hover:bg-black/90"
+            className="w-10 h-10 bg-gradient-to-br from-black/70 to-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-black/80 shadow-lg transition-all duration-200"
             onClick={handleZoomOut}
           >
-            <Minus className="h-4 w-4" />
+            <Minus className="h-5 w-5" />
           </Button>
         </div>
 
