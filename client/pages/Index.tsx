@@ -66,6 +66,56 @@ export default function Index() {
       story: "Pasión y química 🔥",
       online: false,
       verified: true
+    },
+    {
+      id: 4,
+      name: "Miguel",
+      age: 31,
+      distance: "3.2 km",
+      mode: "blue",
+      story: "Profesional buscando estabilidad 💼",
+      online: true,
+      verified: true
+    },
+    {
+      id: 5,
+      name: "Lucia",
+      age: 25,
+      distance: "2.8 km",
+      mode: "amber",
+      story: "Viajera en busca de aventuras ✈️",
+      online: false,
+      verified: false
+    },
+    {
+      id: 6,
+      name: "Diego",
+      age: 28,
+      distance: "3.5 km",
+      mode: "red",
+      story: "Intensidad y conexión real 💫",
+      online: true,
+      verified: true
+    },
+    {
+      id: 7,
+      name: "Ana",
+      age: 23,
+      distance: "6.2 km",
+      mode: "blue",
+      story: "Relación seria y comprometida 💕",
+      online: false,
+      verified: true
+    },
+    {
+      id: 8,
+      name: "Roberto",
+      age: 33,
+      distance: "7.1 km",
+      mode: "amber",
+      story: "Divertirse y conocer gente nueva 🎉",
+      online: true,
+      verified: false
     }
   ]);
 
