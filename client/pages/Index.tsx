@@ -342,13 +342,13 @@ export default function Index() {
                   ))}
 
                   {/* Ver más button for people */}
-                  {filteredPeople.length > 6 && (
+                  {filteredPeople.length > 4 && (
                     <Button
                       variant="ghost"
-                      className="w-full mt-4 py-2 text-white/80 hover:text-white hover:bg-white/10 border border-white/20 rounded-lg transition-all duration-200"
+                      className="w-full mt-4 py-3 text-white/90 hover:text-white hover:bg-white/10 border border-white/30 rounded-xl transition-all duration-200 backdrop-blur-sm"
                     >
                       <Users className="h-4 w-4 mr-2" />
-                      Ver más personas ({filteredPeople.length - 6} más)
+                      Ver más personas ({filteredPeople.length - 4} más)
                     </Button>
                   )}
                 </div>
