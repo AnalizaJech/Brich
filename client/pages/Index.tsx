@@ -30,8 +30,10 @@ interface PersonCard {
 }
 
 export default function Index() {
+  const navigate = useNavigate();
   const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red'>('blue');
   const [credits, setCredits] = useState(15);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // For demo purposes
   const [nearbyPeople, setNearbyPeople] = useState<PersonCard[]>([
     {
       id: 1,
