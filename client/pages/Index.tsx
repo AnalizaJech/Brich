@@ -112,7 +112,7 @@ export default function Index() {
       age: 33,
       distance: "7.1 km",
       mode: "amber",
-      story: "Divertirse y conocer gente nueva 🎉",
+      story: "Divertirse y conocer gente nueva",
       online: true,
       verified: false
     }
