@@ -51,7 +51,7 @@ export default function Index() {
       age: 29,
       distance: "1.8 km",
       mode: "amber",
-      story: "Aventuras y diversión 🌟",
+      story: "Aventuras y diversión sin límites",
       online: true,
       verified: false
     },
