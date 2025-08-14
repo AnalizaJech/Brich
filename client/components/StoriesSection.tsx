@@ -289,6 +289,24 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
           </Button>
         )}
       </div>
+
+      {/* Story Viewer */}
+      <StoryViewer
+        story={selectedStory}
+        onClose={() => setSelectedStory(null)}
+        onLike={() => {
+          console.log('Liked:', selectedStory?.name);
+          setSelectedStory(null);
+        }}
+        onChat={() => {
+          console.log('Chat with:', selectedStory?.name);
+          setSelectedStory(null);
+        }}
+        onViewProfile={() => {
+          console.log('View profile:', selectedStory?.name);
+          setSelectedStory(null);
+        }}
+      />
     </div>
   );
 }
