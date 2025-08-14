@@ -67,32 +67,36 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
     setProgress(0);
   }, []);
 
-  const modeConfig = {
+  // Memoize config to prevent re-renders
+  const modeConfig = useMemo(() => ({
     blue: {
       gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
       name: "Serio",
       icon: Heart,
       color: "blue-500",
-      buttonBg: "bg-blue-500/90",
-      hoverBg: "hover:bg-blue-600"
+      textColor: "text-blue-500",
+      bgColor: "bg-blue-500",
+      chatButtonClass: "bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50 hover:border-blue-300"
     },
     amber: {
       gradient: "bg-gradient-to-br from-amber-500 to-orange-500",
       name: "Aventura",
       icon: Heart,
       color: "amber-500",
-      buttonBg: "bg-amber-500/90",
-      hoverBg: "hover:bg-amber-600"
+      textColor: "text-amber-500",
+      bgColor: "bg-amber-500",
+      chatButtonClass: "bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50 hover:border-amber-300"
     },
     red: {
       gradient: "bg-gradient-to-br from-red-500 to-pink-500",
       name: "Pasión",
       icon: Heart,
       color: "red-500",
-      buttonBg: "bg-red-500/90",
-      hoverBg: "hover:bg-red-600"
+      textColor: "text-red-500",
+      bgColor: "bg-red-500",
+      chatButtonClass: "bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50 hover:border-red-300"
     }
-  };
+  }), []);
 
   // Clean story text and check if it needs truncation
   const cleanStoryText = story.story.replace(/[🔥💙🌟💼✈️💫💕🎉]/g, '');
