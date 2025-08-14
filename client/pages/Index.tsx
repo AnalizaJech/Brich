@@ -243,25 +243,22 @@ export default function Index() {
 
       {/* Main Content */}
       <div className="lg:ml-80">
-        {/* Enhanced Mobile Header */}
-        <div className="lg:hidden bg-gradient-to-r from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-2xl border-b border-white/10 shadow-2xl">
-          <div className="max-w-md mx-auto px-6 py-5 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-brich-red-500 via-brich-red-600 to-brich-red-700 rounded-2xl flex items-center justify-center shadow-2xl">
-                  <Heart className="h-7 w-7 text-white" />
-                </div>
+        {/* Clean Mobile Header */}
+        <div className="lg:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-lg">
+          <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-brich-red-500 to-brich-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Heart className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-black bg-gradient-to-r from-white via-brich-red-200 to-white bg-clip-text text-transparent">Brich</h1>
-                <p className="text-xs text-white/60 font-medium">Encuentra tu conexión perfecta</p>
+                <h1 className="text-xl font-bold text-white">Brich</h1>
+                <p className="text-xs text-slate-400">Conecta y descubre</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2 bg-gradient-to-r from-brich-amber-500/20 to-brich-amber-600/20 backdrop-blur-xl border border-brich-amber-500/30 rounded-2xl px-4 py-3 shadow-xl">
-              <CreditCard className="h-5 w-5 text-brich-amber-400" />
-              <span className="text-lg font-bold text-white">{credits}</span>
-              <span className="text-xs text-brich-amber-200 font-medium">créditos</span>
+            <div className="flex items-center space-x-2 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-2 shadow-lg">
+              <CreditCard className="h-4 w-4 text-amber-400" />
+              <span className="text-sm font-semibold text-white">{credits}</span>
             </div>
           </div>
         </div>
@@ -371,7 +368,7 @@ export default function Index() {
                       className="w-full mt-6 py-4 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl text-white hover:bg-slate-700/60 hover:scale-105 shadow-xl transition-all duration-300"
                     >
                       <Users className="h-5 w-5 mr-3" />
-                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} m��s)</span>
+                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} más)</span>
                     </Button>
                   )}
                 </div>
