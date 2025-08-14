@@ -289,13 +289,25 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                     </div>
                   </div>
 
-                  {/* New story indicator - Instagram style */}
+                  {/* Story progress bars with personality colors */}
                   {story.hasNewStory && (
                     <div className="absolute top-2 left-2 right-2">
                       <div className="grid grid-cols-3 gap-1">
-                        <div className="h-0.5 bg-white/90 rounded-full" />
-                        <div className="h-0.5 bg-white/60 rounded-full" />
-                        <div className="h-0.5 bg-white/30 rounded-full" />
+                        <div className={`h-0.5 rounded-full ${
+                          story.mode === 'blue' ? 'bg-blue-500' :
+                          story.mode === 'amber' ? 'bg-amber-500' :
+                          'bg-red-500'
+                        }`} />
+                        <div className={`h-0.5 rounded-full ${
+                          story.mode === 'blue' ? 'bg-blue-500/60' :
+                          story.mode === 'amber' ? 'bg-amber-500/60' :
+                          'bg-red-500/60'
+                        }`} />
+                        <div className={`h-0.5 rounded-full ${
+                          story.mode === 'blue' ? 'bg-blue-500/30' :
+                          story.mode === 'amber' ? 'bg-amber-500/30' :
+                          'bg-red-500/30'
+                        }`} />
                       </div>
                     </div>
                   )}
