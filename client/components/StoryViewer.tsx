@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { X, Heart, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import ProfilePhoto from "./ProfilePhoto";
+import { useState, useEffect } from "react";
 
 interface StoryViewerProps {
   story: {
@@ -59,24 +60,55 @@ export default function StoryViewer(props: StoryViewerProps) {
           }}
         />
 
-        <div className="absolute inset-0 bg-black/50" />
+        {/* Gradient overlays for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
 
-        <div className="absolute top-4 left-4 right-4 h-1 bg-white/30 rounded-full">
-          <div className="h-full w-full bg-white rounded-full" />
-        </div>
-
-        <div className="absolute top-12 left-4 right-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-            <div>
-              <div className="text-white font-bold">{story.name}</div>
-              <div className="text-white/70 text-sm">{story.age} años</div>
-            </div>
+        {/* Colored progress bars */}
+        <div className="absolute top-4 left-4 right-4 flex space-x-1">
+          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+            <div className={`h-full w-full rounded-full ${
+              story.mode === 'blue' ? 'bg-blue-500' :
+              story.mode === 'amber' ? 'bg-amber-500' :
+              'bg-red-500'
+            }`} />
+          </div>
+          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+            <div className={`h-full w-3/4 rounded-full ${
+              story.mode === 'blue' ? 'bg-blue-500/60' :
+              story.mode === 'amber' ? 'bg-amber-500/60' :
+              'bg-red-500/60'
+            }`} />
+          </div>
+          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+            <div className={`h-full w-1/2 rounded-full ${
+              story.mode === 'blue' ? 'bg-blue-500/30' :
+              story.mode === 'amber' ? 'bg-amber-500/30' :
+              'bg-red-500/30'
+            }`} />
           </div>
         </div>
 
-        <div className="absolute bottom-24 left-4 right-4">
-          <p className="text-white text-center">
+        {/* User info header with ProfilePhoto */}
+        <div className="absolute top-12 left-4 right-4 flex items-center space-x-3">
+          <ProfilePhoto
+            name={story.name}
+            gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
+            personalityType={story.mode}
+            size="sm"
+          />
+          <div className="flex-1">
+            <div className="flex items-center space-x-2">
+              <span className="text-white font-bold text-sm">{story.name}</span>
+              <span className={`${getPersonalityColor(story.mode)} font-semibold text-sm`}>{story.age} años</span>
+            </div>
+            <span className="text-white/70 text-xs">{story.distance}</span>
+          </div>
+        </div>
+
+        {/* Story text with better spacing */}
+        <div className="absolute bottom-32 sm:bottom-36 left-4 sm:left-6 right-4 sm:right-6">
+          <p className="text-white text-lg sm:text-xl font-semibold text-center leading-relaxed drop-shadow-2xl">
             {isExpanded ? story.story : story.story.substring(0, 100)}
             {story.story.length > 100 && (
               <button
@@ -89,7 +121,7 @@ export default function StoryViewer(props: StoryViewerProps) {
           </p>
         </div>
 
-        <div className="absolute bottom-8 left-6 right-6 flex justify-center items-center space-x-6">
+        <div className="absolute bottom-8 sm:bottom-12 left-6 right-6 flex justify-center items-center space-x-8">
           {/* Close Button */}
           <Button
             onClick={handleClose}
