@@ -125,25 +125,22 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
 
         {/* Interactive Story progress indicator */}
         <div className="absolute top-4 left-4 right-4 flex space-x-1">
-          {Array.from({ length: totalStories }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleStoryBarClick(index)}
-              className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1.5 transition-all duration-200"
-            >
-              <div
-                className={`h-full rounded-full transition-all duration-300 ${
-                  story.mode === 'blue' ? 'bg-blue-500' :
-                  story.mode === 'amber' ? 'bg-amber-500' :
-                  'bg-red-500'
-                }`}
-                style={{
-                  width: index < currentStoryIndex ? '100%' :
-                         index === currentStoryIndex ? `${progress}%` : '0%'
-                }}
-              />
-            </button>
-          ))}
+          {Array.from({ length: totalStories }, (_, index) => {
+            const progressWidth = index < currentStoryIndex ? '100%' :
+                                 index === currentStoryIndex ? `${progress}%` : '0%';
+            return (
+              <button
+                key={`story-${story.id}-${index}`}
+                onClick={() => handleStoryBarClick(index)}
+                className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1.5 transition-all duration-200"
+              >
+                <div
+                  className={`h-full rounded-full transition-all duration-300 ${modeConfig[story.mode].bgColor}`}
+                  style={{ width: progressWidth }}
+                />
+              </button>
+            );
+          })}
         </div>
 
         {/* User info header */}
