@@ -131,6 +131,25 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
     ? stories
     : stories.filter(story => story.mode === activeMode);
 
+  const handleCloseStory = useCallback(() => {
+    setSelectedStory(null);
+  }, []);
+
+  const handleLikeStory = useCallback(() => {
+    console.log('Liked:', selectedStory?.name);
+    setSelectedStory(null);
+  }, [selectedStory?.name]);
+
+  const handleChatStory = useCallback(() => {
+    console.log('Chat with:', selectedStory?.name);
+    setSelectedStory(null);
+  }, [selectedStory?.name]);
+
+  const handleViewProfile = useCallback(() => {
+    console.log('View profile:', selectedStory?.name);
+    setSelectedStory(null);
+  }, [selectedStory?.name]);
+
   return (
     <div className="max-w-md mx-auto px-4 py-6">
       {/* Mode Selector as Stories */}
