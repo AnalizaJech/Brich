@@ -104,30 +104,30 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
         </div>
 
         {/* Action buttons */}
-        <div className="absolute bottom-6 left-4 right-4 flex justify-center space-x-4">
+        <div className="absolute bottom-12 left-6 right-6 flex justify-center space-x-6">
           <Button
             variant="ghost"
             size="icon"
             onClick={onLike}
-            className="w-14 h-14 rounded-full bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-all duration-200"
+            className="w-16 h-16 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300"
           >
-            <Heart className="h-6 w-6" />
+            <Heart className="h-7 w-7" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
             onClick={onChat}
-            className="w-14 h-14 rounded-full bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-all duration-200"
+            className="w-16 h-16 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300"
           >
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-7 w-7" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
             onClick={onViewProfile}
-            className="w-14 h-14 rounded-full bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-all duration-200"
+            className="w-16 h-16 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 text-white hover:bg-slate-800/90 hover:scale-110 shadow-2xl transition-all duration-300"
           >
-            <User className="h-6 w-6" />
+            <User className="h-7 w-7" />
           </Button>
         </div>
       </div>
