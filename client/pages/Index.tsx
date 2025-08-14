@@ -17,7 +17,7 @@ import {
   Users,
   Share2,
   Eye,
-  Zap
+  Zap,
 } from "lucide-react";
 
 interface PersonCard {
@@ -25,8 +25,8 @@ interface PersonCard {
   name: string;
   age: number;
   distance: string;
-  mode: 'blue' | 'amber' | 'red';
-  gender: 'male' | 'female';
+  mode: "blue" | "amber" | "red";
+  gender: "male" | "female";
   story: string;
   online: boolean;
   verified: boolean;
@@ -34,7 +34,9 @@ interface PersonCard {
 
 export default function Index() {
   const navigate = useNavigate();
-  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red' | 'all'>('all');
+  const [activeMode, setActiveMode] = useState<
+    "blue" | "amber" | "red" | "all"
+  >("all");
   const [credits, setCredits] = useState(15);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [searchRadius, setSearchRadius] = useState(5000);
@@ -48,7 +50,7 @@ export default function Index() {
       gender: "female",
       story: "Psicóloga buscando algo serio y duradero",
       online: true,
-      verified: true
+      verified: true,
     },
     {
       id: 2,
@@ -58,7 +60,7 @@ export default function Index() {
       mode: "amber",
       story: "Aventuras y diversión sin límites",
       online: true,
-      verified: false
+      verified: false,
     },
     {
       id: 3,
@@ -68,7 +70,7 @@ export default function Index() {
       mode: "red",
       story: "Pasión y química intensa",
       online: false,
-      verified: true
+      verified: true,
     },
     {
       id: 4,
@@ -78,7 +80,7 @@ export default function Index() {
       mode: "blue",
       story: "Profesional buscando estabilidad",
       online: true,
-      verified: true
+      verified: true,
     },
     {
       id: 5,
@@ -88,7 +90,7 @@ export default function Index() {
       mode: "amber",
       story: "Viajera en busca de aventuras",
       online: false,
-      verified: false
+      verified: false,
     },
     {
       id: 6,
@@ -98,7 +100,7 @@ export default function Index() {
       mode: "red",
       story: "Intensidad y conexión real",
       online: true,
-      verified: true
+      verified: true,
     },
     {
       id: 7,
@@ -108,7 +110,7 @@ export default function Index() {
       mode: "blue",
       story: "Relación seria y comprometida 💕",
       online: false,
-      verified: true
+      verified: true,
     },
     {
       id: 8,
@@ -118,8 +120,8 @@ export default function Index() {
       mode: "amber",
       story: "Divertirse y conocer gente nueva",
       online: true,
-      verified: false
-    }
+      verified: false,
+    },
   ]);
 
   const modeConfig = {
@@ -128,27 +130,28 @@ export default function Index() {
       color: "text-brich-blue-600",
       bg: "bg-brich-blue-50",
       border: "border-brich-blue-500",
-      description: "Relaciones serias y duraderas"
+      description: "Relaciones serias y duraderas",
     },
     amber: {
       gradient: "bg-brich-amber-gradient",
       color: "text-brich-amber-600",
       bg: "bg-brich-amber-50",
       border: "border-brich-amber-500",
-      description: "Aventuras y experiencias divertidas"
+      description: "Aventuras y experiencias divertidas",
     },
     red: {
       gradient: "bg-brich-red-gradient",
       color: "text-brich-red-600",
       bg: "bg-brich-red-50",
       border: "border-brich-red-500",
-      description: "Conexiones intensas y apasionadas"
-    }
+      description: "Conexiones intensas y apasionadas",
+    },
   };
 
-  const filteredPeople = nearbyPeople.filter(person => {
-    const personDistanceMeters = parseFloat(person.distance.replace(' km', '')) * 1000;
-    const modeMatch = activeMode === 'all' || person.mode === activeMode;
+  const filteredPeople = nearbyPeople.filter((person) => {
+    const personDistanceMeters =
+      parseFloat(person.distance.replace(" km", "")) * 1000;
+    const modeMatch = activeMode === "all" || person.mode === activeMode;
     return modeMatch && personDistanceMeters <= searchRadius;
   });
 
@@ -163,18 +166,22 @@ export default function Index() {
           <div className="w-20 h-20 bg-brich-hero-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Heart className="h-10 w-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-4">Bienvenido a Brich</h1>
-          <p className="text-white/70 mb-8">La app de citas más segura y divertida del Perú</p>
+          <h1 className="text-3xl font-bold text-white mb-4">
+            Bienvenido a Brich
+          </h1>
+          <p className="text-white/70 mb-8">
+            La app de citas más segura y divertida del Perú
+          </p>
           <div className="space-y-3">
             <Button
-              onClick={() => navigate('/auth')}
+              onClick={() => navigate("/auth")}
               className="w-full bg-brich-blue-gradient text-white hover:opacity-90"
             >
               Iniciar Sesión
             </Button>
             <Button
               variant="outline"
-              onClick={() => navigate('/auth')}
+              onClick={() => navigate("/auth")}
               className="w-full border-white/20 text-white hover:bg-white/10"
             >
               Crear Cuenta
@@ -199,41 +206,64 @@ export default function Index() {
               <p className="text-sm text-white/70">Encuentra tu conexión</p>
             </div>
           </div>
-          
+
           <div className="bg-white/10 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-white/70 text-sm">Créditos disponibles</span>
+              <span className="text-white/70 text-sm">
+                Créditos disponibles
+              </span>
               <div className="flex items-center space-x-1">
                 <CreditCard className="h-4 w-4 text-brich-amber-500" />
                 <span className="text-xl font-bold text-white">{credits}</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <Button size="sm" className="bg-brich-amber-gradient text-white hover:opacity-90">
+              <Button
+                size="sm"
+                className="bg-brich-amber-gradient text-white hover:opacity-90"
+              >
                 <CreditCard className="h-4 w-4 mr-1" />
                 Recargar
               </Button>
-              <Button size="sm" className="bg-brich-blue-gradient text-white hover:opacity-90">
+              <Button
+                size="sm"
+                className="bg-brich-blue-gradient text-white hover:opacity-90"
+              >
                 <Share2 className="h-4 w-4 mr-1" />
                 Invitar
               </Button>
             </div>
           </div>
-          
+
           <nav className="space-y-2">
-            <Button variant="ghost" className="w-full justify-start text-white bg-white/10 hover:bg-white/20">
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-white bg-white/10 hover:bg-white/20"
+            >
               <Heart className="h-5 w-5 mr-3" />
               Descubrir
             </Button>
-            <Button variant="ghost" className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white" onClick={() => window.location.href = '/matches'}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white"
+              onClick={() => (window.location.href = "/matches")}
+            >
               <Users className="h-5 w-5 mr-3" />
               Matches
             </Button>
-            <Button variant="ghost" className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white" onClick={() => window.location.href = '/chats'}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white"
+              onClick={() => (window.location.href = "/chats")}
+            >
               <MessageCircle className="h-5 w-5 mr-3" />
               Chats
             </Button>
-            <Button variant="ghost" className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white" onClick={() => window.location.href = '/profile'}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-white/60 hover:bg-white/10 hover:text-white"
+              onClick={() => (window.location.href = "/profile")}
+            >
               <Settings className="h-5 w-5 mr-3" />
               Perfil
             </Button>
@@ -258,7 +288,9 @@ export default function Index() {
 
             <div className="flex items-center space-x-2 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-2 shadow-lg">
               <CreditCard className="h-4 w-4 text-amber-400" />
-              <span className="text-sm font-semibold text-white">{credits}</span>
+              <span className="text-sm font-semibold text-white">
+                {credits}
+              </span>
             </div>
           </div>
         </div>
@@ -266,7 +298,6 @@ export default function Index() {
         {/* Content Container */}
         <div className="max-w-md mx-auto lg:max-w-4xl lg:px-8">
           <div className="lg:grid lg:grid-cols-5 lg:gap-8 lg:py-8">
-            
             {/* Left Column - Stories & Map (Desktop) / Full Width (Mobile) */}
             <div className="lg:col-span-3">
               <StoriesSection
@@ -277,8 +308,12 @@ export default function Index() {
               {/* Enhanced Map */}
               <div className="max-w-md mx-auto lg:max-w-none px-4 mb-6">
                 <div className="mb-3">
-                  <h3 className="text-xl font-bold text-white mb-1">Mapa de conexiones</h3>
-                  <p className="text-sm text-white/60">Descubre personas en San Vicente de Cañete</p>
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    Mapa de conexiones
+                  </h3>
+                  <p className="text-sm text-white/60">
+                    Descubre personas en San Vicente de Cañete
+                  </p>
                 </div>
                 <Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
                   <CardContent className="p-0">
@@ -299,62 +334,89 @@ export default function Index() {
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
                       <Users className="h-4 w-4 text-brich-blue-400" />
-                      <span className="text-sm font-semibold text-white">{filteredPeople.length}</span>
+                      <span className="text-sm font-semibold text-white">
+                        {filteredPeople.length}
+                      </span>
                       <span className="text-xs text-slate-300">personas</span>
                     </div>
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <svg className="h-4 w-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        <circle cx="12" cy="9" r="2.5" opacity="0.3"/>
+                      <svg
+                        className="h-4 w-4 text-emerald-400"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        <circle cx="12" cy="9" r="2.5" opacity="0.3" />
                       </svg>
                       <span className="text-sm font-semibold text-white">
-                        {searchRadius >= 1000 ? `${(searchRadius/1000).toFixed(1)}km` : `${searchRadius}m`}
+                        {searchRadius >= 1000
+                          ? `${(searchRadius / 1000).toFixed(1)}km`
+                          : `${searchRadius}m`}
                       </span>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3">
                   {filteredPeople.slice(0, 4).map((person) => (
-                    <Card key={person.id} className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 group">
+                    <Card
+                      key={person.id}
+                      className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 group"
+                    >
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-4">
                           <div className="relative flex-shrink-0">
                             <ProfilePhoto
                               name={person.name}
-                              gender={person.gender || 'female'}
+                              gender={person.gender || "female"}
                               personalityType={person.mode}
                               size="lg"
                               className={`border-3 ${
-                                person.mode === 'blue' ? 'border-brich-blue-500' :
-                                person.mode === 'amber' ? 'border-brich-amber-500' :
-                                'border-brich-red-500'
+                                person.mode === "blue"
+                                  ? "border-brich-blue-500"
+                                  : person.mode === "amber"
+                                    ? "border-brich-amber-500"
+                                    : "border-brich-red-500"
                               }`}
                             />
                           </div>
-                          
+
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2 mb-1">
-                              <h3 className="font-bold text-white text-lg">{person.name}</h3>
+                              <h3 className="font-bold text-white text-lg">
+                                {person.name}
+                              </h3>
                               <div className="bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-xl px-3 py-1 shadow-lg">
-                                <span className="text-sm font-bold text-white">{person.age}</span>
+                                <span className="text-sm font-bold text-white">
+                                  {person.age}
+                                </span>
                               </div>
                             </div>
-                            <p className="text-white/80 text-sm mb-2 line-clamp-2">{person.story}</p>
+                            <p className="text-white/80 text-sm mb-2 line-clamp-2">
+                              {person.story}
+                            </p>
                             <div className="flex items-center space-x-1">
                               <MapPin className="h-3 w-3 text-white/50" />
-                              <span className="text-xs text-white/50">{person.distance}</span>
+                              <span className="text-xs text-white/50">
+                                {person.distance}
+                              </span>
                             </div>
                           </div>
-                          
+
                           <div className="flex flex-col space-y-2 flex-shrink-0">
-                            <Button size="sm" variant="ghost" className="text-white hover:bg-white/10">
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="text-white hover:bg-white/10"
+                            >
                               <Eye className="h-4 w-4" />
                             </Button>
-                            <Button 
-                              size="sm" 
+                            <Button
+                              size="sm"
                               className={`${modeConfig[person.mode].gradient} text-white hover:opacity-90`}
-                              onClick={() => setCredits(prev => Math.max(0, prev - 1))}
+                              onClick={() =>
+                                setCredits((prev) => Math.max(0, prev - 1))
+                              }
                             >
                               <MessageCircle className="h-4 w-4" />
                             </Button>
@@ -371,7 +433,9 @@ export default function Index() {
                       className="w-full mt-6 py-4 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl text-white hover:bg-slate-700/60 hover:scale-105 shadow-xl transition-all duration-300"
                     >
                       <Users className="h-5 w-5 mr-3" />
-                      <span className="font-semibold">Ver más personas ({filteredPeople.length - 4} más)</span>
+                      <span className="font-semibold">
+                        Ver más personas ({filteredPeople.length - 4} más)
+                      </span>
                     </Button>
                   )}
                 </div>
@@ -385,7 +449,10 @@ export default function Index() {
       <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-brich-dark via-brich-dark/98 to-brich-dark/95 backdrop-blur-2xl border-t border-white/15 lg:hidden z-40">
         <div className="max-w-md mx-auto px-4 py-3 pb-safe">
           <div className="grid grid-cols-4 gap-2">
-            <Button variant="ghost" className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group">
+            <Button
+              variant="ghost"
+              className="relative flex flex-col items-center space-y-2 text-white hover:bg-white/10 h-auto py-4 rounded-2xl transition-all duration-300 group"
+            >
               <div className="relative">
                 <div className="p-2 bg-gradient-to-br from-brich-blue-500/20 to-brich-blue-600/20 rounded-xl border border-brich-blue-500/30">
                   <Home className="h-6 w-6 text-brich-blue-400" />
@@ -397,7 +464,7 @@ export default function Index() {
             <Button
               variant="ghost"
               className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/matches'}
+              onClick={() => (window.location.href = "/matches")}
             >
               <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
                 <Users className="h-6 w-6" />
@@ -407,7 +474,7 @@ export default function Index() {
             <Button
               variant="ghost"
               className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/chats'}
+              onClick={() => (window.location.href = "/chats")}
             >
               <div className="relative p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
                 <MessageCircle className="h-6 w-6" />
@@ -418,7 +485,7 @@ export default function Index() {
             <Button
               variant="ghost"
               className="flex flex-col items-center space-y-2 text-white/70 hover:bg-white/10 hover:text-white h-auto py-4 rounded-2xl transition-all duration-300 group"
-              onClick={() => window.location.href = '/profile'}
+              onClick={() => (window.location.href = "/profile")}
             >
               <div className="p-2 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
                 <Settings className="h-6 w-6" />
@@ -437,9 +504,12 @@ export default function Index() {
               <div className="w-16 h-16 bg-brich-amber-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-brich-dark mb-2">Créditos bajos</h3>
+              <h3 className="text-lg font-semibold text-brich-dark mb-2">
+                Créditos bajos
+              </h3>
               <p className="text-sm text-gray-600 mb-4">
-                Recarga tus créditos para seguir conversando o invita amigos para ganar más.
+                Recarga tus créditos para seguir conversando o invita amigos
+                para ganar más.
               </p>
               <div className="space-y-2">
                 <Button className="w-full bg-brich-amber-gradient text-white">

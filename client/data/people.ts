@@ -3,8 +3,8 @@ export interface PersonCard {
   name: string;
   age: number;
   distance: string;
-  mode: 'blue' | 'amber' | 'red';
-  gender: 'male' | 'female';
+  mode: "blue" | "amber" | "red";
+  gender: "male" | "female";
   story: string;
   online: boolean;
   verified: boolean;
@@ -20,7 +20,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "female",
     story: "Psicóloga buscando algo serio y duradero",
     online: true,
-    verified: true
+    verified: true,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "male",
     story: "Fotógrafo viajero en busca de aventuras",
     online: true,
-    verified: true
+    verified: true,
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "female",
     story: "Bailarina apasionada por la vida",
     online: false,
-    verified: true
+    verified: true,
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "male",
     story: "Arquitecto profesional buscando estabilidad",
     online: true,
-    verified: true
+    verified: true,
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "female",
     story: "Chef aventurera explorando sabores",
     online: true,
-    verified: false
+    verified: false,
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "male",
     story: "Músico intenso buscando conexión real",
     online: true,
-    verified: true
+    verified: true,
   },
   {
     id: 7,
@@ -86,7 +86,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "female",
     story: "Doctora comprometida con relaciones serias",
     online: false,
-    verified: true
+    verified: true,
   },
   {
     id: 8,
@@ -97,7 +97,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "male",
     story: "Surfista divertido conociendo gente nueva",
     online: true,
-    verified: false
+    verified: false,
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ export const nearbyPeople: PersonCard[] = [
     gender: "female",
     story: "Modelo fitness con pasión por la vida",
     online: true,
-    verified: true
+    verified: true,
   },
   {
     id: 10,
@@ -119,6 +119,6 @@ export const nearbyPeople: PersonCard[] = [
     gender: "male",
     story: "Ingeniero serio buscando compañera de vida",
     online: false,
-    verified: true
-  }
+    verified: true,
+  },
 ];

@@ -89,10 +89,14 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       backgroundImage: {
-        'brich-blue-gradient': 'linear-gradient(135deg, hsl(var(--brich-blue-500)), hsl(var(--brich-blue-600)))',
-        'brich-amber-gradient': 'linear-gradient(135deg, hsl(var(--brich-amber-500)), hsl(var(--brich-amber-600)))',
-        'brich-red-gradient': 'linear-gradient(135deg, hsl(var(--brich-red-500)), hsl(var(--brich-red-600)))',
-        'brich-hero-gradient': 'linear-gradient(135deg, hsl(var(--brich-blue-900)), hsl(var(--brich-red-900)), hsl(var(--brich-amber-900)))',
+        "brich-blue-gradient":
+          "linear-gradient(135deg, hsl(var(--brich-blue-500)), hsl(var(--brich-blue-600)))",
+        "brich-amber-gradient":
+          "linear-gradient(135deg, hsl(var(--brich-amber-500)), hsl(var(--brich-amber-600)))",
+        "brich-red-gradient":
+          "linear-gradient(135deg, hsl(var(--brich-red-500)), hsl(var(--brich-red-600)))",
+        "brich-hero-gradient":
+          "linear-gradient(135deg, hsl(var(--brich-blue-900)), hsl(var(--brich-red-900)), hsl(var(--brich-amber-900)))",
       },
       keyframes: {
         "accordion-down": {
@@ -111,7 +115,7 @@ export default {
             height: "0",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": {
             transform: "translateY(0px)",
           },
@@ -119,7 +123,7 @@ export default {
             transform: "translateY(-10px)",
           },
         },
-        "glow": {
+        glow: {
           "0%": {
             "box-shadow": "0 0 20px hsl(var(--brich-blue-500))",
           },
@@ -132,8 +136,8 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "float": "float 6s ease-in-out infinite",
-        "glow": "glow 2s ease-in-out infinite alternate",
+        float: "float 6s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite alternate",
       },
     },
   },

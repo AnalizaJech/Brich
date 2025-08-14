@@ -7,17 +7,20 @@ interface PersonPin {
   name: string;
   x: number; // percentage position
   y: number; // percentage position
-  mode: 'blue' | 'amber' | 'red';
+  mode: "blue" | "amber" | "red";
   distance: number;
   profileImage?: string;
 }
 
 interface GoogleMapComponentProps {
-  activeMode: 'blue' | 'amber' | 'red';
+  activeMode: "blue" | "amber" | "red";
   onRadiusChange: (radius: number) => void;
 }
 
-export default function GoogleMapComponent({ activeMode, onRadiusChange }: GoogleMapComponentProps) {
+export default function GoogleMapComponent({
+  activeMode,
+  onRadiusChange,
+}: GoogleMapComponentProps) {
   const [radius, setRadius] = useState(5000);
   const [zoom, setZoom] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
@@ -27,22 +30,70 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
 
   // Sample people positioned around San Vicente de Cañete (simulated coordinates)
   const nearbyPeople: PersonPin[] = [
-    { id: 1, name: "Maria", x: 45, y: 35, mode: "blue", distance: 2300, profileImage: "M" },
-    { id: 2, name: "Carlos", x: 65, y: 55, mode: "amber", distance: 1800, profileImage: "C" },
-    { id: 3, name: "Sofia", x: 25, y: 65, mode: "red", distance: 4100, profileImage: "S" },
-    { id: 4, name: "Miguel", x: 55, y: 25, mode: "blue", distance: 3200, profileImage: "M" },
-    { id: 5, name: "Lucia", x: 75, y: 40, mode: "amber", distance: 2800, profileImage: "L" },
-    { id: 6, name: "Diego", x: 35, y: 75, mode: "red", distance: 3500, profileImage: "D" },
+    {
+      id: 1,
+      name: "Maria",
+      x: 45,
+      y: 35,
+      mode: "blue",
+      distance: 2300,
+      profileImage: "M",
+    },
+    {
+      id: 2,
+      name: "Carlos",
+      x: 65,
+      y: 55,
+      mode: "amber",
+      distance: 1800,
+      profileImage: "C",
+    },
+    {
+      id: 3,
+      name: "Sofia",
+      x: 25,
+      y: 65,
+      mode: "red",
+      distance: 4100,
+      profileImage: "S",
+    },
+    {
+      id: 4,
+      name: "Miguel",
+      x: 55,
+      y: 25,
+      mode: "blue",
+      distance: 3200,
+      profileImage: "M",
+    },
+    {
+      id: 5,
+      name: "Lucia",
+      x: 75,
+      y: 40,
+      mode: "amber",
+      distance: 2800,
+      profileImage: "L",
+    },
+    {
+      id: 6,
+      name: "Diego",
+      x: 35,
+      y: 75,
+      mode: "red",
+      distance: 3500,
+      profileImage: "D",
+    },
   ];
 
   const modeConfig = {
     blue: { color: "#3B82F6", name: "Serio" },
     amber: { color: "#F59E0B", name: "Aventura" },
-    red: { color: "#EF4444", name: "Pasión" }
+    red: { color: "#EF4444", name: "Pasión" },
   };
 
-  const filteredPeople = nearbyPeople.filter(person =>
-    person.mode === activeMode && person.distance <= radius
+  const filteredPeople = nearbyPeople.filter(
+    (person) => person.mode === activeMode && person.distance <= radius,
   );
 
   // Calculate distance between two touch points
@@ -74,7 +125,10 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
       if (lastPinchDistance > 0) {
         const pinchDelta = currentDistance - lastPinchDistance;
         const zoomSensitivity = 0.005;
-        const newZoom = Math.max(0.5, Math.min(3, zoom + pinchDelta * zoomSensitivity));
+        const newZoom = Math.max(
+          0.5,
+          Math.min(3, zoom + pinchDelta * zoomSensitivity),
+        );
 
         // Calculate new radius based on zoom level (inverse relationship)
         const baseRadius = 5000; // 5km base
@@ -134,19 +188,75 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
         {/* Streets pattern */}
         <svg className="w-full h-full opacity-30" viewBox="0 0 200 120">
           {/* Main streets of San Vicente de Cañete */}
-          <line x1="0" y1="40" x2="200" y2="40" stroke="#ffffff" strokeWidth="1" />
-          <line x1="0" y1="80" x2="200" y2="80" stroke="#ffffff" strokeWidth="1" />
-          <line x1="50" y1="0" x2="50" y2="120" stroke="#ffffff" strokeWidth="1" />
-          <line x1="100" y1="0" x2="100" y2="120" stroke="#ffffff" strokeWidth="1" />
-          <line x1="150" y1="0" x2="150" y2="120" stroke="#ffffff" strokeWidth="1" />
+          <line
+            x1="0"
+            y1="40"
+            x2="200"
+            y2="40"
+            stroke="#ffffff"
+            strokeWidth="1"
+          />
+          <line
+            x1="0"
+            y1="80"
+            x2="200"
+            y2="80"
+            stroke="#ffffff"
+            strokeWidth="1"
+          />
+          <line
+            x1="50"
+            y1="0"
+            x2="50"
+            y2="120"
+            stroke="#ffffff"
+            strokeWidth="1"
+          />
+          <line
+            x1="100"
+            y1="0"
+            x2="100"
+            y2="120"
+            stroke="#ffffff"
+            strokeWidth="1"
+          />
+          <line
+            x1="150"
+            y1="0"
+            x2="150"
+            y2="120"
+            stroke="#ffffff"
+            strokeWidth="1"
+          />
 
           {/* Plaza and important locations */}
-          <rect x="90" y="35" width="20" height="10" fill="#ffffff" fillOpacity="0.2" />
+          <rect
+            x="90"
+            y="35"
+            width="20"
+            height="10"
+            fill="#ffffff"
+            fillOpacity="0.2"
+          />
           <circle cx="100" cy="40" r="3" fill="#ffffff" fillOpacity="0.3" />
 
           {/* Diagonal streets */}
-          <line x1="0" y1="0" x2="80" y2="60" stroke="#ffffff" strokeWidth="0.5" />
-          <line x1="120" y1="60" x2="200" y2="120" stroke="#ffffff" strokeWidth="0.5" />
+          <line
+            x1="0"
+            y1="0"
+            x2="80"
+            y2="60"
+            stroke="#ffffff"
+            strokeWidth="0.5"
+          />
+          <line
+            x1="120"
+            y1="60"
+            x2="200"
+            y2="120"
+            stroke="#ffffff"
+            strokeWidth="0.5"
+          />
         </svg>
       </div>
 
@@ -157,7 +267,7 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: "none" }}
       >
         {/* Search radius circle */}
         <div
@@ -165,10 +275,10 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
           style={{
             width: `${circleSize}px`,
             height: `${circleSize}px`,
-            transform: 'translate(-50%, -50%)',
-            left: '50%',
-            top: '50%',
-            borderColor: modeConfig[activeMode].color + '66'
+            transform: "translate(-50%, -50%)",
+            left: "50%",
+            top: "50%",
+            borderColor: modeConfig[activeMode].color + "66",
           }}
         >
           {/* User location (center) */}
@@ -188,8 +298,8 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
               style={{
                 left: `${(pin.x - 50) * (circleSize / 120)}px`,
                 top: `${(pin.y - 50) * (circleSize / 120)}px`,
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: modeConfig[pin.mode].color
+                transform: "translate(-50%, -50%)",
+                backgroundColor: modeConfig[pin.mode].color,
               }}
               onClick={() => setSelectedPerson(pin)}
             >
@@ -213,7 +323,9 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
       <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur rounded-lg px-3 py-1">
         <div className="flex items-center space-x-2 text-white">
           <Locate className="h-3 w-3" />
-          <span className="text-xs font-medium">Radio: {getRadiusDisplay(radius)}</span>
+          <span className="text-xs font-medium">
+            Radio: {getRadiusDisplay(radius)}
+          </span>
         </div>
       </div>
 
@@ -257,12 +369,16 @@ export default function GoogleMapComponent({ activeMode, onRadiusChange }: Googl
             <div className="text-center">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2"
-                style={{ backgroundColor: modeConfig[selectedPerson.mode].color }}
+                style={{
+                  backgroundColor: modeConfig[selectedPerson.mode].color,
+                }}
               >
                 {selectedPerson.profileImage}
               </div>
               <h3 className="font-bold text-gray-900">{selectedPerson.name}</h3>
-              <p className="text-sm text-gray-600">{(selectedPerson.distance/1000).toFixed(1)} km de distancia</p>
+              <p className="text-sm text-gray-600">
+                {(selectedPerson.distance / 1000).toFixed(1)} km de distancia
+              </p>
               <Button
                 className="mt-3 w-full"
                 onClick={() => setSelectedPerson(null)}

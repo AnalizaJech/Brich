@@ -8,9 +8,9 @@ interface PlaceholderProps {
   description: string;
 }
 
-export default function Placeholder({ 
-  title = "Próximamente", 
-  description = "Esta funcionalidad estará disponible pronto." 
+export default function Placeholder({
+  title = "Próximamente",
+  description = "Esta funcionalidad estará disponible pronto.",
 }: PlaceholderProps) {
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export default function Placeholder({
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               className="text-white hover:bg-white/10"
             >
               <ArrowLeft className="h-5 w-5" />
@@ -43,18 +43,18 @@ export default function Placeholder({
             <div className="w-20 h-20 bg-brich-amber-gradient rounded-full flex items-center justify-center mx-auto mb-6">
               <Construction className="h-10 w-10 text-white" />
             </div>
-            
+
             <h2 className="text-2xl font-bold text-white mb-4">{title}</h2>
             <p className="text-white/70 mb-8">{description}</p>
-            
+
             <div className="space-y-3">
-              <Button 
-                onClick={() => navigate('/')}
+              <Button
+                onClick={() => navigate("/")}
                 className="w-full bg-brich-blue-gradient text-white hover:opacity-90"
               >
                 Volver al inicio
               </Button>
-              
+
               <p className="text-sm text-white/50">
                 ¿Quieres que prioricemos esta función? ¡Contáctanos!
               </p>

@@ -24,15 +24,30 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/matches"
-            element={<Placeholder title="Matches" description="Aquí verás todas las personas que han mostrado interés mutuo contigo." />}
+            element={
+              <Placeholder
+                title="Matches"
+                description="Aquí verás todas las personas que han mostrado interés mutuo contigo."
+              />
+            }
           />
           <Route
             path="/chats"
-            element={<Placeholder title="Chats" description="Tus conversaciones activas aparecerán aquí." />}
+            element={
+              <Placeholder
+                title="Chats"
+                description="Tus conversaciones activas aparecerán aquí."
+              />
+            }
           />
           <Route
             path="/profile"
-            element={<Placeholder title="Perfil" description="Configura tu perfil, preferencias y configuración de la cuenta." />}
+            element={
+              <Placeholder
+                title="Perfil"
+                description="Configura tu perfil, preferencias y configuración de la cuenta."
+              />
+            }
           />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

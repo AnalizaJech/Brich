@@ -7,7 +7,7 @@ interface StoryViewerProps {
   story: {
     id: number;
     name: string;
-    mode: 'blue' | 'amber' | 'red';
+    mode: "blue" | "amber" | "red";
     profileInitial: string;
     story: string;
     isOnline: boolean;
@@ -43,10 +43,14 @@ export default function StoryViewer(props: StoryViewerProps) {
 
   const getPersonalityColor = (mode: string) => {
     switch (mode) {
-      case 'blue': return 'text-blue-500';
-      case 'amber': return 'text-amber-500';
-      case 'red': return 'text-red-500';
-      default: return 'text-blue-500';
+      case "blue":
+        return "text-blue-500";
+      case "amber":
+        return "text-amber-500";
+      case "red":
+        return "text-red-500";
+      default:
+        return "text-blue-500";
     }
   };
 
@@ -67,25 +71,37 @@ export default function StoryViewer(props: StoryViewerProps) {
         {/* Colored progress bars */}
         <div className="absolute top-4 left-4 right-4 flex space-x-1">
           <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
-            <div className={`h-full w-full rounded-full ${
-              story.mode === 'blue' ? 'bg-blue-500' :
-              story.mode === 'amber' ? 'bg-amber-500' :
-              'bg-red-500'
-            }`} />
+            <div
+              className={`h-full w-full rounded-full ${
+                story.mode === "blue"
+                  ? "bg-blue-500"
+                  : story.mode === "amber"
+                    ? "bg-amber-500"
+                    : "bg-red-500"
+              }`}
+            />
           </div>
           <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
-            <div className={`h-full w-3/4 rounded-full ${
-              story.mode === 'blue' ? 'bg-blue-500/60' :
-              story.mode === 'amber' ? 'bg-amber-500/60' :
-              'bg-red-500/60'
-            }`} />
+            <div
+              className={`h-full w-3/4 rounded-full ${
+                story.mode === "blue"
+                  ? "bg-blue-500/60"
+                  : story.mode === "amber"
+                    ? "bg-amber-500/60"
+                    : "bg-red-500/60"
+              }`}
+            />
           </div>
           <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
-            <div className={`h-full w-1/2 rounded-full ${
-              story.mode === 'blue' ? 'bg-blue-500/30' :
-              story.mode === 'amber' ? 'bg-amber-500/30' :
-              'bg-red-500/30'
-            }`} />
+            <div
+              className={`h-full w-1/2 rounded-full ${
+                story.mode === "blue"
+                  ? "bg-blue-500/30"
+                  : story.mode === "amber"
+                    ? "bg-amber-500/30"
+                    : "bg-red-500/30"
+              }`}
+            />
           </div>
         </div>
 
@@ -93,14 +109,25 @@ export default function StoryViewer(props: StoryViewerProps) {
         <div className="absolute top-12 left-4 right-4 flex items-center space-x-3">
           <ProfilePhoto
             name={story.name}
-            gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
+            gender={
+              story.name === "Maria" ||
+              story.name === "Sofia" ||
+              story.name === "Lucia" ||
+              story.name === "Ana"
+                ? "female"
+                : "male"
+            }
             personalityType={story.mode}
             size="sm"
           />
           <div className="flex-1">
             <div className="flex items-center space-x-2">
               <span className="text-white font-bold text-sm">{story.name}</span>
-              <span className={`${getPersonalityColor(story.mode)} font-semibold text-sm`}>{story.age} años</span>
+              <span
+                className={`${getPersonalityColor(story.mode)} font-semibold text-sm`}
+              >
+                {story.age} años
+              </span>
             </div>
             <span className="text-white/70 text-xs">{story.distance}</span>
           </div>
@@ -135,12 +162,12 @@ export default function StoryViewer(props: StoryViewerProps) {
             onClick={handleChat}
             className={`w-16 h-16 rounded-full border-2 text-white hover:scale-110 transition-all duration-300 shadow-xl ${
               isChatting
-                ? 'bg-white/20 border-white hover:bg-white/30'
-                : story.mode === 'blue'
-                  ? 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50'
-                  : story.mode === 'amber'
-                  ? 'bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50'
-                  : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50'
+                ? "bg-white/20 border-white hover:bg-white/30"
+                : story.mode === "blue"
+                  ? "bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50"
+                  : story.mode === "amber"
+                    ? "bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50"
+                    : "bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50"
             }`}
           >
             <MessageCircle className="h-7 w-7 fill-current" />
@@ -151,8 +178,8 @@ export default function StoryViewer(props: StoryViewerProps) {
             onClick={handleLike}
             className={`w-14 h-14 rounded-full border-2 text-white hover:scale-110 transition-all duration-300 shadow-xl ${
               isLiked
-                ? 'bg-white/20 border-white hover:bg-white/30'
-                : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50'
+                ? "bg-white/20 border-white hover:bg-white/30"
+                : "bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50"
             }`}
           >
             <Heart className="h-6 w-6 fill-current" />
