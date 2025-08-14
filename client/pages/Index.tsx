@@ -40,11 +40,12 @@ export default function Index() {
   const [nearbyPeople, setNearbyPeople] = useState<PersonCard[]>([
     {
       id: 1,
-      name: "Maria",
-      age: 26,
-      distance: "2.3 km",
+      name: "Isabella",
+      age: 24,
+      distance: "1.2 km",
       mode: "blue",
-      story: "Buscando algo serio y duradero",
+      gender: "female",
+      story: "Psicóloga buscando algo serio y duradero",
       online: true,
       verified: true
     },
