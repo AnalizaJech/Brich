@@ -333,7 +333,7 @@ export default function Index() {
                   <h2 className="text-lg font-bold text-white">Cerca de ti</h2>
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1.5 bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl px-4 py-2 shadow-xl">
-                      <Users className="h-4 w-4 text-brich-blue-400" />
+                      <Users className="h-4 w-4 text-purple-400" />
                       <span className="text-sm font-semibold text-white">
                         {filteredPeople.length}
                       </span>
