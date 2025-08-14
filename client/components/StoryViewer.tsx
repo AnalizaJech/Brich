@@ -25,6 +25,35 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
   if (!story) return null;
 
   const [isTextExpanded, setIsTextExpanded] = useState(false);
+  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  // Simulate multiple stories for this person
+  const totalStories = 3;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          if (currentStoryIndex < totalStories - 1) {
+            setCurrentStoryIndex(prev => prev + 1);
+            return 0;
+          } else {
+            onClose();
+            return 100;
+          }
+        }
+        return prev + 1;
+      });
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, [currentStoryIndex, onClose]);
+
+  const handleStoryBarClick = (index: number) => {
+    setCurrentStoryIndex(index);
+    setProgress(0);
+  };
 
   const modeConfig = {
     blue: {
