@@ -91,7 +91,7 @@ export default function Index() {
       age: 28,
       distance: "3.5 km",
       mode: "red",
-      story: "Intensidad y conexión real 💫",
+      story: "Intensidad y conexión real",
       online: true,
       verified: true
     },
