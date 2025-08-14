@@ -61,7 +61,7 @@ export default function Index() {
       age: 24,
       distance: "4.1 km",
       mode: "red",
-      story: "Pasión y química 🔥",
+      story: "Pasión y química intensa",
       online: false,
       verified: true
     },
