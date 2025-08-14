@@ -233,7 +233,13 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
                   {/* Profile picture at top */}
                   <div className="absolute top-4 left-4">
                     <div className="relative">
-                      <ProfilePhoto name={story.name} size="md" className="border-2 border-white/40" />
+                      <ProfilePhoto
+                        name={story.name}
+                        gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
+                        personalityType={story.mode}
+                        size="md"
+                        className="border-2 border-white/40"
+                      />
                     </div>
                   </div>
 
