@@ -51,7 +51,13 @@ export default function StoryViewer({ story, onClose, onLike, onChat, onViewProf
         {/* Large Profile Photo */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl">
-            <ProfilePhoto name={story.name} size="xl" className="w-full h-full scale-150" />
+            <ProfilePhoto
+              name={story.name}
+              gender={story.name === 'Maria' || story.name === 'Sofia' || story.name === 'Lucia' || story.name === 'Ana' ? 'female' : 'male'}
+              personalityType={story.mode}
+              size="xl"
+              className="w-full h-full scale-150"
+            />
           </div>
         </div>
 
