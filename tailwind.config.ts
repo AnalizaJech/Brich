@@ -111,6 +111,22 @@ export default {
             height: "0",
           },
         },
+        "float": {
+          "0%, 100%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
+        "glow": {
+          "0%": {
+            "box-shadow": "0 0 20px hsl(var(--brich-blue-500))",
+          },
+          "100%": {
+            "box-shadow": "0 0 30px hsl(var(--brich-red-500))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
