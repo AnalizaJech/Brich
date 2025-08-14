@@ -55,8 +55,8 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
 
   const handleZoomIn = () => {
     const newZoom = Math.min(18, zoom + 1);
-    const newRadius = Math.round(5000 / Math.pow(2, newZoom - 13));
-    const clampedRadius = Math.max(500, Math.min(20000, newRadius));
+    const newRadius = Math.round(5000 / Math.pow(2, newZoom - 14)); // Adjusted for starting zoom 14
+    const clampedRadius = Math.max(200, Math.min(5000, newRadius)); // 200m to 5km range
 
     setZoom(newZoom);
     setMapUrl(getMapUrl(newZoom));
@@ -64,9 +64,9 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
   };
 
   const handleZoomOut = () => {
-    const newZoom = Math.max(10, zoom - 1);
-    const newRadius = Math.round(5000 / Math.pow(2, newZoom - 13));
-    const clampedRadius = Math.max(500, Math.min(20000, newRadius));
+    const newZoom = Math.max(12, zoom - 1); // Min zoom 12 for 5km radius
+    const newRadius = Math.round(5000 / Math.pow(2, newZoom - 14));
+    const clampedRadius = Math.max(200, Math.min(5000, newRadius));
 
     setZoom(newZoom);
     setMapUrl(getMapUrl(newZoom));
