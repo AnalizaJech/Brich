@@ -10,6 +10,7 @@ import {
   MapPin,
   Heart,
   MessageCircle,
+  Settings,
   CreditCard,
   Users,
   Share2,
