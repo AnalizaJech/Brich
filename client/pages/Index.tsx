@@ -304,8 +304,8 @@ export default function Index() {
                   </div>
                 </div>
                 
-                <div className="space-y-4">
-                  {filteredPeople.map((person) => (
+                <div className="space-y-3">
+                  {filteredPeople.slice(0, 6).map((person) => (
                     <Card key={person.id} className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 group">
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-4">
