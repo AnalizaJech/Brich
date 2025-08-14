@@ -212,8 +212,8 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
           <span className="text-sm text-white/60">{filteredStories.length} personas</span>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {filteredStories.slice(0, 6).map((story) => (
+        <div className="grid grid-cols-2 gap-3">
+          {filteredStories.slice(0, 4).map((story) => (
             <Button
               key={story.id}
               variant="ghost"
