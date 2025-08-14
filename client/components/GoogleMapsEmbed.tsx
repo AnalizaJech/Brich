@@ -45,17 +45,12 @@ export default function GoogleMapsEmbed({ activeMode, onRadiusChange }: GoogleMa
     onRadiusChange(newRadius);
   };
 
-  const generateMapUrl = (zoomLevel: number) => {
-    // Base URL with San Vicente de Cañete coordinates
-    const baseUrl = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d";
-    const coords = "!2d-76.3856!3d-13.0751";
-    const mapType = "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f";
-    const location = "!5m2!1ses-419!2spe";
+  const getMapUrl = (zoomLevel: number) => {
+    // Use original working URL and modify zoom parameter
+    const baseUrl = "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d15544.873545863364!2d-76.4068570447244!3d-13.085341426263092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f";
+    const endUrl = "!4m13!3e6!4m5!1s0x910ff9495dbe053f%3A0x10f4c235753f7244!2sSan%20Vicente%20de%20Ca%C3%B1ete%2C%20Per%C3%BA!3m2!1d-13.076476699999999!2d-76.38488319999999!4m5!1s0x910ff9495dbe053f%3A0x10f4c235753f7244!2sSan%20Vicente%20de%20Ca%C3%B1ete%2C%20Per%C3%BA!3m2!1d-13.076476699999999!2d-76.38488319999999!5e0!3m2!1ses-419!2spe!4v1755149517211!5m2!1ses-419!2spe";
 
-    // Calculate distance based on zoom (higher zoom = smaller distance)
-    const distance = Math.round(20000 / Math.pow(2, zoomLevel - 10));
-
-    return `${baseUrl}${distance}${coords}${mapType}${zoomLevel}${location}`;
+    return `${baseUrl}${zoomLevel}${endUrl}`;
   };
 
   const handleZoomIn = () => {
