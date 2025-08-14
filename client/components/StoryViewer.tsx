@@ -23,14 +23,31 @@ interface StoryViewerProps {
 export default function StoryViewer(props: StoryViewerProps) {
   const { story, onClose, onLike, onChat } = props;
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isChatting, setIsChatting] = useState(false);
 
   if (!story) {
     return null;
   }
 
   const handleClose = () => onClose();
-  const handleLike = () => onLike();
-  const handleChat = () => onChat();
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    onLike();
+  };
+  const handleChat = () => {
+    setIsChatting(!isChatting);
+    onChat();
+  };
+
+  const getPersonalityColor = (mode: string) => {
+    switch (mode) {
+      case 'blue': return 'text-blue-500';
+      case 'amber': return 'text-amber-500';
+      case 'red': return 'text-red-500';
+      default: return 'text-blue-500';
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black z-50">
@@ -64,7 +81,7 @@ export default function StoryViewer(props: StoryViewerProps) {
             {story.story.length > 100 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="ml-2 text-blue-400 underline"
+                className={`ml-2 ${getPersonalityColor(story.mode)} hover:opacity-80 underline font-semibold transition-colors duration-200`}
               >
                 {isExpanded ? "ver menos" : "ver más"}
               </button>
@@ -72,26 +89,41 @@ export default function StoryViewer(props: StoryViewerProps) {
           </p>
         </div>
 
-        <div className="absolute bottom-8 left-6 right-6 flex justify-center space-x-8">
+        <div className="absolute bottom-8 left-6 right-6 flex justify-center items-center space-x-6">
+          {/* Close Button */}
           <Button
             onClick={handleClose}
-            className="w-14 h-14 rounded-full bg-black/40 border-2 border-white/40 text-white"
+            className="w-14 h-14 rounded-full bg-black/50 hover:bg-black/70 border-2 border-white/50 hover:border-white/70 text-white hover:scale-110 transition-all duration-300 shadow-xl"
           >
-            <X className="h-6 w-6" />
+            <X className="h-6 w-6 stroke-2" />
           </Button>
 
-          <Button
-            onClick={handleLike}
-            className="w-14 h-14 rounded-full bg-red-500 text-white"
-          >
-            <Heart className="h-6 w-6" />
-          </Button>
-
+          {/* Chat Button - Center, filled like heart */}
           <Button
             onClick={handleChat}
-            className="w-14 h-14 rounded-full bg-blue-500 text-white"
+            className={`w-16 h-16 rounded-full border-2 text-white hover:scale-110 transition-all duration-300 shadow-xl ${
+              isChatting
+                ? 'bg-white/20 border-white hover:bg-white/30'
+                : story.mode === 'blue'
+                  ? 'bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-blue-400/50'
+                  : story.mode === 'amber'
+                  ? 'bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 border-amber-400/50'
+                  : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50'
+            }`}
           >
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-7 w-7 fill-current" />
+          </Button>
+
+          {/* Like Button */}
+          <Button
+            onClick={handleLike}
+            className={`w-14 h-14 rounded-full border-2 text-white hover:scale-110 transition-all duration-300 shadow-xl ${
+              isLiked
+                ? 'bg-white/20 border-white hover:bg-white/30'
+                : 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-red-400/50'
+            }`}
+          >
+            <Heart className="h-6 w-6 fill-current" />
           </Button>
         </div>
       </div>
