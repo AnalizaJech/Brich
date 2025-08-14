@@ -31,7 +31,7 @@ interface PersonCard {
 
 export default function Index() {
   const navigate = useNavigate();
-  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red' | 'all'>('blue');
+  const [activeMode, setActiveMode] = useState<'blue' | 'amber' | 'red' | 'all'>('all');
   const [credits, setCredits] = useState(15);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [searchRadius, setSearchRadius] = useState(5000);
