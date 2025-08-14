@@ -198,7 +198,7 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
           <span className="text-sm text-white/60">{filteredStories.length} personas</span>
         </div>
         
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {filteredStories.slice(0, 6).map((story) => (
             <Button
               key={story.id}
@@ -206,67 +206,77 @@ export default function StoriesSection({ activeMode, onModeChange }: StoriesSect
               className="p-0 h-auto hover:bg-transparent group"
             >
               <div className="relative w-full">
-                {/* Story container with gradient overlay */}
-                <div className="aspect-[3/4] rounded-xl overflow-hidden relative">
+                {/* Enhanced Story container */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-lg">
                   <div className={`
-                    absolute inset-0 ${modeConfig[story.mode].gradient} opacity-80
+                    absolute inset-0 ${modeConfig[story.mode].gradient} opacity-90
                   `} />
-                  
-                  {/* Background pattern */}
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0iIzMzMzMzMyIgZmlsbC1vcGFjaXR5PSIwLjEiLz4KPC9zdmc+')] opacity-30" />
-                  
+
+                  {/* Subtle pattern overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
+
                   {/* Profile picture at top */}
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-4 left-4">
                     <div className="relative">
-                      <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center border border-white/30">
-                        <span className="text-white font-semibold text-sm">
+                      <div className="w-12 h-12 bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/40">
+                        <span className="text-white font-bold text-base">
                           {story.profileInitial}
                         </span>
                       </div>
-                      
+
                       {/* Online status */}
                       {story.isOnline && (
-                        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-400 border border-white rounded-full" />
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full" />
                       )}
                     </div>
                   </div>
 
-                  {/* View indicator */}
-                  <div className="absolute top-3 right-3">
-                    <div className="bg-black/30 backdrop-blur rounded-full p-1">
-                      <Eye className="h-3 w-3 text-white" />
+                  {/* Story viewed indicator */}
+                  <div className="absolute top-4 right-4">
+                    <div className="bg-black/40 backdrop-blur rounded-full p-2">
+                      <Eye className="h-4 w-4 text-white" />
                     </div>
                   </div>
-                  
-                  {/* Story text at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
+
+                  {/* Story text at bottom with better typography */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
                     <div className="text-left">
-                      <div className="flex items-center space-x-1 mb-1">
-                        <span className="text-white font-semibold text-sm">{story.name}</span>
-                        <span className="text-white/80 text-xs">{story.age}</span>
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="text-white font-bold text-base">{story.name}</span>
+                        <span className="text-white/90 text-sm font-medium">{story.age}</span>
                       </div>
-                      <p className="text-white/90 text-xs leading-tight overflow-hidden" style={{
+                      <p className="text-white/95 text-sm leading-tight mb-2 overflow-hidden" style={{
                         display: '-webkit-box',
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: 'vertical'
                       }}>
                         {story.story}
                       </p>
-                      <p className="text-white/70 text-xs mt-1">
-                        {story.distance}
-                      </p>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-1 h-1 bg-white/60 rounded-full" />
+                        <span className="text-white/80 text-xs font-medium">
+                          {story.distance}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* New story indicator */}
+                  {/* New story indicator - Instagram style */}
                   {story.hasNewStory && (
-                    <div className="absolute top-1 left-1 right-1">
-                      <div className="h-1 bg-white/80 rounded-full" />
+                    <div className="absolute top-2 left-2 right-2">
+                      <div className="grid grid-cols-3 gap-1">
+                        <div className="h-0.5 bg-white/90 rounded-full" />
+                        <div className="h-0.5 bg-white/60 rounded-full" />
+                        <div className="h-0.5 bg-white/30 rounded-full" />
+                      </div>
                     </div>
                   )}
 
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  {/* Enhanced hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+
+                  {/* Scale effect on hover */}
+                  <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </Button>
