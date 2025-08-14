@@ -144,7 +144,8 @@ export default function Index() {
 
   const filteredPeople = nearbyPeople.filter(person => {
     const personDistanceMeters = parseFloat(person.distance.replace(' km', '')) * 1000;
-    return person.mode === activeMode && personDistanceMeters <= searchRadius;
+    const modeMatch = activeMode === 'all' || person.mode === activeMode;
+    return modeMatch && personDistanceMeters <= searchRadius;
   });
 
   const handleRadiusChange = (newRadius: number) => {
